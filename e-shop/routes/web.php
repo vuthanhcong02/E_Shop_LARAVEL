@@ -17,3 +17,4 @@ Route::get('/', function () {
     return view('Frontend.index');
 });
 Route::get('/shop/product/{id}', [ShopController::class, 'show']);
+Route::post('/shop/product/{id}', [ShopController::class, 'postComment']);

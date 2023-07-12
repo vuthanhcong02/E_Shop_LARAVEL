@@ -28,6 +28,7 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
+
         //
     }
 
@@ -70,5 +71,24 @@ class ShopController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function postComment(Request $request, string $id){
+        //
+        $name = $request->name;
+        $email = $request->email;
+        $messages = $request->messages;
+        $product_id = $request->product_id;
+        $user_id = $request->user_id;
+        $rating = $request->rating;
+        $product = Product::findOrFail($id);
+        $comment = new \App\Models\ProductComment();
+        $comment->name = $name;
+        $comment->email = $email;
+        $comment->messages = $messages;
+        $comment->product_id = $product_id;
+        $comment->user_id = $user_id;
+        $comment->rating = $rating;
+        $comment->save();
+        return redirect()->back();
     }
 }

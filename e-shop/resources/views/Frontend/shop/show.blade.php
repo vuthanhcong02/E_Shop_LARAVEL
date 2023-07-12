@@ -344,47 +344,59 @@
                                         <h4>{{count($product->productComments)}} Comments</h4>
                                         <div class="comment-option">
                                         @foreach($product->productComments as $productComment)
-
                                             <div class="co-item">
                                                 <div class="avatar-pic">
-                                                    <img src="Frontend/img/user/{{$productComment->user->avatar ?? 'default-avatar.jpg'}}" alt="">
+                                                    <img src="Frontend/img/user/{{$productComment->user->avatar ?? 'avatar-default.jpeg'}}" alt="">
                                                 </div>
                                                 <div class="avatar-text">
                                                     <div class="at-rating">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-o"></i>
+                                                        @for($i=1;$i<=5;$i++)
+                                                            @if($i<=$productComment->rating)
+                                                                <i class="fa fa-star"></i>
+                                                            @else
+                                                                <i class="fa fa-star-o"></i>
+                                                            @endif
+                                                        @endfor
                                                     </div>
-                                                    <h5>{{$productComment->user->name}}</h5><span>March 23, 2022</span>
+                                                    <h5>{{$productComment->name}}</h5><span>{{date('m,d,Y' ,strtotime($productComment->created_at))}}</span>
                                                     <div class="at-reply">{{$productComment->messages}}</div>
                                                 </div>
                                             </div>  
                                             @endforeach                                   
                                         </div>
-                                        <div class="personal-rating">
-                                            <h4>Your Rating</h4>
-                                            <div class="rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star-o"></i>
-                                            </div>
-                                        </div>
                                         <div class="leave-comment">
                                             <h4>Leave a Comment</h4>
-                                            <form class="comment-form">
+                                            <form class="comment-form" action="" method="post">
+                                                @csrf
+                                                <input type="hidden" name="product_id" value="{{$product->id}}">
+                                                <input type="hidden" name="user_id" value="{{Illuminate\Support\Facades\Auth::user()->id ?? null }}">
+                                                <!-- Đây là một lời gọi đến lớp "Auth" trong Laravel để lấy thông tin người dùng đang được xác thực. Lớp "Auth" cung cấp các phương thức để xác thực và quản lý người dùng trong ứng dụng Laravel. -->
                                                 <div class="row">
                                                     <div class="col-lg-6">
-                                                        <input type="text" placeholder="Name">
+                                                        <input type="text" placeholder="Name" name="name">
                                                     </div>
                                                     <div class="col-lg-6">
-                                                        <input type="text" placeholder="Email">
+                                                        <input type="text" placeholder="Email" name="email">
                                                     </div>
                                                     <div class="col-lg-12">
-                                                        <textarea placeholder="Comment"></textarea>
+                                                        <textarea placeholder="Comment" name="messages"></textarea>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="personal-rating">
+                                                            <h6>Your Rating</h6>
+                                                            <div class="rate">
+                                                                <input type="radio" id="star5" name="rating" value="5" />
+                                                                <label for="star5" title="text">5 stars</label>
+                                                                <input type="radio" id="star4" name="rating" value="4" />
+                                                                <label for="star4" title="text">4 stars</label>
+                                                                <input type="radio" id="star3" name="rating" value="3" />
+                                                                <label for="star3" title="text">3 stars</label>
+                                                                <input type="radio" id="star2" name="rating" value="2" />
+                                                                <label for="star2" title="text">2 stars</label>
+                                                                <input type="radio" id="star1" name="rating" value="1" />
+                                                                <label for="star1" title="text">1 star</label>
+                                                            </div>
+                                                        </div><br>
                                                         <button type="submit" class="site-btn">Send Comment</button>
                                                     </div>
                                                 </div>
