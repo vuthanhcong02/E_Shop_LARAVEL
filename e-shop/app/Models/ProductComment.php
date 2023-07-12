@@ -9,7 +9,7 @@ use App\Models\User;
 class ProductComment extends Model
 {
     use HasFactory;
-    protected $table = 'prduct_comments';
+    protected $table = 'product_comments';
     protected $primaryKey='id';
     protected $guarded = [];
     public function product(){

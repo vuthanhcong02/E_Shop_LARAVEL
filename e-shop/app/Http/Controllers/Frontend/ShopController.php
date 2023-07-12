@@ -38,6 +38,13 @@ class ShopController extends Controller
     {
         //
         $product = Product::findOrFail($id);
+        $avgRating = 0;
+        $avgRating = array_sum(array_column($product->productComments->toArray(), 'rating'));
+        $countRating = count($product->productComments);
+        if($countRating!=0){
+            $avgRating = $avgRating/$countRating;
+        }
+        $product->avgRating = $avgRating;
         return view('Frontend.shop.show', compact('product'));
     }
 

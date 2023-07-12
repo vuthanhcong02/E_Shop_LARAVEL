@@ -172,12 +172,14 @@
                                     <a href="#" class="heart-icon"><i class="icon_heart_alt"></i></a>
                                 </div>
                                 <div class="pd-rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <span>(5)</span>
+                                    @for($i=1;$i<=5;$i++)
+                                        @if($i<=$product->avgRating)
+                                            <i class="fa fa-star"></i>
+                                        @else
+                                            <i class="fa fa-star-o"></i>
+                                        @endif
+                                    @endfor
+                                    <span>({{count($product->productComments)}})</span>
                                 </div>
                                 <div class="pd-desc">
                                     <p>{{$product->content}}</p>
@@ -190,48 +192,24 @@
                                 <div class="pd-color">
                                     <h6>Color:</h6>
                                     <div class="pd-color-choose">
+                                        @foreach(array_unique(array_column($product->productDetails->toArray(), 'color')) as $productColor)
                                         <div class="cc-item">
-                                            <input type="radio" id="cc-black">
-                                            <label class="cc-black" for="cc-black">
+                                            <input type="radio" id="cc-{{$productColor}}">
+                                            <label class="cc-{{$productColor}}" for="cc-{{$productColor}}">
                                             </label>
                                         </div>
-                                        <div class="cc-item">
-                                            <input type="radio" id="cc-yellow">
-                                            <label class="cc-yellow" for="cc-yellow">
-                                            </label>
-                                        </div>
-                                        <div class="cc-item">
-                                            <input type="radio" id="cc-violet">
-                                            <label class="cc-violet" for="cc-violet">
-                                            </label>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="pd-size-choose">
+                                    @foreach(array_unique(array_column($product->productDetails->toArray(), 'size')) as $productSize)
                                         <div class="sc-item">
-                                            <input type="radio" id="s-size">
-                                            <label class="s-size" for="s-size">
-                                                S
+                                            <input type="radio" id="sm-{{$productSize}}">
+                                            <label for="sm-{{$productSize}}-size">
+                                                {{$productSize}}
                                             </label>
                                         </div>
-                                        <div class="sc-item">
-                                            <input type="radio" id="m-size">
-                                            <label class="m-size" for="m-size">
-                                                M
-                                            </label>
-                                        </div>
-                                        <div class="sc-item">
-                                            <input type="radio" id="l-size">
-                                            <label class="l-size" for="l-size">
-                                                L
-                                            </label>
-                                        </div>
-                                        <div class="sc-item">
-                                            <input type="radio" id="xs-size">
-                                            <label class="xs-size" for="xs-size">
-                                                XS
-                                        </label>
-                                    </div>
+                                    @endforeach
                                 </div>
                                 <div class="quantity">
                                     <div class="quantity">
@@ -262,7 +240,7 @@
                             <ul class="nav" role="tablist">
                                 <li><a class="" href="#tab-1" role="tab" data-toggle="tab">DESCRIPTION</a></li>
                                 <li><a class="" href="#tab-2" role="tab" data-toggle="tab">SPECIFICATIONS</a></li>
-                                <li><a class="" href="#tab-3" role="tab" data-toggle="tab">REVIEWS (5)</a></li>
+                                <li><a class="" href="#tab-3" role="tab" data-toggle="tab">REVIEWS ({{count($product->productComments)}})</a></li>
                             </ul>
                         </div>
                         <div class="tab-item-content">
@@ -272,7 +250,7 @@
                                         <div class="row">
                                             <div class="col-lg-7">
                                                 <h5>Product Description</h5>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam ex accusamus blanditiis fuga deserunt impedit ipsum maiores? Fugit minus dolorum ut rerum id, earum maxime ad cumque labore, natus quia!</p>
+                                                <p>{{$product->description}}</p>
                                                 <h5>Product Features</h5>
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
                                             </div>
@@ -289,12 +267,14 @@
                                                 <td class="p-category">Customer Rating</td>
                                                 <td>
                                                     <div class="pd-rating">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-o"></i>
-                                                        <span>(5)</span>
+                                                        @for($i=1;$i<=5;$i++)
+                                                            @if($i<=$product->avgRating)
+                                                                <i class="fa fa-star"></i>
+                                                            @else
+                                                                <i class="fa fa-star-o"></i>
+                                                            @endif
+                                                        @endfor
+                                                        <span>({{count($product->productComments)}})</span>
                                                     </div>
                                                 </td>
 
@@ -305,7 +285,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="p-price">
-                                                        $150.00
+                                                        ${{$product->price}}
                                                     </div>
                                                 </td>
 
@@ -323,29 +303,36 @@
                                             <tr>
                                                 <td class="p-category">Availability</td>
                                                 <td>
-                                                    <div class="p-stock">22 in Stock</div>
+                                                    <div class="p-stock">{{$product->qty}} in Stock</div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="p-category">Size</td>
                                                 <td>
-                                                    <div class="p-size">XXL
+                                                    <div class="p-{{$productSize}}">
+                                                    @foreach(array_unique(array_column($product->productDetails->toArray(), 'size')) as $productSize)
+                                                        {{$productSize}} ,
+                                                    @endforeach
                                                     </div>
+                                                   
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="p-category">Color</td>
                                                 <td>
-                                                    <div class="p-color">
-                                                        Black
+                                                    <div class="p-{{$productColor}}">
+                                                    @foreach(array_unique(array_column($product->productDetails->toArray(), 'color')) as $productColor)
+                                                        {{$productColor}} ,
+                                                    @endforeach
                                                     </div>
+
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="p-category">Sku</td>
                                                 <td>
                                                     <div class="p-sku">
-                                                        123456
+                                                        {{$product->sku}}
                                                     </div>
                                                 </td>
                                             </tr>
@@ -354,11 +341,13 @@
                                 </div>
                                 <div class="tab-pane fade" id="tab-3" role="tabpanel">
                                     <div class="customer-review-option">
-                                        <h4>2 Comments</h4>
+                                        <h4>{{count($product->productComments)}} Comments</h4>
                                         <div class="comment-option">
+                                        @foreach($product->productComments as $productComment)
+
                                             <div class="co-item">
                                                 <div class="avatar-pic">
-                                                    <img src="Frontend/img/product-single/avatar-1.png">
+                                                    <img src="Frontend/img/user/{{$productComment->user->avatar ?? 'default-avatar.jpg'}}" alt="">
                                                 </div>
                                                 <div class="avatar-text">
                                                     <div class="at-rating">
@@ -368,26 +357,11 @@
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star-o"></i>
                                                     </div>
-                                                    <h5> John Doe </h5><span>March 23, 2022</span>
-                                                    <div class="at-reply">Nice!</div>
+                                                    <h5>{{$productComment->user->name}}</h5><span>March 23, 2022</span>
+                                                    <div class="at-reply">{{$productComment->messages}}</div>
                                                 </div>
-                                            </div>
-                                            <div class="co-item">
-                                                <div class="avatar-pic">
-                                                    <img src="Frontend/img/product-single/avatar-2.png">
-                                                </div>
-                                                <div class="avatar-text">
-                                                    <div class="at-rating">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-o"></i>
-                                                    </div>
-                                                    <h5> John Doe </h5><span>March 23, 2022</span>
-                                                    <div class="at-reply">Nice!</div>
-                                                </div>
-                                            </div>                                            
+                                            </div>  
+                                            @endforeach                                   
                                         </div>
                                         <div class="personal-rating">
                                             <h4>Your Rating</h4>
@@ -543,38 +517,6 @@
                         </div>
                     </div>
             </div>     
-        </div>
-    </div>
-    <!--Partner Logo Section Begin-->
-    <div class="partner-logo">
-        <div class="container">
-            <div class="logo-carousel owl-carousel">
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="Frontend/img/logo-carousel/logo-1.png" alt="">
-                    </div>
-                </div>
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="Frontend/img/logo-carousel/logo-2.png" alt="">
-                    </div>
-                </div>
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="Frontend/img/logo-carousel/logo-3.png" alt="">
-                    </div>
-                </div>
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="Frontend/img/logo-carousel/logo-4.png" alt="">
-                    </div>
-                </div>
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="Frontend/img/logo-carousel/logo-5.png" alt="">
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <!--Partner Logo Section End-->
