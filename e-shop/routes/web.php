@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\ShopController;
+use App\Http\Controllers\Frontend\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,9 +13,6 @@ use App\Http\Controllers\Frontend\ShopController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('Frontend.index');
-});
+Route::get('/', [HomeController::class, 'index']);
 Route::get('/shop/product/{id}', [ShopController::class, 'show']);
 Route::post('/shop/product/{id}', [ShopController::class, 'postComment']);

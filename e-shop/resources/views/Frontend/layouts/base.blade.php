@@ -302,6 +302,7 @@
     <script src="{{asset('Frontend/js/jquery.slicknav.js')}}"></script>
     <script src="{{asset('Frontend/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('Frontend/js/main.js')}}"></script>
+    <script src="{{asset('Frontend/js/owlcarousel2-filter.min.js')}}"></script>
 </body>
 
 </html>

@@ -246,5 +246,11 @@
 		}
 		$button.parent().find('input').val(newVal);
 	});
+    $('.filter-control').on('click','.item', function () {
+    
+        const $item = $(this);
+        $item.siblings().removeClass('active');
+        $item.addClass('active');
+    })
 
 })(jQuery);
