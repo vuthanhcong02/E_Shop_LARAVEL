@@ -285,7 +285,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="p-price">
-                                                        ${{$product->price}}
+                                                        ${{$product->discount??$product->price}}
                                                     </div>
                                                 </td>
 
@@ -309,23 +309,25 @@
                                             <tr>
                                                 <td class="p-category">Size</td>
                                                 <td>
-                                                    <div class="p-{{$productSize}}">
-                                                    @foreach(array_unique(array_column($product->productDetails->toArray(), 'size')) as $productSize)
-                                                        {{$productSize}} ,
-                                                    @endforeach
-                                                    </div>
-                                                   
+                                                @foreach(array_unique(array_column($product->productDetails->toArray(), 'size')) as $productSize)
+                                                    @if($productSize !=null)
+                                                        <div class="p-{{$productSize}}">
+                                                            {{$productSize}}
+                                                        </div>
+                                                    @endif
+                                                @endforeach
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="p-category">Color</td>
                                                 <td>
+                                                @foreach(array_unique(array_column($product->productDetails->toArray(), 'color')) as $productColor)
+                                                    @if($productColor !=null)
                                                     <div class="p-{{$productColor}}">
-                                                    @foreach(array_unique(array_column($product->productDetails->toArray(), 'color')) as $productColor)
-                                                        {{$productColor}} ,
-                                                    @endforeach
+                                                        {{$productColor}}
                                                     </div>
-
+                                                    @endif
+                                                @endforeach
                                                 </td>
                                             </tr>
                                             <tr>
@@ -373,13 +375,13 @@
                                                 <!-- Đây là một lời gọi đến lớp "Auth" trong Laravel để lấy thông tin người dùng đang được xác thực. Lớp "Auth" cung cấp các phương thức để xác thực và quản lý người dùng trong ứng dụng Laravel. -->
                                                 <div class="row">
                                                     <div class="col-lg-6">
-                                                        <input type="text" placeholder="Name" name="name">
+                                                        <input type="text" placeholder="Name" name="name" required>
                                                     </div>
                                                     <div class="col-lg-6">
-                                                        <input type="text" placeholder="Email" name="email">
+                                                        <input type="text" placeholder="Email" name="email" required>
                                                     </div>
                                                     <div class="col-lg-12">
-                                                        <textarea placeholder="Comment" name="messages"></textarea>
+                                                        <textarea placeholder="Comment" name="messages" required></textarea>
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="personal-rating">
@@ -424,10 +426,11 @@
                 </div>
             </div>
             <div class="row">
+                @foreach($relatedProducts as $relatedProduct)
                     <div class="col-lg-3 col-md-6">
                         <div class="product-item">
                             <div class="pi-pic">
-                                <img src="img/products/product-1.jpg" alt="">
+                                <img src="Frontend/img/products/{{$relatedProduct->productImages[0]->path}}" alt="">
                                 <div class="sale pp-sale">Sale</div>
                                 <div class="icon">
                                     <i class="icon_heart_alt"></i>
@@ -439,95 +442,18 @@
                                 </ul>
                             </div>
                             <div class="pi-text">
-                                <div class="catagory-name">Towel</div>
+                                <div class="catagory-name">{{$relatedProduct->productCategory->name}}</div>
                                 <a href="#">
-                                    <h5>Pure Pineapple</h5>
+                                    <h5>{{$relatedProduct->name}}</h5>
                                 </a>
                                 <div class="product-price">
-                                    $29.00
-                                    <span>$39.00</span>
+                                    ${{$relatedProduct->discount ?? $relatedProduct->price}}
+                                    <span>${{$relatedProduct->price}}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="Frontend/img/products/product-1.jpg" alt="">
-                                <div class="sale pp-sale">Sale</div>
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="product.html">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Towel</div>
-                                <a href="#">
-                                    <h5>Pure Pineapple</h5>
-                                </a>
-                                <div class="product-price">
-                                    $29.00
-                                    <span>$39.00</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="Frontend/img/products/product-1.jpg" alt="">
-                                <div class="sale pp-sale">Sale</div>
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="product.html">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Towel</div>
-                                <a href="#">
-                                    <h5>Pure Pineapple</h5>
-                                </a>
-                                <div class="product-price">
-                                    $29.00
-                                    <span>$39.00</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="Frontend/img/products/product-1.jpg" alt="">
-                                <div class="sale pp-sale">Sale</div>
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="product.html">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Towel</div>
-                                <a href="#">
-                                    <h5>Pure Pineapple</h5>
-                                </a>
-                                <div class="product-price">
-                                    $29.00
-                                    <span>$39.00</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                @endforeach
             </div>     
         </div>
     </div>

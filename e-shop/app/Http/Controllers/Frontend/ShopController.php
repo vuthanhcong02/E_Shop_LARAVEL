@@ -35,7 +35,7 @@ class ShopController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id,$limit=4)
     {
         //
         $product = Product::findOrFail($id);
@@ -46,7 +46,18 @@ class ShopController extends Controller
             $avgRating = $avgRating/$countRating;
         }
         $product->avgRating = $avgRating;
-        return view('Frontend.shop.show', compact('product'));
+        // $relativeProducts = Product::where('tag', $product->tag)
+        //                     ->where('id', '!=', $product->id)->get();
+        $relatedProducts = Product::where(function ($query) use ($product) {
+            $query->where('product_category_id', $product->product_category_id)
+                  ->orWhere('tag', $product->tag);
+        })
+        ->where('id', '!=', $product->id)
+        ->limit($limit)
+        ->get();
+    
+        // echo $relativeProducts;
+        return view('Frontend.shop.show', compact('product','relatedProducts'));
     }
 
     /**
