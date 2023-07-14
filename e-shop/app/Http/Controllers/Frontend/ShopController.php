@@ -10,10 +10,35 @@ class ShopController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $listProducts = Product::orderBy('id', 'DESC')->paginate(6);
+        $perPage = $request->show ?? 3; 
+        $sortBy = $request->sort_by ?? 'lasted';
+        
+        switch ($sortBy) {
+            case 'lasted':
+                $listProducts = Product::orderBy('id', 'DESC')->paginate($perPage);
+                break;
+            case 'oldest':
+                $listProducts = Product::orderBy('id', 'ASC')->paginate($perPage);
+                break;
+            case 'name':
+                $listProducts = Product::orderBy('name', 'ASC')->paginate($perPage);
+                break;
+            case 'name-desc':
+                $listProducts = Product::orderBy('name', 'DESC')->paginate($perPage);
+                break;
+            case 'price':
+                $listProducts = Product::orderBy('price', 'ASC')->paginate($perPage);
+                break;
+            case 'price-desc':
+                $listProducts = Product::orderBy('price', 'DESC')->paginate($perPage);
+                break;
+                default:
+                $listProducts = Product::orderBy('id', 'DESC')->paginate($perPage);
+        }
+        // $listProducts = Product::orderBy('id', 'DESC')->paginate(6);
 
         return view('Frontend.shop.index',compact('listProducts'));
     }
