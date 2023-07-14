@@ -13,6 +13,6 @@ class Blog extends Model
     protected $guarded = [];
 
     public function BlogComments(){
-        $this->hasMany(BlogComment::class,'blog_id','id');
+        return $this->hasMany(BlogComment::class,'blog_id','id');
     }
 }

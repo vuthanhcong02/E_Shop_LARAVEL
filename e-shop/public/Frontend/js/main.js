@@ -56,7 +56,7 @@
         Product Slider
     --------------------*/
    $(".product-slider").owlCarousel({
-        loop: true,
+        loop: false,
         margin: 25,
         nav: true,
         items: 4,
@@ -246,11 +246,39 @@
 		}
 		$button.parent().find('input').val(newVal);
 	});
+
+
+    // -------------------
+    // Filter Products
+    const product_men = $('.product-slider.men');
+    const product_women = $('.product-slider.women');
+
     $('.filter-control').on('click','.item', function () {
     
         const $item = $(this);
+        const Filter = $item.data('tag');
+        const category = $item.data('category');
         $item.siblings().removeClass('active');
         $item.addClass('active');
+        if(category ==='men'){
+            var product_men_filtered = product_men.owlcarousel2_filter(Filter);
+            if(product_men_filtered == null){
+                $('.no-product').show();
+            }
+            else{
+                $('.no-product').hide();
+            }
+        }
+        if(category ==='women'){
+            var product_women_filtered = product_women.owlcarousel2_filter(Filter);
+            console.log(product_women_filtered)
+            if(product_women_filtered === null){
+                $('.no-product').show();
+            }
+            else{
+                $('.no-product').hide();
+            }
+        }
     })
 
 })(jQuery);

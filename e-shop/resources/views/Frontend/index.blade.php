@@ -87,16 +87,16 @@
                 <div class="col-lg-8 offset-lg-1">
                     <div class="filter-control">
                         <ul>
-                            <li class="active item" data-tag="all" data-category="Women">All</li>
-                            <li class="item" data-tag=".Clothings" data-category="Women" >Clothings</li>
-                            <li class="item" data-tag=".HandBag" data-category="Women">HandBag</li>
-                            <li class="item" data-tag=".Shoes" data-category="Women">Shoes</li>
-                            <li class="item" data-tag=".Accessories" data-category="Women">Accessories</li>
+                            <li class="active item" data-tag="*" data-category="women">All</li>
+                            <li class="item" data-tag=".Clothing" data-category="women" >Clothings</li>
+                            <li class="item" data-tag=".HandBag" data-category="women">HandBag</li>
+                            <li class="item" data-tag=".Shoe" data-category="women">Shoes</li>
+                            <li class="item" data-tag=".Accessory" data-category="women">Accessories</li>
                         </ul>
                     </div>
-                    <div class="product-slider owl-carousel">
+                    <div class="product-slider owl-carousel women">
                         @foreach($featured_Products_Women as $product)
-                        <div class="product-item">
+                        <div class="product-item item {{$product->tag}}">
                             <div class="pi-pic">
                                 <img src="Frontend/img/products/{{$product->productImages[0]->path}}" alt="">
                                 @if($product->discount!=null)
@@ -125,7 +125,11 @@
                             </div>
                         </div>
                         @endforeach
+                        <div class="product-item item {{$product->tag}} no-product" style="">
+                            Không có sản phẩm
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -176,16 +180,16 @@
                 <div class="col-lg-8">
                     <div class="filter-control">
                         <ul>
-                            <li class="active item " data-tag="all" data-category="Men">All</li>
-                            <li class="item" data-tag=".Clothings" data-category="Men">Clothings</li>
-                            <li class="item" data-tag=".HandBag" data-category="Men">HandBag</li>
-                            <li class="item" data-tag=".Shoes" data-category="Men">Shoes</li>
-                            <li class="item" data-tag=".Accessories" data-category="Men">Accessories</li>
+                            <li class="active item " data-tag="*" data-category="men">All</li>
+                            <li class="item" data-tag=".Clothing" data-category="men">Clothings</li>
+                            <li class="item" data-tag=".HandBag" data-category="men">HandBag</li>
+                            <li class="item" data-tag=".Shoe" data-category="men">Shoes</li>
+                            <li class="item" data-tag=".Accessory" data-category="men">Accessories</li>
                         </ul>
                     </div>
-                    <div class="product-slider owl-carousel">
+                    <div class="product-slider owl-carousel men">
                         @foreach($featured_Products_Man as $product)
-                        <div class="product-item">
+                        <div class="product-item item {{$product->tag}}">
                             <div class="pi-pic">
                                 <img src="Frontend/img/products/{{$product->productImages[0]->path}}" alt="">
                                 @if($product->discount!=null)
@@ -279,69 +283,29 @@
                 </div>
             </div>
             <div class="row">
+                @foreach($newBlogs as $blog)
                 <div class="col-lg-4 col-md-6">
                     <div class="single-latest-blog">
-                        <img src="Frontend/img/latest-1.jpg">
+                        <img src="Frontend/img/blog/{{$blog->image}}">
                         <div class="latest-text">
                             <div class="tag-list">
                                <div class="tag-item">
                                     <i class="fa fa-calendar-o"></i>
-                                    May 15, 2022
+                                    {{date('d-m-Y',strtotime($blog->created_at))}}
                                </div>
                                <div class="tag-item">
                                     <i class="fa fa-comment-o"></i>
-                                    5
+                                    {{count($blog->BlogComments)}}
                                </div>
                             </div>
                             <a href="#">
-                                <h4>The best Street Style for Spring</h4>
+                                <h4>{{$blog->title}}</h4>
                             </a>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                            <p>{{$blog->subtitle}}</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-latest-blog">
-                        <img src="Frontend/img/latest-2.jpg">
-                        <div class="latest-text">
-                            <div class="tag-list">
-                               <div class="tag-item">
-                                    <i class="fa fa-calendar-o"></i>
-                                    May 15, 2022
-                               </div>
-                               <div class="tag-item">
-                                    <i class="fa fa-comment-o"></i>
-                                    5
-                               </div>
-                            </div>
-                            <a href="#">
-                                <h4>The best Street Style for Spring</h4>
-                            </a>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-latest-blog">
-                        <img src="Frontend/img/latest-3.jpg">
-                        <div class="latest-text">
-                            <div class="tag-list">
-                               <div class="tag-item">
-                                    <i class="fa fa-calendar-o"></i>
-                                    May 15, 2022
-                               </div>
-                               <div class="tag-item">
-                                    <i class="fa fa-comment-o"></i>
-                                    5
-                               </div>
-                            </div>
-                            <a href="#">
-                                <h4>The best Street Style for Spring</h4>
-                            </a>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <div class="benefit-items">
                 <div class="row">

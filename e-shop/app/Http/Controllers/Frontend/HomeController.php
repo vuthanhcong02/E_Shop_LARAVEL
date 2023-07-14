@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Blog;
+use App\Models\BlogComment;
 class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($limitBlog = 3)
     {
         //
         $featured_Products_Women = Product::where('featured', true)
@@ -19,9 +21,10 @@ class HomeController extends Controller
         $featured_Products_Man = Product::where('featured', true)
                                     ->where('product_category_id', 1)
                                     ->get();
-
+        $newBlogs = Blog::orderBy('created_at', 'desc')->limit($limitBlog)->get();
+        // echo $newBlogs;
         // echo $featured_Products_Women;
-        return view('Frontend.index',compact('featured_Products_Women','featured_Products_Man'));
+        return view('Frontend.index',compact('featured_Products_Women','featured_Products_Man','newBlogs'));
     }
 
     /**
