@@ -14,5 +14,8 @@ use App\Http\Controllers\Frontend\HomeController;
 |
 */
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/shop/product/{id}', [ShopController::class, 'show']);
-Route::post('/shop/product/{id}', [ShopController::class, 'postComment']);
+Route::prefix('shop')->group(function(){
+    Route::get('/product/{id}', [ShopController::class, 'show']);
+    Route::post('/product/{id}', [ShopController::class, 'postComment']);
+    Route::get('', [ShopController::class, 'index']);
+});

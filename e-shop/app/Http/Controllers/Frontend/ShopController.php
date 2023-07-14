@@ -13,6 +13,9 @@ class ShopController extends Controller
     public function index()
     {
         //
+        $listProducts = Product::orderBy('id', 'DESC')->paginate(6);
+
+        return view('Frontend.shop.index',compact('listProducts'));
     }
 
     /**
