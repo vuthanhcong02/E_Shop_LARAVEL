@@ -151,6 +151,7 @@
                         <div class="col-lg-7 col-md-7">
                             <form action="">
                                 <div class="select-option">
+                                    <input type="hidden" name="search" value="{{request('search')??''}}">
                                     <select class="sorting" name="sort_by" onchange="this.form.submit()">
                                         <option {{request('sort_by') == 'lasted' ? 'selected' : ''}} value="lasted">Sort By Lasted</option>
                                         <option {{request('sort_by') == 'oldest' ? 'selected' : ''}} value="oldest">Sort By Oldest</option>

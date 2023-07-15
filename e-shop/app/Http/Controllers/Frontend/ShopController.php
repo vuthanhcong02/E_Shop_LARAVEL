@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+
 class ShopController extends Controller
 {
     /**
@@ -15,32 +16,57 @@ class ShopController extends Controller
         //
         $perPage = $request->show ?? 3; 
         $sortBy = $request->sort_by ?? 'lasted';
-        
+        $search = $request->search ?? '';
+        $search_ListProducts =  Product::where(function ($query) use ($search) {
+            $query->where('products.name', 'like', '%'.$search.'%')
+                ->orWhere('products.tag', 'like', '%'.$search.'%');
+        });
         switch ($sortBy) {
             case 'lasted':
-                $listProducts = Product::orderBy('id', 'DESC')->paginate($perPage);
+                $listProducts = $search_ListProducts
+                ->orderBy('id', 'DESC')
+                ->paginate($perPage)
+                ->appends(['sort_by' => 'lasted', 'search' => $search, 'show' => $perPage]);
                 break;
             case 'oldest':
-                $listProducts = Product::orderBy('id', 'ASC')->paginate($perPage);
+                $listProducts = $search_ListProducts
+                ->orderBy('id', 'ASC')
+                ->paginate($perPage)
+                ->appends(['sort_by' => 'oldest', 'search' => $search, 'show' => $perPage]);
                 break;
             case 'name':
-                $listProducts = Product::orderBy('name', 'ASC')->paginate($perPage);
+                $listProducts = $search_ListProducts
+                ->orderBy('name', 'ASC')
+                ->paginate($perPage)
+                ->appends(['sort_by' => 'name', 'search' => $search, 'show' => $perPage]);
                 break;
             case 'name-desc':
-                $listProducts = Product::orderBy('name', 'DESC')->paginate($perPage);
+                $listProducts = $search_ListProducts
+                ->orderBy('name', 'DESC')
+                ->paginate($perPage)
+                ->appends(['sort_by' => 'name-desc', 'search' => $search, 'show' => $perPage]);
                 break;
             case 'price':
-                $listProducts = Product::orderBy('price', 'ASC')->paginate($perPage);
+                $listProducts = $search_ListProducts
+                ->orderBy('price', 'ASC')
+                ->paginate($perPage)
+                ->appends(['sort_by' => 'price', 'search' => $search, 'show' => $perPage]);
                 break;
             case 'price-desc':
-                $listProducts = Product::orderBy('price', 'DESC')->paginate($perPage);
+                $listProducts = $search_ListProducts
+                ->orderBy('price', 'DESC')
+                ->paginate($perPage)
+                ->appends(['sort_by' => 'price-desc', 'search' => $search, 'show' => $perPage]);
                 break;
                 default:
-                $listProducts = Product::orderBy('id', 'DESC')->paginate($perPage);
+                    $listProducts = $search_ListProducts
+                    ->orderBy('id', 'DESC')
+                    ->paginate($perPage)
+                    ->appends(['sort_by' => 'lasted', 'search' => $search, 'show' => $perPage]);
         }
         // $listProducts = Product::orderBy('id', 'DESC')->paginate(6);
 
-        return view('Frontend.shop.index',compact('listProducts'));
+        return view('Frontend.shop.index', compact('listProducts'));
     }
 
     /**
@@ -63,29 +89,29 @@ class ShopController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id,$limit=4)
+    public function show(string $id, $limit = 4)
     {
         //
         $product = Product::findOrFail($id);
         $avgRating = 0;
         $avgRating = array_sum(array_column($product->productComments->toArray(), 'rating'));
         $countRating = count($product->productComments);
-        if($countRating!=0){
-            $avgRating = $avgRating/$countRating;
+        if ($countRating != 0) {
+            $avgRating = $avgRating / $countRating;
         }
         $product->avgRating = $avgRating;
         // $relativeProducts = Product::where('tag', $product->tag)
         //                     ->where('id', '!=', $product->id)->get();
         $relatedProducts = Product::where(function ($query) use ($product) {
             $query->where('product_category_id', $product->product_category_id)
-                  ->orWhere('tag', $product->tag);
+                ->orWhere('tag', $product->tag);
         })
-        ->where('id', '!=', $product->id)
-        ->limit($limit)
-        ->get();
-    
+            ->where('id', '!=', $product->id)
+            ->limit($limit)
+            ->get();
+
         // echo $relativeProducts;
-        return view('Frontend.shop.show', compact('product','relatedProducts'));
+        return view('Frontend.shop.show', compact('product', 'relatedProducts'));
     }
 
     /**
@@ -111,7 +137,8 @@ class ShopController extends Controller
     {
         //
     }
-    public function postComment(Request $request, string $id){
+    public function postComment(Request $request, string $id)
+    {
         //
         $name = $request->name;
         $email = $request->email;
