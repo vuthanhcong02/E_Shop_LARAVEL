@@ -10,7 +10,7 @@
                     <h4 class="fw-title">Categories</h4>
                     <ul class="filter-catagories">
                         @foreach($categories_name as $category)
-                            <li><a href="#">{{$category->name}}</a></li>
+                            <li class="{{request()->categoryName == $category->name ? 'active-category' : ''}}"><a href="/shop/category/{{$category->name}}">{{$category->name}}</a></li>
                         @endforeach
                     </ul>
                 </div>

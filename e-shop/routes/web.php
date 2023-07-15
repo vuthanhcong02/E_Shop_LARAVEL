@@ -18,4 +18,5 @@ Route::prefix('shop')->group(function(){
     Route::get('/product/{id}', [ShopController::class, 'show']);
     Route::post('/product/{id}', [ShopController::class, 'postComment']);
     Route::get('', [ShopController::class, 'index']);
+    Route::get('/category/{categoryName}', [ShopController::class, 'getProductByCategory']);
 });

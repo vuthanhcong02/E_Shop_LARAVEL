@@ -2013,7 +2013,10 @@ ol {
 	font-size: 16px;
 	color: #252525;
 }
-
+.active-category {
+	background-color : #e7ab3c;
+	padding :0px 10px;
+}
 .product-show-option p {
 	margin-bottom: 0;
 	color: #636363;
