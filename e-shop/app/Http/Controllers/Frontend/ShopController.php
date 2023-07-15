@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
-
+use App\Models\ProductCategory;
 class ShopController extends Controller
 {
     /**
@@ -65,8 +65,8 @@ class ShopController extends Controller
                     ->appends(['sort_by' => 'lasted', 'search' => $search, 'show' => $perPage]);
         }
         // $listProducts = Product::orderBy('id', 'DESC')->paginate(6);
-
-        return view('Frontend.shop.index', compact('listProducts'));
+        $categories_name  = ProductCategory::all();
+        return view('Frontend.shop.index', compact('listProducts','categories_name'));
     }
 
     /**

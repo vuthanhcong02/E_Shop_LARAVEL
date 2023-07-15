@@ -9,9 +9,9 @@
                 <div class="filter-widget">
                     <h4 class="fw-title">Categories</h4>
                     <ul class="filter-catagories">
-                        <li><a href="#">Men</a></li>
-                        <li><a href="#">Women's</a></li>
-                        <li><a href="#">Kid's</a></li>
+                        @foreach($categories_name as $category)
+                            <li><a href="#">{{$category->name}}</a></li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="filter-widget">
