@@ -6,67 +6,70 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Brand;
 class ShopController extends Controller
 {
     public function index(Request $request)
-{
-    $listProducts = $this->getSortedAndPaginatedProducts($request);
-    $categories_name  = ProductCategory::all();
-    return view('Frontend.shop.index', compact('listProducts','categories_name'));
-}
-
-public function getProductByCategory(string $categoryName, Request $request)
-{
-    $listProducts = $this->getSortedAndPaginatedProducts($request, $categoryName);
-    $categories_name  = ProductCategory::all();
-    return view('Frontend.shop.index', compact('listProducts','categories_name'));
-}
-
-private function getSortedAndPaginatedProducts(Request $request, $categoryName = null)
-{
-    $perPage = $request->show ?? 3; 
-    $sortBy = $request->sort_by ?? 'lasted';
-    $search = $request->search ?? '';
-
-    $products = Product::query();
-    
-    if ($categoryName) {
-        $products->join('product_categories', 'product_categories.id', '=', 'products.product_category_id')
-            ->select('products.*', 'product_categories.name as categoryName')
-            ->where('product_categories.name', $categoryName);
+    {
+        $listProducts = $this->getSortedAndPaginatedProducts($request);
+        $categories_name  = ProductCategory::all();
+        $brands = Brand::all();
+        return view('Frontend.shop.index', compact('listProducts','categories_name','brands'));
     }
 
-    $products->where(function ($query) use ($search) {
-        $query->where('products.name', 'like', '%'.$search.'%')
-            ->orWhere('products.tag', 'like', '%'.$search.'%');
-    });
-
-    switch ($sortBy) {
-        case 'lasted':
-            $products->orderBy('id', 'DESC');
-            break;
-        case 'oldest':
-            $products->orderBy('id', 'ASC');
-            break;
-        case 'name':
-            $products->orderBy('name', 'ASC');
-            break;
-        case 'name-desc':
-            $products->orderBy('name', 'DESC');
-            break;
-        case 'price':
-            $products->orderBy('price', 'ASC');
-            break;
-        case 'price-desc':
-            $products->orderBy('price', 'DESC');
-            break;
-        default:
-            $products->orderBy('id', 'DESC');
-            break;
+    public function getProductByCategory(string $categoryName, Request $request)
+    {
+        $listProducts = $this->getSortedAndPaginatedProducts($request, $categoryName);
+        $categories_name  = ProductCategory::all();
+        $brands = Brand::all();
+        return view('Frontend.shop.index', compact('listProducts','categories_name','brands'));
     }
 
-    return $products->paginate($perPage)->appends(['sort_by' => $sortBy, 'search' => $search, 'show' => $perPage]);
-}
+    private function getSortedAndPaginatedProducts(Request $request, $categoryName = null)
+    {
+        $perPage = $request->show ?? 3; 
+        $sortBy = $request->sort_by ?? 'lasted';
+        $search = $request->search ?? '';
+
+        $products = Product::query();
+        
+        if ($categoryName) {
+            $products->join('product_categories', 'product_categories.id', '=', 'products.product_category_id')
+                ->select('products.*', 'product_categories.name as categoryName')
+                ->where('product_categories.name', $categoryName);
+        }
+
+        $products->where(function ($query) use ($search) {
+            $query->where('products.name', 'like', '%'.$search.'%')
+                ->orWhere('products.tag', 'like', '%'.$search.'%');
+        });
+
+        switch ($sortBy) {
+            case 'lasted':
+                $products->orderBy('id', 'DESC');
+                break;
+            case 'oldest':
+                $products->orderBy('id', 'ASC');
+                break;
+            case 'name':
+                $products->orderBy('name', 'ASC');
+                break;
+            case 'name-desc':
+                $products->orderBy('name', 'DESC');
+                break;
+            case 'price':
+                $products->orderBy('price', 'ASC');
+                break;
+            case 'price-desc':
+                $products->orderBy('price', 'DESC');
+                break;
+            default:
+                $products->orderBy('id', 'DESC');
+                break;
+        }
+
+        return $products->paginate($perPage)->appends(['sort_by' => $sortBy, 'search' => $search, 'show' => $perPage]);
+    }
 
     public function show(string $id, $limit = 4)
     {
