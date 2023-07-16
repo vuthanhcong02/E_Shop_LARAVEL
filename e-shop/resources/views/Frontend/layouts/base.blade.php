@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <div class="col-lg-7 col-md-7">
-                        <form action="/shop">
+                        <form action="{{ (request()->segment(2) !== 'category') ? url('/shop') : url('/shop/category/'.request()->segment(3)) }}">
                             <div class="advanced-search">
                                 <button type="button" class="category-btn">All Categories</button>
                                 <div class="input-group">

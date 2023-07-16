@@ -125,9 +125,6 @@
                             </div>
                         </div>
                         @endforeach
-                        <div class="product-item item {{$product->tag}} no-product" style="">
-                            Không có sản phẩm
-                        </div>
                     </div>
 
                 </div>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Blog;
 use App\Models\BlogComment;
+use App\Models\ProductCategory;
 class HomeController extends Controller
 {
     /**
@@ -15,6 +16,7 @@ class HomeController extends Controller
     public function index($limitBlog = 3)
     {
         //
+
         $featured_Products_Women = Product::where('featured', true)
                                     ->where('product_category_id', 2)
                                     ->get();
