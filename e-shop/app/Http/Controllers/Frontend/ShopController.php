@@ -33,18 +33,25 @@ class ShopController extends Controller
         $search = $request->search ?? '';
         $brands = $request->brand ?? [];
         $brand_ids = array_keys($brands);
+        $pMax = $request->p_max;
+        $pMin = $request->p_min;
+        $pMax = str_replace('$','', $pMax);
+        $pMin = str_replace('$','', $pMin);
         $products = Product::query();        
         if ($categoryName) {
             $products->join('product_categories', 'product_categories.id', '=', 'products.product_category_id')
                 ->select('products.*', 'product_categories.name as categoryName')
                 ->where('product_categories.name', $categoryName);
         }
-        $products = $brand_ids != null ? $products->whereIn('brand_id', $brand_ids):$products;
-
+        
         $products->where(function ($query) use ($search) {
             $query->where('products.name', 'like', '%'.$search.'%')
                 ->orWhere('products.tag', 'like', '%'.$search.'%');
         });
+        #brands
+        $products = $brand_ids != null ? $products->whereIn('brand_id', $brand_ids):$products;
+        #price
+        $products = ($pMax != null && $pMin != null) ? $products->whereBetween('price', [$pMin, $pMax]):$products;
 
         switch ($sortBy) {
             case 'lasted':
@@ -70,7 +77,7 @@ class ShopController extends Controller
                 break;
         }
 
-        return $products->paginate($perPage)->appends(['sort_by' => $sortBy,'brand' => $brands,'search' => $search, 'show' => $perPage]);
+        return $products->paginate($perPage)->appends(['sort_by' => $sortBy,'brand' => $brands,'search' => $search, 'show' => $perPage, 'p_max' => $pMax, 'p_min' => $pMin]);
     }
     public function filterBrand(Request $request,$products)
     {
