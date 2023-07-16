@@ -11,6 +11,7 @@ class ShopController extends Controller
 {
     public function index(Request $request)
     {
+        
         $listProducts = $this->getSortedAndPaginatedProducts($request);
         $categories_name  = ProductCategory::all();
         $brands = Brand::all();
@@ -30,14 +31,15 @@ class ShopController extends Controller
         $perPage = $request->show ?? 3; 
         $sortBy = $request->sort_by ?? 'lasted';
         $search = $request->search ?? '';
-
-        $products = Product::query();
-        
+        $brands = $request->brand ?? [];
+        $brand_ids = array_keys($brands);
+        $products = Product::query();        
         if ($categoryName) {
             $products->join('product_categories', 'product_categories.id', '=', 'products.product_category_id')
                 ->select('products.*', 'product_categories.name as categoryName')
                 ->where('product_categories.name', $categoryName);
         }
+        $products = $brand_ids != null ? $products->whereIn('brand_id', $brand_ids):$products;
 
         $products->where(function ($query) use ($search) {
             $query->where('products.name', 'like', '%'.$search.'%')
@@ -68,9 +70,17 @@ class ShopController extends Controller
                 break;
         }
 
-        return $products->paginate($perPage)->appends(['sort_by' => $sortBy, 'search' => $search, 'show' => $perPage]);
+        return $products->paginate($perPage)->appends(['sort_by' => $sortBy,'brand' => $brands,'search' => $search, 'show' => $perPage]);
     }
+    public function filterBrand(Request $request,$products)
+    {
+        $brands = $request->brand ?? [];
+        $brand_ids = array_keys($brands);
 
+        $products = $brand_ids != null ? $products->whereIn('brand_id', $brand_ids):$products;
+        return $products;
+
+    }
     public function show(string $id, $limit = 4)
     {
         //
