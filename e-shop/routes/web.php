@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,4 +20,7 @@ Route::prefix('shop')->group(function(){
     Route::post('/product/{id}', [ShopController::class, 'postComment']);
     Route::get('', [ShopController::class, 'index']);
     Route::get('/category/{categoryName}', [ShopController::class, 'getProductByCategory']);
+});
+Route::prefix('cart')->group(function(){
+    Route::get('/add/{id}', [CartController::class, 'addToCart']);
 });
