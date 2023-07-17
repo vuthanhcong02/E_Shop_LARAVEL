@@ -108,9 +108,10 @@ class ShopController extends Controller
             ->where('id', '!=', $product->id)
             ->limit($limit)
             ->get();
-
+        $categories_name = ProductCategory::all();
+        $brands = Brand::all();
         // echo $relativeProducts;
-        return view('Frontend.shop.show', compact('product', 'relatedProducts'));
+        return view('Frontend.shop.show', compact('product', 'relatedProducts','categories_name','brands'));
     }
 
     /**
