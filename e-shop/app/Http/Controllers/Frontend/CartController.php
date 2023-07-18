@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use  Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Product;
+use App\Models\ProductImage;
 class CartController extends Controller
 {
     /**
@@ -14,6 +15,10 @@ class CartController extends Controller
     public function index()
     {
         //
+        $carts = Cart::content();
+        $total = Cart::total();
+        $subtotal = Cart::subtotal();
+        return view('Frontend.cart.index',compact('carts','total','subtotal'));
     }
 
     /**
@@ -76,7 +81,7 @@ class CartController extends Controller
                 ],
             ]
         );
-        dd(Cart::content());
-        // return redirect()->back();
+        // dd(Cart::content());
+        return redirect()->back();
     }
 }

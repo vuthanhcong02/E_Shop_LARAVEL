@@ -92,7 +92,7 @@
                                 </a>
                             </li>
                             <li class="cart-icon">
-                                <a href="#">
+                                <a href="/cart">
                                     <i class="icon_bag_alt"></i>
                                     <span>3</span>
                                 </a>
@@ -120,7 +120,7 @@
                                         <h5>$120.00</h5>
                                     </div>
                                     <div class="select-button">
-                                        <a href="shopping-cart.html" class="primary-btn view-card">VIEW CARD</a>
+                                        <a href="/cart" class="primary-btn view-card">VIEW CARD</a>
                                         <a href="check-out.html" class="primary-btn checkout-btn">CHECK OUT</a>
                                     </div>
                                 </div>
@@ -167,7 +167,7 @@
                         <li><a href="">Pages</a>
                             <ul class="dropdown">
                                 <li><a href="blog-details.html">Blog Details</a></li>
-                                <li><a href="shopping-cart.html">Shoping Cart</a></li>
+                                <li><a href="/cart">Shoping Cart</a></li>
                                 <li><a href="check-out.html">Checkout</a></li>
                                 <li><a href="faq.html">Faq</a></li>
                                 <li><a href="register.html">Register</a></li>

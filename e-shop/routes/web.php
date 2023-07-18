@@ -23,4 +23,5 @@ Route::prefix('shop')->group(function(){
 });
 Route::prefix('cart')->group(function(){
     Route::get('/add/{id}', [CartController::class, 'addToCart']);
+    Route::get('/', [CartController::class, 'index']);
 });

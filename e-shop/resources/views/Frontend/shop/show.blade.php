@@ -79,7 +79,7 @@
                                         <div class="pro-qty">
                                             <input type="text" value="1">
                                         </div>
-                                        <a href="#" class="primary-btn pd-cart">Add to cart</a>
+                                        <a href="/cart/add/{{$product->id}}" class="primary-btn pd-cart">Add to cart</a>
                                     </div>
                                    
                                 </div>
