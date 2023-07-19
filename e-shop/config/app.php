@@ -169,6 +169,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -185,6 +186,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+        'Flash' => Laracasts\Flash\Flash::class,
     ])->toArray(),
 
 ];

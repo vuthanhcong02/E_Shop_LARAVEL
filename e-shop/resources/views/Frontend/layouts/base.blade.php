@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{asset('Frontend/css/jquery-ui.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('Frontend/css/slicknav.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('Frontend/css/style.css')}}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -31,6 +32,7 @@
     <div id="preloder">
         <div class="loader"></div>
     </div>
+   
     <!-- Header Section Begin -->
     <header class="header-section">
         <div class="header-top">
@@ -49,8 +51,8 @@
                     <a class="login-panel" href="login.html"><i class="fa fa-user"></i>Login</a>
                     <div class="lan-selector">
                         <select class="language_drop" name="countries" id="countries" style="width: 300px;">
-                            <option value="yt" data-image ="Frontend/img/flag-1.jpg" data-imagecss="flag yt" data-title="English">English</option>
-                            <option value="yu" data-image ="Frontend/img/flag-2.jpg" data-imagecss="flag yu" data-title="Bangladesh">German</option>
+                            <option value="yt" data-image="Frontend/img/flag-1.jpg" data-imagecss="flag yt" data-title="English">English</option>
+                            <option value="yu" data-image="Frontend/img/flag-2.jpg" data-imagecss="flag yu" data-title="Bangladesh">German</option>
                         </select>
                     </div>
                     <div class="top-social">
@@ -94,30 +96,32 @@
                             <li class="cart-icon">
                                 <a href="/cart">
                                     <i class="icon_bag_alt"></i>
-                                    <span>3</span>
+                                    <span class="cart-count">{{Cart::count()}}</span>
                                 </a>
                                 <div class="cart-hover">
                                     <div class="select-items">
                                         <table>
                                             <tbody>
-                                                <tr>
-                                                    <td class="si-pic"><img src="Frontend/img/select-product-1.jpg" alt=""></td>
+                                                @foreach(Cart::content() as $cart)
+                                                <tr data-rowId="{{$cart->rowId}}">
+                                                    <td class="si-pic"><img src="Frontend/img/products/{{$cart->options->images[0]->path}}" style="width: 60px;" alt=""></td>
                                                     <td class="si-text">
-                                                        <div class="producr-selected">
-                                                            <p>$60.00 x 1</p>
-                                                            <h6>Kabino Bedside Table</h6>
+                                                        <div class="product-selected">
+                                                            <p>${{number_format($cart->price,2)}} x {{$cart->qty}}</p>
+                                                            <h6>{{$cart->name}}</h6>
                                                         </div>
                                                     </td>
                                                     <td class="si-close">
                                                         <i class="ti-close"></i>
                                                     </td>
                                                 </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
                                     <div class="select-total">
                                         <span>total:</span>
-                                        <h5>$120.00</h5>
+                                        <h5 >${{number_format(Cart::total(),2)}}</h5>
                                     </div>
                                     <div class="select-button">
                                         <a href="/cart" class="primary-btn view-card">VIEW CARD</a>
@@ -126,11 +130,11 @@
                                 </div>
                             </li>
                             <li class="cart-price">
-                                $150.00
+                                ${{number_format(Cart::total(),2)}}
                             </li>
                         </ul>
                     </div>
-                </div>                        
+                </div>
             </div>
         </div>
         <div class="nav-item">
@@ -179,16 +183,16 @@
                 </nav>
                 <div id="mobile-menu-wrap">
 
-                </div>  
-            </div>    
+                </div>
+            </div>
         </div>
-    </header>   
+    </header>
     <!-- Header End -->
 
-<!-- Body Section Begin -->
+    <!-- Body Section Begin -->
     @yield('body')
-<!-- Body Section End -->
-       <!--Partner Logo Section Begin-->
+    <!-- Body Section End -->
+    <!--Partner Logo Section Begin-->
     <div class="partner-logo">
         <div class="container">
             <div class="logo-carousel owl-carousel">
@@ -281,7 +285,9 @@
                     <div class="col-lg-12">
                         <div class="copyright-text">
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright @<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            Copyright @<script>
+                                document.write(new Date().getFullYear());
+                            </script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </div>
                         <div class="payment-pic">
@@ -292,6 +298,7 @@
             </div>
         </div>
     </footer>
+
     <!-- Footer Section End -->
     <!-- Js Plugins -->
     <script src="{{asset('Frontend/js/jquery-3.3.1.min.js')}}"></script>
@@ -305,6 +312,7 @@
     <script src="{{asset('Frontend/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('Frontend/js/main.js')}}"></script>
     <script src="{{asset('Frontend/js/owlcarousel2-filter.min.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
 </html>

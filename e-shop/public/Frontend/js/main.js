@@ -284,3 +284,56 @@
     })
 
 })(jQuery);
+function addToCart(productId) {
+    $.ajax({
+        type: "GET",
+        url: "cart/add",
+        data: {
+            productId: productId
+        },
+        success: function (response) {
+            $('.cart-count').text(response['count']);
+            $('.cart-price').text('$' + response['total']);
+            $('.select-total h5').text('$' + response['total']);
+            var cartHover_tbody = $('.select-items tbody');
+            var cartHover_existItem = cartHover_tbody.find("tr" + "[data-rowId='" + response['cart'].rowId +"']");
+            if(cartHover_existItem.length){
+                cartHover_existItem.find('.product-selected p').text('$'+ response['cart'].price.toFixed(2)+ ' x '+ response['cart'].qty);
+            }
+            else{
+                var newItem = 
+                '<tr data-rowId="' + response['cart'].rowId + '">\n' +
+                '    <td class="si-pic">\n' +
+                '        <img style="width: 60px;"\n' +
+                '            src="Frontend/img/products/'+response['cart'].options.images[0].path + '" alt="">\n' +
+                '    </td>\n' +
+                '<td class="si-text">\n' +
+                '    <div class="producr-selected">\n' +
+                '        <p>$'+ response['cart'].price.toFixed(2)+ ' x '+ response['cart'].qty +'</p>\n' +
+                '        <h6>' + response['cart'].name + '</h6>\n' +
+                '    </div>\n' +
+                '</td>\n' +
+                '<td class="si-close">\n' +
+                '    <i class="ti-close"></i>\n' +
+                '</td>\n' +
+                '</tr>';
+                cartHover_tbody.append(newItem);
+            }
+            // alert('Sản phẩm đã được thêm vào giỏ hàng');
+            toastr.options={
+                "closeButton":true,
+                "progressBar":true
+            }
+            toastr.success("Sản phẩm đã được thêm vào giỏ hàng",{timeOut:5000})
+
+        },
+        error: function (response) {
+            toastr.options={
+                "closeButton":true,
+                "progressBar":true
+            }
+            toastr.error("Có lỗi xảy ra!",{timeOut:5000})
+        
+        },
+    });
+}

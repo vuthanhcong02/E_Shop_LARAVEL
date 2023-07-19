@@ -22,6 +22,6 @@ Route::prefix('shop')->group(function(){
     Route::get('/category/{categoryName}', [ShopController::class, 'getProductByCategory']);
 });
 Route::prefix('cart')->group(function(){
-    Route::get('/add/{id}', [CartController::class, 'addToCart']);
+    Route::get('add', [CartController::class, 'add']);
     Route::get('/', [CartController::class, 'index']);
 });

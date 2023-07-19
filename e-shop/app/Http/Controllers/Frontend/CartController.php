@@ -68,20 +68,25 @@ class CartController extends Controller
     {
         //
     }
-    public function addToCart(Request $request, $id){
-        $product = Product::find($id);
-        Cart::add(
-            [
-                'id' => $product->id,
-                'name' => $product->name,
-                'price' => $product->price,
-                'qty' => 1,
-                'options' => [
-                    'image' => $product->productImages
-                ],
-            ]
-        );
+    public function add(Request $request){
+        if($request->ajax()){
+            $product = Product::find($request->productId);
+            $response['cart'] = Cart::add(
+                [
+                    'id' => $product->id,
+                    'name' => $product->name,
+                    'price' => $product->price,
+                    'qty' => 1,
+                    'options' => [
+                        'images' => $product->productImages
+                    ],
+                ]
+            );
+            $response['count']=Cart::count();
+            $response['total']=Cart::total();
+            return $response;
+        }
         // dd(Cart::content());
-        return redirect()->back();
+        return back();
     }
 }
