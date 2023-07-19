@@ -314,7 +314,7 @@ function addToCart(productId) {
                 '    </div>\n' +
                 '</td>\n' +
                 '<td class="si-close">\n' +
-                '    <i class="ti-close"></i>\n' +
+                '    <i class="ti-close" onclick="deleteCart(\''+response['cart'].rowId+'\')"></i>\n' +
                 '</td>\n' +
                 '</tr>';
                 cartHover_tbody.append(newItem);
@@ -336,4 +336,44 @@ function addToCart(productId) {
         
         },
     });
+}
+function deleteCart(rowId){
+    if(confirm("Bạn có muốn xóa sản phẩm khỏi giỏ hàng")){
+        $.ajax({
+            type: "GET",
+            url: "cart/delete",
+            data: {
+                rowId: rowId
+            },
+            success: function (response) {
+                $('.cart-count').text(response['count']);
+                $('.cart-price').text('$' + response['total']);
+                $('.select-total h5').text('$' + response['total']);
+                $('.subtotal span').text('$' + response['subtotal']);
+                $('.cart-total span').text('$' + response['total']);
+                var cartHover_tbody = $('.select-items tbody');
+                var cartHover_existItem = cartHover_tbody.find("tr" + "[data-rowId='" + rowId +"']");
+                cartHover_existItem.remove();
+                //xử lí ở trang shop/cart
+                var cart_tbody = $('.cart-table tbody');
+                var cart_existItem = cart_tbody.find("tr" + "[data-rowId='" + rowId +"']");
+                cart_existItem.remove();
+                // alert('Sản phẩm đã được thêm vào giỏ hàng');
+                toastr.options={
+                    "closeButton":true,
+                    "progressBar":true
+                }
+                toastr.warning("Sản phẩm đã được xóa khỏi giỏ hàng",{timeOut:5000})
+    
+            },
+            error: function (response) {
+                toastr.options={
+                    "closeButton":true,
+                    "progressBar":true
+                }
+                toastr.error("Có lỗi xảy ra!",{timeOut:5000})
+            
+            },
+        });
+    }
 }

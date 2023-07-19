@@ -64,9 +64,17 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
+    public function destroy(Request $request)
+    {   
+        if($request->ajax()){
+            $response['cart'] = Cart::remove($request->rowId);
+            $response['count']=Cart::count();
+            $response['total']=Cart::total();
+            $response['subtotal']=Cart::subtotal();
+            return $response;
+        }
+        // dd(Cart::content());
+        return back();
     }
     public function add(Request $request){
         if($request->ajax()){
