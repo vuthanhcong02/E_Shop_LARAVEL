@@ -56,9 +56,18 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
         //
+        if($request->ajax()){
+            $reponse['cart'] = Cart::update($request->rowId, $request->qty);
+            $reponse['count']=Cart::count();
+            $reponse['total']=Cart::total();
+            $reponse['subtotal']=Cart::subtotal();
+            return $reponse;
+        }
+        // dd(Cart::content());
+        return back();
     }
 
     /**

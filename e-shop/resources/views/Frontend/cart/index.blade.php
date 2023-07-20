@@ -47,7 +47,7 @@
                                         <td class="qua-col first-row">
                                         <div class="quantity">
                                                 <div class="pro-qty">
-                                                    <input type="text" value="{{$cart->qty}}">
+                                                    <input type="text" value="{{$cart->qty}}" data-rowid="{{$cart->rowId}}">
                                                 </div>
                                         </div>
                                         </td>
@@ -66,8 +66,8 @@
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="cart-buttons">
-                                <a href="shop.html" class="primary-btn continue-shop">Continue shopping</a>
-                                <a href="" class="primary-btn up-cart">Update Cart</a>
+                                <a href="/shop" class="primary-btn continue-shop">Continue shopping</a>
+                                <!-- <a href="javascript:updateCart()" class="primary-btn up-cart">Update Cart</a> -->
                             </div>
                             <div class="discount-coupon">
                                 <h6>Discount Codes</h6>

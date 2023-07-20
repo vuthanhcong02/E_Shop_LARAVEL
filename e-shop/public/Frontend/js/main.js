@@ -247,6 +247,8 @@
 			}
 		}
 		$button.parent().find('input').val(newVal);
+        var $rowId = $button.parent().find('input').data('rowid');
+        updateCart($rowId, newVal); 
 	});
 
 
@@ -410,4 +412,44 @@ function destroyCart(){
         },
     });
 
+}
+function updateCart(rowId,qty){
+    $.ajax({
+        type: "GET",
+        url: "cart/update",
+        data: {
+            rowId: rowId,qty:qty,
+        },
+        success: function (response) {
+            $('.cart-count').text(response['count']);
+            $('.cart-price').text('$' + response['total']);
+            $('.select-total h5').text('$' + response['total']);
+            $('.subtotal span').text('$' + response['subtotal']);
+            $('.cart-total span').text('$' + response['total']);
+            var cartHover_tbody = $('.select-items tbody');
+            var cartHover_existItem = cartHover_tbody.find("tr" + "[data-rowId='" + rowId +"']");
+            if(qty===0){
+                cartHover_existItem.remove();
+            }else{
+                cartHover_existItem.find('.product-selected p').text('$'+ response['cart'].price.toFixed(2)+ ' x '+ response['cart'].qty);
+            }
+            //xử lí ở trang shop/cart
+            var cart_tbody = $('.cart-table tbody');
+            var cart_existItem = cart_tbody.find("tr" + "[data-rowId='" + rowId +"']");
+            if(qty===0){
+                cart_existItem.remove();
+            }else{
+                cart_existItem.find('.total-price').text('$'+ (response['cart'].price * response['cart'].qty).toFixed(2));
+            }
+            // alert('update thành công');
+        },
+        error: function (response) {
+            toastr.options={
+                "closeButton":true,
+                "progressBar":true
+            }
+            toastr.error("Có lỗi xảy ra!",{timeOut:5000})
+        
+        },
+    });
 }
