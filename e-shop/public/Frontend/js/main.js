@@ -377,3 +377,37 @@ function deleteCart(rowId){
         });
     }
 }
+function destroyCart(){
+    $.ajax({
+        type: "GET",
+        url: "cart/destroy",
+        success: function (response) {
+            $('.cart-count').text('0');
+            $('.cart-price').text('$' + '0.00');
+            $('.select-total h5').text('$' + '0.00');
+            $('.subtotal span').text('$' + '0.00');
+            $('.cart-total span').text('$' + '0.00');
+            var cartHover_tbody = $('.select-items tbody');
+            cartHover_tbody.children().remove();
+            //xử lí ở trang shop/cart
+            var cart_tbody = $('.cart-table tbody');
+            cart_tbody.children().remove();
+            // alert('Sản phẩm đã được thêm vào giỏ hàng');
+            toastr.options={
+                "closeButton":true,
+                "progressBar":true
+            }
+            toastr.error("Tất cả sản phẩm đã bị xóa khỏi giỏ hàng",{timeOut:5000})
+
+        },
+        error: function (response) {
+            toastr.options={
+                "closeButton":true,
+                "progressBar":true
+            }
+            toastr.error("Có lỗi xảy ra!",{timeOut:5000})
+        
+        },
+    });
+
+}

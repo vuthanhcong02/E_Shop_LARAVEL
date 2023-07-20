@@ -30,30 +30,36 @@
                                     <th>Price</th>
                                     <th>Quantity</th>
                                     <th>Total</th>
-                                    <th><i class="ti-close"></i></th>
+                                    <th><i class="ti-close" onclick="confirm('Bạn có chắc muốn xóa toàn bộ giỏ hàng không?') ? destroyCart() : ''"></i></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($carts as $cart)
-                                <tr data-rowId = "{{$cart->rowId}}">
-                                    <td class="cart-pic first-row">
-                                        <img src="Frontend/img/products/{{$cart->options->images[0]->path}}" alt="" style="width: 100px;">
-                                    </td>
-                                    <td class="cart-title first-row">
-                                        <h5>{{$cart->name}}</h5>
-                                    </td>
-                                    <td class="p-price first-row">${{number_format($cart->price,2)}}</td>
-                                    <td class="qua-col first-row">
-                                       <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="{{$cart->qty}}">
-                                            </div>
-                                       </div>
-                                    </td>
-                                    <td class="total-price first-row">${{number_format($cart->price * $cart->qty,2)}}</td>
-                                    <td class="close-td first-row"><i onclick="deleteCart('{{$cart->rowId}}')" class="ti-close"></i></td>
-                                </tr>
-                                @endforeach
+                                @if(Cart::count() > 0)
+                                    @foreach($carts as $cart)
+                                    <tr data-rowId = "{{$cart->rowId}}">
+                                        <td class="cart-pic first-row">
+                                            <img src="Frontend/img/products/{{$cart->options->images[0]->path}}" alt="" style="width: 100px;">
+                                        </td>
+                                        <td class="cart-title first-row">
+                                            <h5>{{$cart->name}}</h5>
+                                        </td>
+                                        <td class="p-price first-row">${{number_format($cart->price,2)}}</td>
+                                        <td class="qua-col first-row">
+                                        <div class="quantity">
+                                                <div class="pro-qty">
+                                                    <input type="text" value="{{$cart->qty}}">
+                                                </div>
+                                        </div>
+                                        </td>
+                                        <td class="total-price first-row">${{number_format($cart->price * $cart->qty,2)}}</td>
+                                        <td class="close-td first-row"><i onclick="deleteCart('{{$cart->rowId}}')" class="ti-close"></i></td>
+                                    </tr>
+                                    @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="6" class="cart-empty" style="padding-top: 34px"><h4>Cart is empty</h4></td>
+                                        </tr>
+                                    @endif
                             </tbody>
                         </table>
                     </div>
