@@ -83,7 +83,7 @@
                                     <li class="subtotal">Subtotal:<span>${{number_format(Cart::subtotal(),2)}}</span></li>
                                     <li class="cart-total">Total:<span>${{number_format(Cart::total(),2)}}</span></li>
                                 </ul>
-                                <a href="check-out.html" class="proceed-btn">PROCEED TO CHECKOUT</a>
+                                <a href="/checkout" class="proceed-btn">PROCEED TO CHECKOUT</a>
                             </div>
                         </div>
                     </div>

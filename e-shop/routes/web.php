@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,4 +28,7 @@ Route::prefix('cart')->group(function(){
     Route::get('delete', [CartController::class, 'delete']);
     Route::get('destroy', [CartController::class, 'destroy']);
     Route::get('update',[CartController::class,'update']);
+});
+Route::prefix('checkout')->group(function(){
+    Route::get('/', [CheckoutController::class, 'index']);
 });
