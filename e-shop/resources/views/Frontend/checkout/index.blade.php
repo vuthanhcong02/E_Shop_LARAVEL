@@ -20,7 +20,8 @@
     <!--Checkout Secsion Begin-->
     <div class="checkout-section spad">
         <div class="container">
-            <form class="checkout-form">
+            <form class="checkout-form" action="" method="post">
+                @csrf
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="checkout-content">
@@ -30,27 +31,27 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <label for="fir">First Name<span>*</span></label>
-                                <input type="text" id="fir">
+                                <input type="text" id="fir" name="first_name">
                             </div>
                             <div class="col-lg-6">
                                 <label for="las">Last Name<span>*</span></label>
-                                <input type="text" id="las">
+                                <input type="text" id="las" name="last_name">
                             </div>
                             <div class="col-lg-12">
                                 <label for="add">Address<span>*</span></label>
-                                <input type="text" id="add">
+                                <input type="text" id="add" name="address">
                             </div>
                             <div class="col-lg-12">
                                 <label for="city">City<span>*</span></label>
-                                <input type="text" id="city">
+                                <input type="text" id="city" name="city">
                             </div>
                             <div class="col-lg-6">
                                 <label for="email">Email<span>*</span></label>
-                                <input type="email" id="email">
+                                <input type="email" id="email" name="email">
                             </div>
                             <div class="col-lg-6">
                                 <label for="phone">Phone<span>*</span></label>
-                                <input type="text" id="phone">
+                                <input type="text" id="phone" name="phone">
                             </div>
                             <div class="col-lg-12">
                                 <div class="create-item">
@@ -80,20 +81,24 @@
                                 </ul>
                                 <div class="payment-check">
                                     <div class="pc-item">
-                                        <label for="pc-check">Cheque Payment
-                                            <input type="checkbox" id="pc-check">
+                                        <label for="pc-check">Pay Later
+                                            <input type="radio" name="payment" id="pc-check" value="pay_later" checked>
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
                                     <div class="pc-item">
-                                        <label for="pc-paypal">Paypal
-                                            <input type="checkbox" id="pc-paypal">
+                                        <label for="pc-paypal">Online Pay
+                                            <input type="radio" id="pc-paypal" name="payment" value="online_pay">
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
                                 </div>
                                 <div class="order-btn">
+                                    @if(Cart::count() > 0)
                                     <button type="submit" class="site-btn place-btn">Place Order</button>
+                                    @else
+                                    <div class="site-btn place-btn disabled">Place Order</div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

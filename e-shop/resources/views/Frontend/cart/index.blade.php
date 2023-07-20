@@ -83,7 +83,11 @@
                                     <li class="subtotal">Subtotal:<span>${{number_format(Cart::subtotal(),2)}}</span></li>
                                     <li class="cart-total">Total:<span>${{number_format(Cart::total(),2)}}</span></li>
                                 </ul>
-                                <a href="/checkout" class="proceed-btn">PROCEED TO CHECKOUT</a>
+                                @if(Cart::count() > 0)
+                                    <a href="/checkout" class="proceed-btn">PROCEED TO CHECKOUT</a>
+                                @else
+                                    <div class="proceed-btn disabled" >PROCEED TO CHECKOUT</div>
+                                @endif
                             </div>
                         </div>
                     </div>
