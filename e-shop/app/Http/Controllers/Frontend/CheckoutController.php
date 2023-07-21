@@ -8,6 +8,8 @@ use  Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Utilities\VNPay;
+use Illuminate\Support\Facades\Mail;
+
 class CheckoutController extends Controller
 {
     //
@@ -32,6 +34,10 @@ class CheckoutController extends Controller
             ]);
         }
         if($request->payment=='pay_later'){
+            //send email
+            $total = Cart::total();
+            $subtotal = Cart::subtotal();
+            $this->sendEmail($order,$total,$subtotal);
              //Xóa giỏ hàng
             Cart::destroy();
             //Trả về kết quả
@@ -56,6 +62,11 @@ class CheckoutController extends Controller
         // Kiểm tra data xem kết quả giao dịch có hợp lệ không
         if($vnp_ReponseCode != null){
             if($vnp_ReponseCode == 00){
+                //send email
+                $order = Order::where('id',$vnp_TxnRef)->first();
+                $total = Cart::total();
+                $subtotal = Cart::subtotal();
+                $this->sendEmail($order,$total,$subtotal);
                 Cart::destroy();
                 return redirect('checkout/result')->with('notice','Thanh toán đơn hàng thành công!Vui lòng kiểm tra email');
             }
@@ -69,5 +80,13 @@ class CheckoutController extends Controller
     public function show(){
         $notify = session()->get('notice');
         return view('Frontend.checkout.show',compact('notify'));
+    }
+    private function sendEmail($order,$total,$subtotal){
+        $email_to = $order->email;
+        Mail::send('Frontend.checkout.email',compact('order','total','subtotal'),function($message) use($email_to){
+            $message->from('congvtc02@gmail.com','VTC-eShop');
+            $message->to($email_to,$email_to);
+            $message->subject('Thông báo đơn hàng bạn đặt');            
+        });
     }
 }
