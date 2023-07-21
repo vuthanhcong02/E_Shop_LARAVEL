@@ -33,6 +33,10 @@ class CheckoutController extends Controller
         //Xóa giỏ hàng
         Cart::destroy();
         //Trả về kết quả
-        return "Đơn đặt hàng thành công";
+        return redirect('checkout/result')->with('success','Cảm ơn bạn đã đặt hàng vui lòng kiểm tra email!');
+    }
+    public function show(){
+        $notify = session()->get('success');
+        return view('Frontend.checkout.show',compact('notify'));
     }
 }
