@@ -21,6 +21,7 @@ Route::prefix('shop')->group(function(){
     Route::post('/product/{id}', [ShopController::class, 'postComment']);
     Route::get('', [ShopController::class, 'index']);
     Route::get('/category/{categoryName}', [ShopController::class, 'getProductByCategory']);
+    Route::get('/tag/{tagName}', [ShopController::class, 'getProductByTag']);
 });
 Route::prefix('cart')->group(function(){
     Route::get('add', [CartController::class, 'add']);

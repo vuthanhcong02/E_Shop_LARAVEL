@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Blog;
 use App\Models\BlogComment;
 use App\Models\ProductCategory;
+use App\Models\Tag;
 class HomeController extends Controller
 {
     /**
@@ -16,7 +17,8 @@ class HomeController extends Controller
     public function index($limitBlog = 3)
     {
         //
-
+        $categories_name = ProductCategory::all();
+        $tags = Tag::all();
         $featured_Products_Women = Product::where('featured', true)
                                     ->where('product_category_id', 2)
                                     ->get();
@@ -26,7 +28,7 @@ class HomeController extends Controller
         $newBlogs = Blog::orderBy('created_at', 'desc')->limit($limitBlog)->get();
         // echo $newBlogs;
         // echo $featured_Products_Women;
-        return view('Frontend.index',compact('featured_Products_Women','featured_Products_Man','newBlogs'));
+        return view('Frontend.index',compact('featured_Products_Women','featured_Products_Man','newBlogs','categories_name','tags'));
     }
 
     /**

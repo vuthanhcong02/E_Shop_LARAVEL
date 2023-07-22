@@ -144,14 +144,17 @@
                         <i class="ti-menu"></i>
                         <span>All Department</span>
                         <ul class="depart-hover">
-                            <li class="active"><a href="#">All Department</a></li>
-                            <li><a href="#">Dresses</a></li>
+                            <li class="{{request()->segment(1) =='shop' && request()->segment(2) =='' ? 'active' : ''}}"><a href="/shop">All Department</a></li>
+                            @foreach ($tags as $tag)
+                                <li class="{{request()->segment(3)==$tag->name ? 'active' : ''}}"><a href="/shop/tag/{{$tag->name}}">{{$tag->name}}</a></li>
+                            @endforeach
+                            <!-- <li><a href="#">Dresses</a></li>
                             <li><a href="#">Pants</a></li>
                             <li><a href="#">Shirts</a></li>
                             <li><a href="#">Jackets & Coats</a></li>
                             <li><a href="#">Sweaters</a></li>
                             <li><a href="#">Hoodies & Sweatshirts</a></li>
-                            <li><a href="#">Jackets</a></li>
+                            <li><a href="#">Jackets</a></li> -->
                         </ul>
                     </div>
                 </div>
@@ -159,11 +162,13 @@
                     <ul>
                         <li class="{{request()->segment(1)=='' ? 'active' :''}}"><a href="/">Home</a></li>
                         <li class="{{request()->segment(1)=='shop' ? 'active' :''}}"><a href="/shop">Shop</a></li>
-                        <li><a href="">Colections</a>
+                        <li><a href="">Categories</a>
                             <ul class="dropdown">
-                                <li><a href="">Men's</a></li>
-                                <li><a href="">Women's</a></li>
-                                <li><a href="">Kid's</a></li>
+                                @foreach($categories_name as $category)
+                                <li><a href="/shop/category/{{request()->segment(3) == $category->name ? 'all' : $category->name}}">{{$category->name}}</a></li>
+                                @endforeach
+                                <!-- <li><a href="/shop/category/Women">Women's</a></li>
+                                <li><a href="/shop/category/Kids">Kid's</a></li> -->
                             </ul>
                         </li>
                         <li class="{{request()->segment(1)=='blog' ? 'active' :''}}"><a href="/blog">Blog</a></li>

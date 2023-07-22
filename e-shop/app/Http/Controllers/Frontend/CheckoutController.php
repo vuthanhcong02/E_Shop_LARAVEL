@@ -9,15 +9,18 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Utilities\VNPay;
 use Illuminate\Support\Facades\Mail;
-
+use App\Models\ProductCategory;
+use App\Models\Tag;
 class CheckoutController extends Controller
 {
     //
     public function index(){
+        $categories_name = ProductCategory::all();
+        $tags = Tag::all();
         $carts = Cart::content();
         $total = Cart::total();
         $subtotal = Cart::subtotal();
-        return view('Frontend.checkout.index',compact('carts','total','subtotal'));
+        return view('Frontend.checkout.index',compact('carts','total','subtotal','categories_name','tags'));
     }
     public function addOrder(Request $request){
         //Thêm đơn hàng
@@ -78,8 +81,10 @@ class CheckoutController extends Controller
         }
     }
     public function show(){
+        $tags = Tag::all();
+        $categories_name = ProductCategory::all();
         $notify = session()->get('notice');
-        return view('Frontend.checkout.show',compact('notify'));
+        return view('Frontend.checkout.show',compact('notify','tags','categories_name'));
     }
     private function sendEmail($order,$total,$subtotal){
         $email_to = $order->email;

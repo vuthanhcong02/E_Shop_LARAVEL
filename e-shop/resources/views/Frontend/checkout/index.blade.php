@@ -31,27 +31,27 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <label for="fir">First Name<span>*</span></label>
-                                <input type="text" id="fir" name="first_name">
+                                <input type="text" id="fir" name="first_name" required>
                             </div>
                             <div class="col-lg-6">
                                 <label for="las">Last Name<span>*</span></label>
-                                <input type="text" id="las" name="last_name">
+                                <input type="text" id="las" name="last_name" required>
                             </div>
                             <div class="col-lg-12">
                                 <label for="add">Address<span>*</span></label>
-                                <input type="text" id="add" name="address">
+                                <input type="text" id="add" name="address" required>
                             </div>
                             <div class="col-lg-12">
                                 <label for="city">City<span>*</span></label>
-                                <input type="text" id="city" name="city">
+                                <input type="text" id="city" name="city" required>
                             </div>
                             <div class="col-lg-6">
                                 <label for="email">Email<span>*</span></label>
-                                <input type="email" id="email" name="email">
+                                <input type="email" id="email" name="email" required>
                             </div>
                             <div class="col-lg-6">
                                 <label for="phone">Phone<span>*</span></label>
-                                <input type="text" id="phone" name="phone">
+                                <input type="text" id="phone" name="phone" required>
                             </div>
                             <div class="col-lg-12">
                                 <div class="create-item">

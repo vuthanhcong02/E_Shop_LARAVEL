@@ -142,7 +142,29 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Kids',
             ],
         ]);
-
+        DB::table('tags')->insert([
+            [
+                'name' => 'Clothing',
+            ],
+            [
+                'name' => 'Shoes',
+            ],
+            [
+                'name' => 'Accessories',
+            ],
+            [
+                'name' => 'Beauty',
+            ],
+            [
+                'name' => 'Handbags',
+            ],
+            [
+                'name' => 'Jewelry',
+            ],
+            [
+                'name' => 'Dress'
+            ],
+        ]);
         DB::table('products')->insert([
             [
                 'id' => 1,
@@ -157,7 +179,7 @@ class DatabaseSeeder extends Seeder
                 'weight' => 1.3,
                 'sku' => '00012',
                 'featured' => true,
-                'tag' => 'Clothing',
+                'tag_id' => 1,
             ],
             [
                 'id' => 2,
@@ -172,7 +194,7 @@ class DatabaseSeeder extends Seeder
                 'weight' => null,
                 'sku' => null,
                 'featured' => true,
-                'tag' => 'Clothing',
+                'tag_id' => 1,
             ],
             [
                 'id' => 3,
@@ -187,7 +209,7 @@ class DatabaseSeeder extends Seeder
                 'weight' => null,
                 'sku' => null,
                 'featured' => true,
-                'tag' => 'Clothing',
+                'tag_id' => 1,
             ],
             [
                 'id' => 4,
@@ -202,7 +224,7 @@ class DatabaseSeeder extends Seeder
                 'weight' => null,
                 'sku' => null,
                 'featured' => true,
-                'tag' => 'Accessories',
+                'tag_id' => 3,
             ],
             [
                 'id' => 5,
@@ -217,7 +239,7 @@ class DatabaseSeeder extends Seeder
                 'weight' => null,
                 'sku' => null,
                 'featured' => false,
-                'tag' => 'Accessories',
+                'tag_id' => 3,
             ],
             [
                 'id' => 6,
@@ -232,7 +254,7 @@ class DatabaseSeeder extends Seeder
                 'weight' => null,
                 'sku' => null,
                 'featured' => true,
-                'tag' => 'Clothing',
+                'tag_id' => 1,
             ],
             [
                 'id' => 7,
@@ -247,7 +269,7 @@ class DatabaseSeeder extends Seeder
                 'weight' => null,
                 'sku' => null,
                 'featured' => true,
-                'tag' => 'HandBag',
+                'tag_id' => 6,
             ],
             [
                 'id' => 8,
@@ -262,7 +284,7 @@ class DatabaseSeeder extends Seeder
                 'weight' => null,
                 'sku' => null,
                 'featured' => true,
-                'tag' => 'Clothing',
+                'tag_id' => 1,
             ],
             [
                 'id' => 9,
@@ -277,7 +299,7 @@ class DatabaseSeeder extends Seeder
                 'weight' => null,
                 'sku' => null,
                 'featured' => true,
-                'tag' => 'Shoes',
+                'tag_id' => 2,
             ],
         ]);
 

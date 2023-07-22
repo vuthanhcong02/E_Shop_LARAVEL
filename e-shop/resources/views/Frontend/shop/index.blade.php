@@ -55,7 +55,7 @@
                                     </ul>
                                 </div>
                                 <div class="pi-text">
-                                    <div class="catagory-name">{{$product->tag}}</div>
+                                    <div class="catagory-name">{{$product->productTag->name}}</div>
                                     <a href="/shop/product/{{$product->id}}">
                                         <h5>{{$product->name}}</h5>
                                     </a>

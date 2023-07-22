@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use  Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\ProductCategory;
+use App\Models\Tag;
 class CartController extends Controller
 {
     /**
@@ -15,10 +17,12 @@ class CartController extends Controller
     public function index()
     {
         //
+        $categories_name = ProductCategory::all();
+        $tags = Tag::all();
         $carts = Cart::content();
         $total = Cart::total();
         $subtotal = Cart::subtotal();
-        return view('Frontend.cart.index',compact('carts','total','subtotal'));
+        return view('Frontend.cart.index',compact('carts','total','subtotal','categories_name','tags'));
     }
 
     /**

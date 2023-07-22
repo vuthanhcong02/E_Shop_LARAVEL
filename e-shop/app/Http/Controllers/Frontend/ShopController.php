@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Brand;
+use App\Models\Tag;
 class ShopController extends Controller
 {
     public function index(Request $request)
@@ -14,19 +15,31 @@ class ShopController extends Controller
         
         $listProducts = $this->getSortedAndPaginatedProducts($request);
         $categories_name  = ProductCategory::all();
+        $tags = Tag::all();
         $brands = Brand::all();
-        return view('Frontend.shop.index', compact('listProducts','categories_name','brands'));
+        return view('Frontend.shop.index', compact('listProducts','categories_name','brands','tags'));
     }
 
     public function getProductByCategory(string $categoryName, Request $request)
     {
-        $listProducts = $this->getSortedAndPaginatedProducts($request, $categoryName);
+        $listProducts = $this->getSortedAndPaginatedProducts($request, $categoryName, null);
         $categories_name  = ProductCategory::all();
+        $tags = Tag::all();
         $brands = Brand::all();
-        return view('Frontend.shop.index', compact('listProducts','categories_name','brands'));
+        return view('Frontend.shop.index', compact('listProducts','categories_name','brands','tags'));
     }
-
-    private function getSortedAndPaginatedProducts(Request $request, $categoryName = null)
+    public function getProductByTag(string $tagName, Request $request){
+        // $listProducts = Product::join('tags', 'tags.id', '=', 'products.tag_id')
+        //     ->select('products.*', 'tags.name as tagName')
+        //     ->where('tags.name', $tagName)
+        //     ->paginate(10);
+        $listProducts = $this->getSortedAndPaginatedProducts($request, null, $tagName);
+        $categories_name  = ProductCategory::all();
+        $tags = Tag::all();
+        $brands = Brand::all();
+        return view('Frontend.shop.index', compact('listProducts','categories_name','brands','tags'));
+    }
+    private function getSortedAndPaginatedProducts(Request $request, $categoryName = null, $tagName = null)
     {
         $perPage = $request->show ?? 3; 
         $sortBy = $request->sort_by ?? 'lasted';
@@ -37,17 +50,30 @@ class ShopController extends Controller
         $pMin = $request->p_min;
         $pMax = str_replace('$','', $pMax);
         $pMin = str_replace('$','', $pMin);
-        $products = Product::query();        
+        $products = Product::query();    
+          
         if ($categoryName) {
             $products->join('product_categories', 'product_categories.id', '=', 'products.product_category_id')
                 ->select('products.*', 'product_categories.name as categoryName')
                 ->where('product_categories.name', $categoryName);
         }
         
+        // $products->where(function ($query) use ($search) {
+        //     $query->where('products.name', 'like', '%'.$search.'%')
+        //         ->orWhere('products.tag', 'like', '%'.$search.'%');
+        // });
+        if($tagName){
+            $products->join('tags', 'tags.id', '=', 'products.tag_id')
+            ->select('products.*', 'tags.name as tagName')
+            ->where('tags.name', $tagName);
+        } 
         $products->where(function ($query) use ($search) {
             $query->where('products.name', 'like', '%'.$search.'%')
-                ->orWhere('products.tag', 'like', '%'.$search.'%');
+                  ->orWhereHas('productTag', function ($query) use ($search) {
+                      $query->where('name', 'like', '%'.$search.'%');
+                  });
         });
+        
         #brands
         $products = $brand_ids != null ? $products->whereIn('brand_id', $brand_ids):$products;
         #price
@@ -92,6 +118,7 @@ class ShopController extends Controller
     {
         //
         $product = Product::findOrFail($id);
+        $tags = Tag::all();
         $avgRating = 0;
         $avgRating = array_sum(array_column($product->productComments->toArray(), 'rating'));
         $countRating = count($product->productComments);
@@ -103,15 +130,18 @@ class ShopController extends Controller
         //                     ->where('id', '!=', $product->id)->get();
         $relatedProducts = Product::where(function ($query) use ($product) {
             $query->where('product_category_id', $product->product_category_id)
-                ->orWhere('tag', $product->tag);
+        //        ->orWhere('tag', $product->tag)
+                   ->orWhere('tag_id', $product->tag_id);
+
         })
-            ->where('id', '!=', $product->id)
-            ->limit($limit)
-            ->get();
+        // $relatedProducts = Product::where('product_category_id', $product->product_category_id)
+                        ->where('id', '!=', $product->id)
+                        ->limit($limit)
+                        ->get();
         $categories_name = ProductCategory::all();
         $brands = Brand::all();
         // echo $relativeProducts;
-        return view('Frontend.shop.show', compact('product', 'relatedProducts','categories_name','brands'));
+        return view('Frontend.shop.show', compact('product', 'relatedProducts','categories_name','brands','tags'));
     }
 
     /**

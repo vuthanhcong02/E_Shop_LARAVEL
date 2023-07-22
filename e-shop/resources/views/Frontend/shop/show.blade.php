@@ -47,9 +47,9 @@
                                 <div class="pd-desc">
                                     <p>{{$product->content}}</p>
                                     @if($product->discount !=null)
-                                        <h4>${{$product->discount}}<span>${{$product->price}}</span></h4>
+                                        <h4>${{number_format($product->discount,2)}}<span>${{number_format($product->price,2)}}</span></h4>
                                     @else
-                                        <h4>${{$product->price}}</h4>
+                                        <h4>${{number_format($product->price,2)}}</h4>
                                     @endif
                                 </div>
                                 <div class="pd-color">
@@ -85,7 +85,7 @@
                                 </div>
                                 <ul class="pd-tags">
                                     <li><span>CATEGORIES</span> : {{$product->productCategory->name}}</li>
-                                    <li><span>TAGS</span> : {{$product->tag}}</li>
+                                    <li><span>TAGS</span> : {{$product->productTag->name}}</li>
                                 </ul>
                                 <div class="pd-share">
                                     <div class="p-code">Sku : {{$product->sku}}</div>
@@ -148,7 +148,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="p-price">
-                                                        ${{$product->discount??$product->price}}
+                                                        ${{number_format($product->discount??$product->price, 2)}}
                                                     </div>
                                                 </td>
 
@@ -299,19 +299,19 @@
                                     <i class="icon_heart_alt"></i>
                                 </div>
                                 <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="product.html">+ Quick View</a></li>
+                                    <li class="w-icon active"><a href="javascript:addToCart({{$relatedProduct->id}})"><i class="icon_bag_alt"></i></a></li>
+                                    <li class="quick-view"><a href="/shop/product/{{$relatedProduct->id}}">+ Quick View</a></li>
                                     <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
                                 </ul>
                             </div>
                             <div class="pi-text">
-                                <div class="catagory-name">{{$relatedProduct->productCategory->name}}</div>
+                                <div class="catagory-name">{{$relatedProduct->productTag->name}}</div>
                                 <a href="#">
                                     <h5>{{$relatedProduct->name}}</h5>
                                 </a>
                                 <div class="product-price">
-                                    ${{$relatedProduct->discount ?? $relatedProduct->price}}
-                                    <span>${{$relatedProduct->price}}</span>
+                                    ${{number_format($relatedProduct->discount ?? $relatedProduct->price,2)}}
+                                    <span>${{number_format($relatedProduct->price,2)}}</span>
                                 </div>
                             </div>
                         </div>

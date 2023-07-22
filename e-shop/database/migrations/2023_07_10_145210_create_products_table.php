@@ -25,7 +25,7 @@ return new class extends Migration
             $table->double('weight')->nullable();
             $table->string('sku')->nullable();
             $table->boolean('featured');
-            $table->string('tag')->nullable();
+            $table->integer('tag_id')->unsigned();
 
             $table->timestamps();
         });
