@@ -295,7 +295,7 @@
                                     {{count($blog->BlogComments)}}
                                </div>
                             </div>
-                            <a href="#">
+                            <a href="blog/details/{{$blog->id}}">
                                 <h4>{{$blog->title}}</h4>
                             </a>
                             <p>{{$blog->subtitle}}</p>

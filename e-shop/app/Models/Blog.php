@@ -15,4 +15,5 @@ class Blog extends Model
     public function BlogComments(){
         return $this->hasMany(BlogComment::class,'blog_id','id');
     }
+    
 }

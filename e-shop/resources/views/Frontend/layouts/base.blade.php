@@ -162,7 +162,7 @@
                     <ul>
                         <li class="{{request()->segment(1)=='' ? 'active' :''}}"><a href="/">Home</a></li>
                         <li class="{{request()->segment(1)=='shop' ? 'active' :''}}"><a href="/shop">Shop</a></li>
-                        <li><a href="">Categories</a>
+                        <li class="{{request()->segment(1)=='category' ? 'active' :''}}"><a href="/shop">Categories</a>
                             <ul class="dropdown">
                                 @foreach($categories_name as $category)
                                 <li><a href="/shop/category/{{request()->segment(3) == $category->name ? 'all' : $category->name}}">{{$category->name}}</a></li>

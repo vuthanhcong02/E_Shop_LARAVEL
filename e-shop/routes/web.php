@@ -5,6 +5,7 @@ use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
+use App\Http\Controllers\Frontend\BlogController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,4 +36,8 @@ Route::prefix('checkout')->group(function(){
     Route::post('/', [CheckoutController::class, 'addOrder']);
     Route::get('/result', [CheckoutController::class, 'show']);
     Route::get('/vnPayCheck', [CheckoutController::class, 'vnPayCheck']);
+});
+Route::prefix('blog')->group(function(){
+    Route::get('/', [BlogController::class, 'index']);
+    Route::get('/details/{id}', [BlogController::class, 'show']);
 });
