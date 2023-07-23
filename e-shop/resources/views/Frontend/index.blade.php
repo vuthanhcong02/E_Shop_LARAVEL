@@ -89,14 +89,14 @@
                         <ul>
                             <li class="active item" data-tag="*" data-category="women">All</li>
                             <li class="item" data-tag=".Clothing" data-category="women" >Clothings</li>
-                            <li class="item" data-tag=".HandBag" data-category="women">HandBag</li>
-                            <li class="item" data-tag=".Shoe" data-category="women">Shoes</li>
-                            <li class="item" data-tag=".Accessory" data-category="women">Accessories</li>
+                            <li class="item" data-tag=".Handbags" data-category="women">HandBag</li>
+                            <li class="item" data-tag=".Shoes" data-category="women">Shoes</li>
+                            <li class="item" data-tag=".Accessories" data-category="women">Accessories</li>
                         </ul>
                     </div>
                     <div class="product-slider owl-carousel women">
                         @foreach($featured_Products_Women as $product)
-                        <div class="product-item item {{$product->tag}}">
+                        <div class="product-item item {{$product->productTag->name}}">
                             <div class="pi-pic">
                                 <img src="Frontend/img/products/{{$product->productImages[0]->path}}" alt="">
                                 @if($product->discount!=null)
@@ -112,7 +112,7 @@
                                 </ul>
                             </div>
                             <div class="pi-text">
-                                <div class="catagory-name">{{$product->tag}}</div>
+                                <div class="catagory-name">{{$product->productTag->name}}</div>
                                 <a href="/shop/product/{{$product->id}}">
                                     <h5>{{$product->name}}</h5>
                                 </a>
@@ -179,14 +179,14 @@
                         <ul>
                             <li class="active item " data-tag="*" data-category="men">All</li>
                             <li class="item" data-tag=".Clothing" data-category="men">Clothings</li>
-                            <li class="item" data-tag=".HandBag" data-category="men">HandBag</li>
-                            <li class="item" data-tag=".Shoe" data-category="men">Shoes</li>
-                            <li class="item" data-tag=".Accessory" data-category="men">Accessories</li>
+                            <li class="item" data-tag=".Handbags" data-category="men">HandBag</li>
+                            <li class="item" data-tag=".Shoes" data-category="men">Shoes</li>
+                            <li class="item" data-tag=".Accessories" data-category="men">Accessories</li>
                         </ul>
                     </div>
                     <div class="product-slider owl-carousel men">
                         @foreach($featured_Products_Man as $product)
-                        <div class="product-item item {{$product->tag}}">
+                        <div class="product-item item {{$product->productTag->name}}">
                             <div class="pi-pic">
                                 <img src="Frontend/img/products/{{$product->productImages[0]->path}}" alt="">
                                 @if($product->discount!=null)
@@ -202,7 +202,7 @@
                                 </ul>
                             </div>
                             <div class="pi-text">
-                                <div class="catagory-name">{{$product->tag}}</div>
+                                <div class="catagory-name">{{$product->productTag->name}}</div>
                                 <a href="/shop/product/{{$product->id}}">
                                     <h5>{{$product->name}}</h5>
                                 </a>
