@@ -12,6 +12,11 @@ use Illuminate\Http\Request;
 class BlogController extends Controller
 {
     //
+    public function __construct()
+    {
+        $tags = Tag::all();
+        $categories_name = ProductCategory::all();
+    }
     public function index()
     {
         $tags = Tag::all();
@@ -69,5 +74,14 @@ class BlogController extends Controller
         $comment->save();
         return redirect()->back();
         // dd($blog_id);
+    }
+    public function getBlogByCategory(Request $request,$categoryName){
+        $tags = Tag::all();
+        $categories_name = ProductCategory::all();
+        $category = $categoryName;
+        $listBlogRecents = Blog::latest()->take(4)->get();
+        $listBlogs = Blog::where('category','LIKE','%'.$category.'%')->paginate(6);
+        return view('Frontend.blog.index', compact('listBlogs','listBlogRecents','tags','categories_name'));
+        // dd($category);
     }
 }

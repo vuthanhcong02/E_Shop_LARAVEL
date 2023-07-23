@@ -31,10 +31,11 @@
                             <div class="blog-catagory">
                                 <h4>Categories</h4>
                                 <ul>
-                                    <li><a href="#">Fashion</a></li>
-                                    <li><a href="#">Travel</a></li>
-                                    <li><a href="#">Picnic</a></li>
-                                    <li><a href="#">Model</a></li>
+                                    <li class="{{request()->segment(1) == 'blog'&& request()->segment(2) == null ? 'active-category' : ''}}"><a href="/blog">All</a></li>
+                                    <li class="{{request()->segment(2) == 'Fashion' ? 'active-category' : ''}}"><a href="/blog/Fashion">Fashion</a></li>
+                                    <li class="{{request()->segment(2) == 'Travel' ? 'active-category' : ''}}"><a href="/blog/Travel">Travel</a></li>
+                                    <li class="{{request()->segment(2) == 'Picnic' ? 'active-category' : ''}}"><a href="/blog/Picnic">Picnic</a></li>
+                                    <li class="{{request()->segment(2) == 'Model' ? 'active-category' : ''}}"><a href="/blog/Model">Model</a></li>
                                 </ul>
                             </div>
                             <div class="recent-post">
@@ -70,6 +71,7 @@
                 </div>
                 <div class="col-lg-9 order-1 order-lg-2">
                         <div class="row">
+                            @if(count($listBlogs) > 0)
                             @foreach($listBlogs as $blog)
                             <div class="col-lg-6 col-sm-6">
                                 <div class="blog-item">
@@ -85,6 +87,17 @@
                                 </div>
                             </div>
                            @endforeach
+                           @else
+                           <div class="container">
+                               <div class="row">
+                                   <div class="col-lg-12">
+                                       <div class="alert alert-danger mt-5 p-5 d-flex justify-content-center align-items-center ">
+                                           No Blog
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                           @endif
                             <div class="col-lg-12">
                                 {{$listBlogs->links('pagination::bootstrap-5')}}
                             </div>
