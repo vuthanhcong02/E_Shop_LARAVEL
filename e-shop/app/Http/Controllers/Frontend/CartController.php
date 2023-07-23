@@ -17,12 +17,10 @@ class CartController extends Controller
     public function index()
     {
         //
-        $categories_name = ProductCategory::all();
-        $tags = Tag::all();
         $carts = Cart::content();
         $total = Cart::total();
         $subtotal = Cart::subtotal();
-        return view('Frontend.cart.index',compact('carts','total','subtotal','categories_name','tags'));
+        return view('Frontend.cart.index',compact('carts','total','subtotal'));
     }
 
     /**

@@ -11,24 +11,14 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    //
-    public function __construct()
-    {
-        $tags = Tag::all();
-        $categories_name = ProductCategory::all();
-    }
     public function index()
     {
-        $tags = Tag::all();
-        $categories_name = ProductCategory::all();
         $listBlogs = Blog::paginate(4);
         $listBlogRecents = Blog::latest()->take(4)->get();
-        return view('Frontend.blog.index', compact('tags', 'categories_name', 'listBlogs', 'listBlogRecents'));
+        return view('Frontend.blog.index',compact('listBlogs', 'listBlogRecents'));
     }
     public function show(string $id)
     {
-        $tags = Tag::all();
-        $categories_name = ProductCategory::all();
         $blog = Blog::findOrFail($id);
         // Lấy blog trước
         // Lấy blog trước
@@ -56,7 +46,7 @@ class BlogController extends Controller
         $listComments = BlogComment::where('blog_id', $id)->get();
 
         $listBlog = Blog::where('id', '!=', '$id')->paginate(3);
-        return view('Frontend.blog.show', compact('blog', 'listBlog', 'tags', 'categories_name', 'previousBlog', 'nextBlog','listComments'));
+        return view('Frontend.blog.show',compact('blog', 'listBlog','previousBlog', 'nextBlog','listComments'));
     }
     public function postComment(Request $request){
         $name = $request->name;
@@ -76,12 +66,10 @@ class BlogController extends Controller
         // dd($blog_id);
     }
     public function getBlogByCategory(Request $request,$categoryName){
-        $tags = Tag::all();
-        $categories_name = ProductCategory::all();
         $category = $categoryName;
         $listBlogRecents = Blog::latest()->take(4)->get();
         $listBlogs = Blog::where('category','LIKE','%'.$category.'%')->paginate(6);
-        return view('Frontend.blog.index', compact('listBlogs','listBlogRecents','tags','categories_name'));
+        return view('Frontend.blog.index',compact('listBlogs','listBlogRecents'));
         // dd($category);
     }
 }

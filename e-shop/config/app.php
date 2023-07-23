@@ -170,6 +170,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
+        App\Providers\ViewComposerServiceProvider::class,//get Tags and Categories
     ])->toArray(),
 
     /*

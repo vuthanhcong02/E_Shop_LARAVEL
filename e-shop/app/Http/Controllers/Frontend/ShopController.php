@@ -14,19 +14,15 @@ class ShopController extends Controller
     {
         
         $listProducts = $this->getSortedAndPaginatedProducts($request);
-        $categories_name  = ProductCategory::all();
-        $tags = Tag::all();
         $brands = Brand::all();
-        return view('Frontend.shop.index', compact('listProducts','categories_name','brands','tags'));
+        return view('Frontend.shop.index', compact('listProducts','brands'));
     }
 
     public function getProductByCategory(string $categoryName, Request $request)
     {
         $listProducts = $this->getSortedAndPaginatedProducts($request, $categoryName, null);
-        $categories_name  = ProductCategory::all();
-        $tags = Tag::all();
         $brands = Brand::all();
-        return view('Frontend.shop.index', compact('listProducts','categories_name','brands','tags'));
+        return view('Frontend.shop.index', compact('listProducts','brands'));
     }
     public function getProductByTag(string $tagName, Request $request){
         // $listProducts = Product::join('tags', 'tags.id', '=', 'products.tag_id')
@@ -34,10 +30,8 @@ class ShopController extends Controller
         //     ->where('tags.name', $tagName)
         //     ->paginate(10);
         $listProducts = $this->getSortedAndPaginatedProducts($request, null, $tagName);
-        $categories_name  = ProductCategory::all();
-        $tags = Tag::all();
         $brands = Brand::all();
-        return view('Frontend.shop.index', compact('listProducts','categories_name','brands','tags'));
+        return view('Frontend.shop.index', compact('listProducts','brands'));
     }
     private function getSortedAndPaginatedProducts(Request $request, $categoryName = null, $tagName = null)
     {
@@ -118,7 +112,6 @@ class ShopController extends Controller
     {
         //
         $product = Product::findOrFail($id);
-        $tags = Tag::all();
         $avgRating = 0;
         $avgRating = array_sum(array_column($product->productComments->toArray(), 'rating'));
         $countRating = count($product->productComments);
@@ -138,10 +131,9 @@ class ShopController extends Controller
                         ->where('id', '!=', $product->id)
                         ->limit($limit)
                         ->get();
-        $categories_name = ProductCategory::all();
         $brands = Brand::all();
         // echo $relativeProducts;
-        return view('Frontend.shop.show', compact('product', 'relatedProducts','categories_name','brands','tags'));
+        return view('Frontend.shop.show', compact('product', 'relatedProducts','brands'));
     }
 
     /**

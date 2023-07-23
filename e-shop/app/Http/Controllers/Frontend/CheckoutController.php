@@ -15,12 +15,10 @@ class CheckoutController extends Controller
 {
     //
     public function index(){
-        $categories_name = ProductCategory::all();
-        $tags = Tag::all();
         $carts = Cart::content();
         $total = Cart::total();
         $subtotal = Cart::subtotal();
-        return view('Frontend.checkout.index',compact('carts','total','subtotal','categories_name','tags'));
+        return view('Frontend.checkout.index',compact('carts','total','subtotal'));
     }
     public function addOrder(Request $request){
         //Thêm đơn hàng
@@ -81,10 +79,8 @@ class CheckoutController extends Controller
         }
     }
     public function show(){
-        $tags = Tag::all();
-        $categories_name = ProductCategory::all();
         $notify = session()->get('notice');
-        return view('Frontend.checkout.show',compact('notify','tags','categories_name'));
+        return view('Frontend.checkout.show',compact('notify'));
     }
     private function sendEmail($order,$total,$subtotal){
         $email_to = $order->email;
