@@ -86,9 +86,7 @@
                             </div>
                            @endforeach
                             <div class="col-lg-12">
-                                <div class="loading-more">
-                                    {{$listBlogs->links('pagination::bootstrap-5')}}
-                                </div>
+                                {{$listBlogs->links('pagination::bootstrap-5')}}
                             </div>
                         </div>
                 </div>

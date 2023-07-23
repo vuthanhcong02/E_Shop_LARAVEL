@@ -40,4 +40,5 @@ Route::prefix('checkout')->group(function(){
 Route::prefix('blog')->group(function(){
     Route::get('/', [BlogController::class, 'index']);
     Route::get('/details/{id}', [BlogController::class, 'show']);
+    Route::post('/details/{id}', [BlogController::class, 'postComment']);
 });

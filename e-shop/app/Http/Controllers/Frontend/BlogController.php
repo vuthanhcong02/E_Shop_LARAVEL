@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Tag;
 use App\Models\ProductCategory;
 use App\Models\Blog;
+use App\Models\BlogComment;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -47,9 +48,26 @@ class BlogController extends Controller
             $nextBlog = Blog::oldest()->first();
         }
 
-
+        $listComments = BlogComment::where('blog_id', $id)->get();
 
         $listBlog = Blog::where('id', '!=', '$id')->paginate(3);
-        return view('Frontend.blog.show', compact('blog', 'listBlog', 'tags', 'categories_name', 'previousBlog', 'nextBlog'));
+        return view('Frontend.blog.show', compact('blog', 'listBlog', 'tags', 'categories_name', 'previousBlog', 'nextBlog','listComments'));
+    }
+    public function postComment(Request $request){
+        $name = $request->name;
+        $email = $request->email;
+        $messages = $request->messages;
+        $blog_id = $request->segment(3);
+        $user_id = $request->user_id;
+        // $blog = Blog::findOrFail($id);
+        $comment = new BlogComment();
+        $comment->name = $name;
+        $comment->email = $email;
+        $comment->messages = $messages;
+        $comment->blog_id = $blog_id;
+        $comment->user_id = $user_id;
+        $comment->save();
+        return redirect()->back();
+        // dd($blog_id);
     }
 }
