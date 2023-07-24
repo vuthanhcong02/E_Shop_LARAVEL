@@ -11,10 +11,21 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    public function index()
-    {
-        $listBlogs = Blog::paginate(4);
-        $listBlogRecents = Blog::latest()->take(4)->get();
+    public function index(Request $request, $limit = 4)
+    {   
+        $search = $request->search ?? '';
+        // dd($search);
+        if($search){
+            $listBlogs = Blog::where('title', 'like', '%'.$search.'%')
+                        ->orWhere('subtitle', 'like', '%'.$search.'%')
+                        ->orWhere('content', 'like', '%'.$search.'%')
+                        ->orWhere('category', 'like', '%'.$search.'%')        
+                        ->paginate($limit);
+        }else{
+            $listBlogs = Blog::paginate($limit);
+        }
+        // $listBlogs = Blog::paginate(4);
+        $listBlogRecents = Blog::latest()->take($limit)->get();
         return view('Frontend.blog.index',compact('listBlogs', 'listBlogRecents'));
     }
     public function show(string $id)
@@ -65,11 +76,15 @@ class BlogController extends Controller
         return redirect()->back();
         // dd($blog_id);
     }
-    public function getBlogByCategory(Request $request,$categoryName){
+    public function getBlogByCategory(Request $request,$categoryName,$perPage=4){
         $category = $categoryName;
+        $search = $request->search ?? 'Rong';
         $listBlogRecents = Blog::latest()->take(4)->get();
-        $listBlogs = Blog::where('category','LIKE','%'.$category.'%')->paginate(6);
-        return view('Frontend.blog.index',compact('listBlogs','listBlogRecents'));
+        
+        $listBlogs = Blog::where('category', 'LIKE', '%' . $category . '%')->paginate($perPage);
+        
+        return view('Frontend.blog.index', compact('listBlogs', 'listBlogRecents','search'));
+        
         // dd($category);
     }
 }

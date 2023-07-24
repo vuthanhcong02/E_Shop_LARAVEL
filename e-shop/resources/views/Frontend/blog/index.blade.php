@@ -23,7 +23,7 @@
                         <div class="blog-sidebar">
                             <div class="search-form">
                                 <h4>Search</h4>
-                                <form action="">
+                                <form action="/blog">
                                     <input type="text" placeholder="Search..." name="search" value="{{request('search') ?? ''}}">
                                     <button type="submit"><i class="fa fa-search"></i></button>
                                 </form>
