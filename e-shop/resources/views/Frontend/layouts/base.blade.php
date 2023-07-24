@@ -48,7 +48,13 @@
                     </div>
                 </div>
                 <div class="ht-right">
-                    <a class="login-panel" href="login.html"><i class="fa fa-user"></i>Login</a>
+                    @if(Auth::check())
+                        <a class="login-panel" href="/account/logout"><i class="fa fa-user"></i> 
+                        {{Auth::user()->name}} - Logout
+                        </a>
+                    @else
+                        <a class="login-panel" href="/account/login"><i class="fa fa-user"></i>Login</a>
+                    @endif
                     <div class="lan-selector">
                         <select class="language_drop" name="countries" id="countries" style="width: 300px;">
                             <option value="yt" data-image="Frontend/img/flag-1.jpg" data-imagecss="flag yt" data-title="English">English</option>
@@ -175,12 +181,11 @@
                         <li class="{{request()->segment(1)=='contact' ? 'active' :''}}"><a href="/contact">Contact</a></li>
                         <li><a href="">Pages</a>
                             <ul class="dropdown">
-                                <li><a href="blog-details.html">Blog Details</a></li>
+                                <li><a href="/blog-details.html">Blog Details</a></li>
                                 <li><a href="/cart">Shoping Cart</a></li>
                                 <li><a href="/checkout">Checkout</a></li>
-                                <li><a href="faq.html">Faq</a></li>
-                                <li><a href="register.html">Register</a></li>
-                                <li><a href="login.html">Login</a></li>
+                                <li><a href="/register">Register</a></li>
+                                <li><a href="/account/login">Login</a></li>
                             </ul>
                         </li>
 

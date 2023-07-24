@@ -7,6 +7,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\ContactController;
+use App\Http\Controllers\Frontend\AccountController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,4 +48,9 @@ Route::prefix('blog')->group(function(){
 Route::prefix('contact')->group(function(){
     Route::get('/', [ContactController::class, 'index']);
     Route::post('/', [ContactController::class, 'postFeedback']);
+});
+Route::prefix('account')->group(function(){
+    Route::get('/login', [AccountController::class, 'login']);
+    Route::get('/logout', [AccountController::class, 'logout']);
+    Route::post('/login', [AccountController::class, 'checkLogin']);
 });

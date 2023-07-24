@@ -56,11 +56,11 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'id' => 5,
-                'name' => 'Roy Banks',
-                'email' => 'RoyBanks@gmail.com',
+                'name' => 'Vũ Thành Công',
+                'email' => 'congvtc02@gmail.com',
                 'password' => Hash::make('123456'),
                 'avatar' => 'avatar-2.png',
-                'level' => 1,
+                'level' => 2,
                 'description' => null,
             ],
         ]);
