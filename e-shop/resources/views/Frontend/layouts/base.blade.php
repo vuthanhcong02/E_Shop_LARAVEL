@@ -303,7 +303,6 @@
             </div>
         </div>
     </footer>
-
     <!-- Footer Section End -->
     <!-- Js Plugins -->
     <script src="{{asset('Frontend/js/jquery-3.3.1.min.js')}}"></script>
@@ -318,6 +317,16 @@
     <script src="{{asset('Frontend/js/main.js')}}"></script>
     <script src="{{asset('Frontend/js/owlcarousel2-filter.min.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    @if(session()->has('success'))
+    <script>
+        toastr.option=
+            {
+                "closeButton":true,
+                "debug":false,
+            }
+        toastr.success('Cảm ơn vì góp ý của bạn. Chúng tôi sẽ liên lạc lại sớm nhất có thể', { timeOut: 5000 });
+    </script>
+    @endif
 </body>
 
 </html>

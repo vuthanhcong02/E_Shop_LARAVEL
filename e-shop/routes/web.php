@@ -6,6 +6,7 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\BlogController;
+use App\Http\Controllers\Frontend\ContactController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,4 +43,8 @@ Route::prefix('blog')->group(function(){
     Route::get('/details/{id}', [BlogController::class, 'show']);
     Route::post('/details/{id}', [BlogController::class, 'postComment']);
     Route::get('/{categoryName}', [BlogController::class, 'getBlogByCategory']);
+});
+Route::prefix('contact')->group(function(){
+    Route::get('/', [ContactController::class, 'index']);
+    Route::post('/', [ContactController::class, 'postFeedback']);
 });

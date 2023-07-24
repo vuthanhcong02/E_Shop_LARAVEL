@@ -84,7 +84,7 @@ class CheckoutController extends Controller
     }
     private function sendEmail($order,$total,$subtotal){
         $email_to = $order->email;
-        Mail::send('Frontend.checkout.email',compact('order','total','subtotal'),function($message) use($email_to){
+        Mail::send('Frontend.emails.email_checkout',compact('order','total','subtotal'),function($message) use($email_to){
             $message->from('congvtc02@gmail.com','VTC-eShop');
             $message->to($email_to,$email_to);
             $message->subject('Thông báo đơn hàng bạn đặt');            
