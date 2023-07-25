@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Utilities\Constant;
 class AccountController extends Controller
 {
     //
@@ -17,7 +18,7 @@ class AccountController extends Controller
         $dataInfor = [
             'email' => $request->email,
             'password' => $request->password,
-            'level'=>2
+            'level'=> Constant::USER_LEVEL_CUSTOMER
         ];
         $remember_pass = $request->save_pass;
         if(Auth::attempt($dataInfor,$remember_pass)){
@@ -47,7 +48,7 @@ class AccountController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'level' => 2,
+            'level' => Constant::USER_LEVEL_CUSTOMER,
         ];
         User::create($dataInfor);
         return redirect('/account/login')->with('notice','Đăng ký thành công! Xin mời đăng nhập!');

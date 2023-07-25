@@ -22,19 +22,20 @@
         <div class="container">
             <form class="checkout-form" action="" method="post">
                 @csrf
+                <input type="hidden" name="user_id" value="{{Auth::user()->id ?? ''}}">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="checkout-content">
-                            <a href="login.html" class="content-btn">Click Here To Login</a>
+                            <a href="/account/login" class="content-btn">Click Here To Login</a>
                         </div>
                         <h4>Billing Details</h4>
                         <div class="row">
                             <div class="col-lg-6">
                                 <label for="fir">First Name<span>*</span></label>
-                                <input type="text" id="fir" name="first_name" required>
+                                <input type="text" id="fir" name="first_name" required value="{{Auth::user()->name ?? ''}}">
                             </div>
                             <div class="col-lg-6">
-                                <label for="las">Last Name<span>*</span></label>
+                                <label for="las">Last Name<span>*</span></label> 
                                 <input type="text" id="las" name="last_name" required>
                             </div>
                             <div class="col-lg-12">
@@ -47,7 +48,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <label for="email">Email<span>*</span></label>
-                                <input type="email" id="email" name="email" required>
+                                <input type="email" id="email" name="email" required value="{{Auth::user()->email ?? ''}}">
                             </div>
                             <div class="col-lg-6">
                                 <label for="phone">Phone<span>*</span></label>
@@ -94,10 +95,12 @@
                                     </div>
                                 </div>
                                 <div class="order-btn">
-                                    @if(Cart::count() > 0)
+                                    @if(Cart::count()>0 && isset(Auth::user()->id))
                                     <button type="submit" class="site-btn place-btn">Place Order</button>
-                                    @else
+                                    @elseif(Cart::count()==0 && isset(Auth::user()->id))
                                     <div class="site-btn place-btn disabled">Place Order</div>
+                                    @else
+                                    <a class="site-btn place-btn" href="/account/login">Place Order</a>
                                     @endif
                                 </div>
                             </div>

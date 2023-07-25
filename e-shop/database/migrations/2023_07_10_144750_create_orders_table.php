@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-
+            $table->integer('user_id');
             $table->string('first_name')->nullable();
             $table->string('last_name');
             $table->string('address');
@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone');
             $table->string('payment');
+            $table->integer('status');
             $table->timestamps();
         });
     }
