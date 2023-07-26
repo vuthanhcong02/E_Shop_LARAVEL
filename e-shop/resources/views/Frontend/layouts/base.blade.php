@@ -181,7 +181,7 @@
                         <li class="{{request()->segment(1)=='contact' ? 'active' :''}}"><a href="/contact">Contact</a></li>
                         <li><a href="">Pages</a>
                             <ul class="dropdown">
-                                <li><a href="/blog-details.html">Blog Details</a></li>
+                                <li><a href="/account/my-order">My Order</a></li>
                                 <li><a href="/cart">Shoping Cart</a></li>
                                 <li><a href="/checkout">Checkout</a></li>
                                 <li><a href="/register">Register</a></li>

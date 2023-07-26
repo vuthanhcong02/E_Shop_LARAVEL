@@ -55,4 +55,8 @@ Route::prefix('account')->group(function(){
     Route::post('/login', [AccountController::class, 'checkLogin']);
     Route::get('/register', [AccountController::class, 'register']);
     Route::post('/register', [AccountController::class, 'postRegister']);
+    Route::prefix('/my-order')->group(function(){
+        Route::get('/', [AccountController::class, 'myOrder']);
+        Route::get('/{id}', [AccountController::class, 'showDetailsOrder']);
+    });
 });
