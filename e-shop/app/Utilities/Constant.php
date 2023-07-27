@@ -25,9 +25,9 @@ class Constant{
     ];
 
     // User
-    const USER_LEVEL_ADMIN = 1;
+    const USER_LEVEL_ADMIN = 0;
     const USER_LEVEL_CUSTOMER = 2;
-    const USER_LEVEL_MANAGER = 3;
+    const USER_LEVEL_MANAGER = 1;
     public static $user_level = [
         self::USER_LEVEL_ADMIN => 'Admin',
         self::USER_LEVEL_CUSTOMER => 'Khách hàng',
