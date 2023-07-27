@@ -64,5 +64,8 @@ Route::prefix('account')->group(function(){
 
 // Admin Dashboard
 Route::prefix('admin')->group(function(){
-    Route::get('/user', [UserController::class, 'index']); 
+    Route::prefix('user')->group(function(){
+        Route::get('/', [UserController::class, 'index']);
+        Route::get('/{id}', [UserController::class, 'show']);
+    });
 });
