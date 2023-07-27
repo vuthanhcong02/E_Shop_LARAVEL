@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\AccountController;
+use App\Http\Controllers\Admin\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -59,4 +60,9 @@ Route::prefix('account')->group(function(){
         Route::get('/', [AccountController::class, 'myOrder']);
         Route::get('/{id}', [AccountController::class, 'showDetailsOrder']);
     });
+});
+
+// Admin Dashboard
+Route::prefix('admin')->group(function(){
+    Route::get('/user', [UserController::class, 'index']); 
 });
