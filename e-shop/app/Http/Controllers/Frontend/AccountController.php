@@ -26,7 +26,8 @@ class AccountController extends Controller
         ];
         $remember_pass = $request->save_pass;
         if(Auth::attempt($dataInfor,$remember_pass)){
-            return redirect('/');
+            //return redirect('/');
+            return redirect()->intended('/');//chuyển hướng người dùng đến trang mà họ đang cố gắng truy cập trước khi yêu cầu xác thực (nếu có), và nếu không có trang đích xác định, nó sẽ chuyển hướng người dùng đến đường dẫn /.
         }
         else{
             return redirect()->back()->with('error','Đăng nhập không thành công.Vui lòng kiểm tra lại!');

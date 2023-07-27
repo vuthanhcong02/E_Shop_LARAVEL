@@ -95,13 +95,13 @@
                                     </div>
                                 </div>
                                 <div class="order-btn">
-                                    @if(Cart::count()>0 && isset(Auth::user()->id))
+                                    <!-- @if(Cart::count()>0 && isset(Auth::user()->id)) -->
                                     <button type="submit" class="site-btn place-btn">Place Order</button>
-                                    @elseif(Cart::count()==0 && isset(Auth::user()->id))
-                                    <div class="site-btn place-btn disabled">Place Order</div>
-                                    @else
-                                    <a class="site-btn place-btn" href="/account/login">Place Order</a>
-                                    @endif
+                                    <!-- @elseif(Cart::count()==0 && isset(Auth::user()->id)) -->
+                                    <!-- <div class="site-btn place-btn disabled">Place Order</div> -->
+                                    <!-- @else -->
+                                    <!-- <a class="site-btn place-btn" href="/account/login">Place Order</a> -->
+                                    <!-- @endif -->
                                 </div>
                             </div>
                         </div>

@@ -33,7 +33,7 @@ Route::prefix('cart')->group(function(){
     Route::get('destroy', [CartController::class, 'destroy']);
     Route::get('update',[CartController::class,'update']);
 });
-Route::prefix('checkout')->group(function(){
+Route::prefix('checkout')->middleware('CheckMemberLogin')->group(function(){
     Route::get('/', [CheckoutController::class, 'index']);
     Route::post('/', [CheckoutController::class, 'addOrder']);
     Route::get('/result', [CheckoutController::class, 'show']);
@@ -55,7 +55,7 @@ Route::prefix('account')->group(function(){
     Route::post('/login', [AccountController::class, 'checkLogin']);
     Route::get('/register', [AccountController::class, 'register']);
     Route::post('/register', [AccountController::class, 'postRegister']);
-    Route::prefix('/my-order')->group(function(){
+    Route::prefix('/my-order')->middleware('CheckMemberLogin')->group(function(){
         Route::get('/', [AccountController::class, 'myOrder']);
         Route::get('/{id}', [AccountController::class, 'showDetailsOrder']);
     });
