@@ -27,11 +27,7 @@
             </div>
         </div>
     </div>
-    @if(session('notice'))
-        <div class="alert alert-success" role="alert" limit="1">
-            {{session('notice')}}
-        </div>
-    @endif
+    @include('Dashboard.notice.notice')
     <div class="row">
         <div class="col-md-12">
             <div class="main-card mb-3 card">
@@ -95,7 +91,7 @@
                                     <a href="/admin/user/{{$user->id}}" class="btn btn-hover-shine btn-outline-primary border-0 btn-sm">
                                         Details
                                     </a>
-                                    <a href="./user-edit.html" data-toggle="tooltip" title="Edit" data-placement="bottom" class="btn btn-outline-warning border-0 btn-sm">
+                                    <a href="/admin/user/{{$user->id}}/edit" data-toggle="tooltip" title="Edit" data-placement="bottom" class="btn btn-outline-warning border-0 btn-sm">
                                         <span class="btn-icon-wrapper opacity-8">
                                             <i class="fa fa-edit fa-w-20"></i>
                                         </span>

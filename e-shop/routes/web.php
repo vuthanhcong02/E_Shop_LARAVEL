@@ -69,5 +69,7 @@ Route::prefix('admin')->group(function(){
         Route::get('/add',[UserController::class,'create']);
         Route::post('/add',[UserController::class,'store']);
         Route::get('/{id}',[UserController::class,'show']);
+        Route::get('/{id}/edit',[UserController::class,'edit']);
+        Route::put('/{id}',[UserController::class,'update']);
     });
 });

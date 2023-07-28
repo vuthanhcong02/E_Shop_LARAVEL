@@ -31,11 +31,11 @@ class UserController extends Controller
     {
         //
         if($request->password!= $request->password_confirmation){
-            return redirect()->back()->with('notice', 'Password does not match');
+            return redirect()->back()->with('notice-error', 'Password does not match');
         }
         $email_exsist = User::where('email',$request->email)->first();
         if($email_exsist){
-            return redirect()->back()->with('notice', 'Email already exist');
+            return redirect()->back()->with('notice-error', 'Email already exist');
         }
         $data = $request->all();
         $data['password'] = bcrypt($request->password);
@@ -45,7 +45,7 @@ class UserController extends Controller
         }
 
         User::create($data);
-        return redirect('/admin/user')->with('notice', 'Create user successfully');
+        return redirect('/admin/user')->with('notice-success', 'Create user successfully');
     }
 
     /**
@@ -55,6 +55,9 @@ class UserController extends Controller
     {
         //
         $user = User::find($id);
+        if(!$user){
+            return redirect()->back()->with('notice-error', 'User not found');
+        }
         return view('Dashboard.user.show',compact('user'));
         // return view('Dashboard.user.add');
     }
@@ -62,17 +65,50 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(User $user,string $id)
     {
         //
+        $user = User::find($id);
+        return view('Dashboard.user.edit',compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, string $id)
     {
         //
+        // Lấy ra model User với $id
+        $user = User::find($id);
+
+        // Kiểm tra nếu không tìm thấy user với $id
+        if (!$user) {
+            return redirect()->back()->with('notice-error', 'User not found');
+        }
+
+        $data = $request->all();
+        // $data = $request->except('image_old');
+        if($request->password != null){
+            if($request->password!= $request->password_confirmation){
+                return redirect()->back()->with('notice-error', 'Password does not match');
+            }
+            $data['password'] = bcrypt($request->password);
+        }
+        else{
+            unset($data['password']);
+        }
+        // hanlde upload file image
+        if($request->hasFile('image')){
+            // Thêm file mới
+            $data['avatar'] = Common::uploadFile($request->file('image'), 'Frontend/img/user');
+            // xoa file cu
+            $file_avatar_old = $request->image_old;
+            if($file_avatar_old !=''){
+                unlink('Frontend/img/user/'.$file_avatar_old);
+            }
+        }
+        $user->update($data);
+        return redirect('/admin/user/'.$user->id)->with('notice-success', 'Update user successfully');
     }
 
     /**
