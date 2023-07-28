@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use App\Utilities\Common;
 class UserController extends Controller
 {
     /**
@@ -39,6 +39,11 @@ class UserController extends Controller
         }
         $data = $request->all();
         $data['password'] = bcrypt($request->password);
+        // hanlde upload file image
+        if($request->hasFile('image')){
+            $data['avatar'] = Common::uploadFile($request->file('image'), 'Frontend/img/user');
+        }
+
         User::create($data);
         return redirect('/admin/user')->with('notice', 'Create user successfully');
     }
