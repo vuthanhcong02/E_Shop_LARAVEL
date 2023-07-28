@@ -18,7 +18,7 @@
             </div>
 
             <div class="page-title-actions">
-                <a href="./user-create.html" class="btn-shadow btn-hover-shine mr-3 btn btn-primary">
+                <a href="/admin/user/add" type="button" class="btn-shadow btn-hover-shine mr-3 btn btn-primary">
                     <span class="btn-icon-wrapper pr-2 opacity-7">
                         <i class="fa fa-plus fa-w-20"></i>
                     </span>
@@ -27,7 +27,11 @@
             </div>
         </div>
     </div>
-
+    @if(session('notice'))
+        <div class="alert alert-success" role="alert" limit="1">
+            {{session('notice')}}
+        </div>
+    @endif
     <div class="row">
         <div class="col-md-12">
             <div class="main-card mb-3 card">
@@ -78,14 +82,14 @@
                                                 </div>
                                             </div>
                                             <div class="widget-content-left flex2">
-                                                <div class="widget-heading">{{$user->name}}</div>
+                                                <div class="widget-heading">{{$user->name ?? ''}}</div>
                                             </div>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-center">{{$user->email}}</td>
+                                <td class="text-center">{{$user->email ?? ''}}</td>
                                 <td class="text-center">
-                                    {{App\Utilities\Constant::$user_level[$user->level]}}
+                                    {{App\Utilities\Constant::$user_level[$user->level ?? 2] ?? ''}}
                                 </td>
                                 <td class="text-center">
                                     <a href="/admin/user/{{$user->id}}" class="btn btn-hover-shine btn-outline-primary border-0 btn-sm">

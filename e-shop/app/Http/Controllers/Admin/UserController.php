@@ -21,17 +21,26 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
+    public function create(){
+        return view('Dashboard.user.create');
     }
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
         //
+        if($request->password!= $request->password_confirmation){
+            return redirect()->back()->with('notice', 'Password does not match');
+        }
+        $email_exsist = User::where('email',$request->email)->first();
+        if($email_exsist){
+            return redirect()->back()->with('notice', 'Email already exist');
+        }
+        $data = $request->all();
+        $data['password'] = bcrypt($request->password);
+        User::create($data);
+        return redirect('/admin/user')->with('notice', 'Create user successfully');
     }
 
     /**
@@ -42,6 +51,7 @@ class UserController extends Controller
         //
         $user = User::find($id);
         return view('Dashboard.user.show',compact('user'));
+        // return view('Dashboard.user.add');
     }
 
     /**

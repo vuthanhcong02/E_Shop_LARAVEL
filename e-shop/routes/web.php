@@ -64,8 +64,10 @@ Route::prefix('account')->group(function(){
 
 // Admin Dashboard
 Route::prefix('admin')->group(function(){
-    Route::prefix('user')->group(function(){
-        Route::get('/', [UserController::class, 'index']);
-        Route::get('/{id}', [UserController::class, 'show']);
+    Route::prefix('/user')->group(function(){
+        Route::get('/',[UserController::class,'index']);
+        Route::get('/add',[UserController::class,'create']);
+        Route::post('/add',[UserController::class,'store']);
+        Route::get('/{id}',[UserController::class,'show']);
     });
 });
