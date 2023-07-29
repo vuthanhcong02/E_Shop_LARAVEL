@@ -96,7 +96,9 @@
                                             <i class="fa fa-edit fa-w-20"></i>
                                         </span>
                                     </a>
-                                    <form class="d-inline" action="" method="post">
+                                    <form class="d-inline" action="/admin/user/{{$user->id}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
                                         <button class="btn btn-hover-shine btn-outline-danger border-0 btn-sm" type="submit" data-toggle="tooltip" title="Delete" data-placement="bottom" onclick="return confirm('Do you really want to delete this item?')">
                                             <span class="btn-icon-wrapper opacity-8">
                                                 <i class="fa fa-trash fa-w-20"></i>

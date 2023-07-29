@@ -71,5 +71,6 @@ Route::prefix('admin')->group(function(){
         Route::get('/{id}',[UserController::class,'show']);
         Route::get('/{id}/edit',[UserController::class,'edit']);
         Route::put('/{id}',[UserController::class,'update']);
+        Route::delete('/{id}',[UserController::class,'destroy']);
     });
 });

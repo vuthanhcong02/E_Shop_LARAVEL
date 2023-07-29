@@ -114,8 +114,15 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(string $id)
     {
         //
+        $user = User::find($id);
+        $file_name = $user->avatar;
+        $user->delete();
+        if($file_name !=''){
+            unlink('Frontend/img/user/'.$file_name);
+        }
+        return redirect('/admin/user')->with('notice-success', 'Delete user successfully');
     }
 }
