@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -73,4 +74,9 @@ Route::prefix('admin')->group(function(){
         Route::put('/{id}',[UserController::class,'update']);
         Route::delete('/{id}',[UserController::class,'destroy']);
     });
+    Route::prefix('/login')->group(function(){
+        Route::get('/',[AdminHomeController::class,'getLogin']);
+        Route::post('/',[AdminHomeController::class,'checkLogin']);
+    });
+    Route::get('/logout',[AdminHomeController::class,'logout']);
 });
