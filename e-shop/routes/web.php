@@ -64,7 +64,7 @@ Route::prefix('account')->group(function(){
 });
 
 // Admin Dashboard
-Route::prefix('admin')->group(function(){
+Route::prefix('admin')->middleware('CheckAdminLogin')->group(function(){
     Route::prefix('/user')->group(function(){
         Route::get('/',[UserController::class,'index']);
         Route::get('/add',[UserController::class,'create']);
@@ -75,8 +75,8 @@ Route::prefix('admin')->group(function(){
         Route::delete('/{id}',[UserController::class,'destroy']);
     });
     Route::prefix('/login')->group(function(){
-        Route::get('/',[AdminHomeController::class,'getLogin']);
-        Route::post('/',[AdminHomeController::class,'checkLogin']);
+        Route::get('/',[AdminHomeController::class,'getLogin'])->withoutMiddleware('CheckAdminLogin');
+        Route::post('/',[AdminHomeController::class,'checkLogin'])->withoutMiddleware('CheckAdminLogin');
     });
     Route::get('/logout',[AdminHomeController::class,'logout']);
 });

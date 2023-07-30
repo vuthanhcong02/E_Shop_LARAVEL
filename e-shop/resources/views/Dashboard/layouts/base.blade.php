@@ -830,7 +830,7 @@
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
                                     <div class="widget-heading"> {{Auth::user()->name ?? ''}} </div>
-                                    <div class="widget-subheading"> {{App\Utilities\Constant::$user_level[Auth::user()->level ??'']}}</div>
+                                    <div class="widget-subheading"> {{App\Utilities\Constant::$user_level[Auth::user()->level ?? ''] ?? ''}}</div>
                                 </div>
                                 <div class="widget-content-right header-user-info ml-3">
                                     <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
