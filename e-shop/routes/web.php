@@ -10,6 +10,7 @@ use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\AccountController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -74,6 +75,7 @@ Route::prefix('admin')->middleware('CheckAdminLogin')->group(function(){
         Route::put('/{id}',[UserController::class,'update']);
         Route::delete('/{id}',[UserController::class,'destroy']);
     });
+    Route::resource('/category', CategoryController::class);
     Route::prefix('/login')->group(function(){
         Route::get('/',[AdminHomeController::class,'getLogin'])->withoutMiddleware('CheckAdminLogin');
         Route::post('/',[AdminHomeController::class,'checkLogin'])->withoutMiddleware('CheckAdminLogin');
