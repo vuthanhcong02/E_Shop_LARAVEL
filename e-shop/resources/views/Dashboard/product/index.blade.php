@@ -102,7 +102,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
-                                                    <a href="./product-show.html"
+                                                    <a href="{{route('product.show',$product->id)}}"
                                                         class="btn btn-hover-shine btn-outline-primary border-0 btn-sm">
                                                         Details
                                                     </a>
