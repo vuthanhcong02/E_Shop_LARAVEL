@@ -28,7 +28,7 @@
                             </div>
                         </div>
                     </div>
-
+@include('Dashboard.notice.notice')
                     <div class="row">
                         <div class="col-md-12">
                             <div class="main-card mb-3 card">
@@ -106,13 +106,15 @@
                                                         class="btn btn-hover-shine btn-outline-primary border-0 btn-sm">
                                                         Details
                                                     </a>
-                                                    <a href="./product-edit.html" data-toggle="tooltip" title="Edit"
+                                                    <a href="{{route('product.edit',$product->id)}}" data-toggle="tooltip" title="Edit"
                                                         data-placement="bottom" class="btn btn-outline-warning border-0 btn-sm">
                                                         <span class="btn-icon-wrapper opacity-8">
                                                             <i class="fa fa-edit fa-w-20"></i>
                                                         </span>
                                                     </a>
-                                                    <form class="d-inline" action="" method="post">
+                                                    <form class="d-inline" action="{{route('product.destroy',$product->id)}}" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
                                                         <button class="btn btn-hover-shine btn-outline-danger border-0 btn-sm"
                                                             type="submit" data-toggle="tooltip" title="Delete"
                                                             data-placement="bottom"

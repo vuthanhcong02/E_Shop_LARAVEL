@@ -61,7 +61,7 @@ class ProductController extends Controller
         // $data = $request->sku ?? '';
         $data['qty'] = 0;
         $product = Product::create($data);
-        return redirect('/admin/product/'.$product->id)->with('success','Product created successfully');
+        return redirect('/admin/product/'.$product->id)->with('notice-success','Product created successfully');
     }
 
     /**
@@ -80,6 +80,11 @@ class ProductController extends Controller
     public function edit(string $id)
     {
         //
+        $product = Product::find($id);
+        $tags = Tag::all();
+        $brands = Brand::all();
+        $categories = ProductCategory::all();
+        return view('Dashboard.product.edit',compact('tags','brands','categories','product'));
     }
 
     /**
@@ -88,6 +93,10 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $data = $request->all();
+        $product = Product::find($id);
+        $product->update($data);
+        return redirect('/admin/product/'.$product->id)->with('notice-success','Product updated successfully');
     }
 
     /**
@@ -96,5 +105,8 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         //
+        $product = Product::find($id);
+        $product->delete();
+        return redirect('/admin/product')->with('notice-success','Product deleted successfully');
     }
 }
