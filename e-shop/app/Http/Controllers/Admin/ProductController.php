@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\ProductCategory;
+use App\Models\Brand;
+use App\Models\Tag;
 class ProductController extends Controller
 {
     /**
@@ -42,6 +45,10 @@ class ProductController extends Controller
     public function create()
     {
         //
+        $brands = Brand::all();
+        $categories = ProductCategory::all();
+        $tags = Tag::all();
+        return view('Dashboard.product.create',compact('brands','categories','tags'));
     }
 
     /**
@@ -50,6 +57,11 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
+        $data = $request->all();
+        // $data = $request->sku ?? '';
+        $data['qty'] = 0;
+        $product = Product::create($data);
+        return redirect('/admin/product/'.$product->id)->with('success','Product created successfully');
     }
 
     /**
