@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductImageController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -80,6 +82,7 @@ Route::prefix('admin')->middleware('CheckAdminLogin')->group(function(){
     Route::resource('/category', CategoryController::class);
     Route::resource('/brand', BrandController::class);
     Route::resource('/product', ProductController::class);
+    Route::resource('/product/{product_id}/image', ProductImageController::class);
     Route::prefix('/login')->group(function(){
         Route::get('/',[AdminHomeController::class,'getLogin'])->withoutMiddleware('CheckAdminLogin');
         Route::post('/',[AdminHomeController::class,'checkLogin'])->withoutMiddleware('CheckAdminLogin');
