@@ -39,6 +39,7 @@ class ProductDetailController extends Controller
         $data = $request->all();
         $product = Product::find($id);
         $product->productDetails()->create($data);
+        $this->updateQty($id);
         return redirect('/admin/product/'.$id.'/detail')->with('notice-success','Product Detail Added');
     }
 
@@ -70,6 +71,7 @@ class ProductDetailController extends Controller
         $data = $request->all();
         $productDetail = ProductDetail::find($productDetail_id);
         $productDetail->update($data);
+        $this->updateQty($product_id);
         return redirect('/admin/product/'.$product_id.'/detail')->with('notice-success','Product Detail Updated');
     }
 
@@ -82,5 +84,11 @@ class ProductDetailController extends Controller
         $product = ProductDetail::find($productDetail_id);
         $product->delete();
         return redirect('/admin/product/'.$product_id.'/detail')->with('notice-success','Product Detail Deleted');
+    }
+    public function updateQty(string $product_id){
+        $product = Product::find($product_id);
+        $productDetails = $product->productDetails;
+        $quanty = array_sum(array_column($productDetails->toArray(),'qty'));
+        $product->update(['qty' => $quanty]);
     }
 }
