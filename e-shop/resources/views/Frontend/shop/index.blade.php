@@ -41,7 +41,7 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="product-item">
                                 <div class="pi-pic">
-                                    <img src="Frontend/img/products/{{$product->productImages[0]->path}}" alt="">
+                                    <img src="Frontend/img/products/{{$product->productImages[0]->path ?? ''}}" alt="">
                                     @if($product->discount!=null)
                                     <div class="sale pp-sale">Sale</div>
                                     @endif

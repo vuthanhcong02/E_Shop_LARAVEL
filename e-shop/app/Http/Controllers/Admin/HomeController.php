@@ -19,11 +19,14 @@ class HomeController extends Controller
             'level'=> [Constant::USER_LEVEL_ADMIN,Constant::USER_LEVEL_MANAGER],
         ];
         $remember_pass = $request->save_pass;
+        // $remember_pass = false;
         if(Auth::attempt($dataInfor,$remember_pass)){
             //return redirect('/');
             return redirect()->intended('/admin/user');//chuyển hướng người dùng đến trang mà họ đang cố gắng truy cập trước khi yêu cầu xác thực (nếu có), và nếu không có trang đích xác định, nó sẽ chuyển hướng người dùng đến đường dẫn /.
         }
         else{
+             // Xóa cookie "remember_web_" nếu đăng nhập không thành công
+            // Cookie::queue(Cookie::forget('remember_web_'));
             return redirect()->back()->with('notice-error','Đăng nhập không thành công.Vui lòng kiểm tra lại!');
         }
     }

@@ -38,7 +38,7 @@
                                     @foreach($carts as $cart)
                                     <tr data-rowId = "{{$cart->rowId}}">
                                         <td class="cart-pic first-row">
-                                            <img src="Frontend/img/products/{{$cart->options->images[0]->path}}" alt="" style="width: 100px;">
+                                            <img src="Frontend/img/products/{{$cart->options->images[0]->path ?? ''}}" alt="" style="width: 100px;">
                                         </td>
                                         <td class="cart-title first-row">
                                             <h5>{{$cart->name}}</h5>

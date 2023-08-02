@@ -34,7 +34,7 @@
 
                                 <td class="cart-pic first-row">
                                     @if(isset($order->orderDetails[0]->product->productImages[0]->path))
-                                    <img src="Frontend/img/products/{{$order->orderDetails[0]->product->productImages[0]->path}}" alt="" style="width: 100px;">
+                                    <img src="Frontend/img/products/{{$order->orderDetails[0]->product->productImages[0]->path ?? ''}}" alt="" style="width: 100px;">
                                     @endif
                                 </td>
                                 <td class="first-row">#{{$order->id}}</td>

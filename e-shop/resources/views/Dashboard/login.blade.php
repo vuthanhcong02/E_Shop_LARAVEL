@@ -40,13 +40,13 @@
                                                 <div class="col-md-12">
                                                     <div class="position-relative form-group">
                                                         <input name="email" id="exampleEmail" placeholder="Email here..."
-                                                            type="email" class="form-control">
+                                                            type="email" class="form-control" autocomplete="off">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="position-relative form-group">
                                                         <input name="password" id="examplePassword"
-                                                            placeholder="Password here..." type="password"
+                                                            placeholder="Password here..." type="password" autocomplete="off"
                                                             class="form-control">
                                                     </div>
                                                 </div>
@@ -71,6 +71,6 @@
         </div>
     </div>
     <script type="text/javascript" src="{{asset('Dashboard/assets/scripts/main.js')}}"></script>
-</body>
 
+</body>
 </html>

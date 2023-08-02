@@ -76,7 +76,7 @@
                             <div class="col-lg-6 col-sm-6">
                                 <div class="blog-item">
                                     <div class="bi-pic">
-                                        <img src="Frontend/img/blog/{{$blog->image}}" alt="">
+                                        <img src="Frontend/img/blog/{{$blog->image ?? ''}}" alt="">
                                     </div>
                                     <div class="bi-text">
                                         <a href="/blog/details/{{$blog->id}}">

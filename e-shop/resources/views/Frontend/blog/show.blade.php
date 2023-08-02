@@ -28,7 +28,7 @@
                         <p>{{$blog->category}}<span> {{date('d-m-Y',strtotime($blog->created_at)) ?? ''}}</span></p>
                     </div>
                     <div class="blog-large-pic">
-                        <img src="Frontend/img/blog/{{$blog->image}}" alt="">
+                        <img src="Frontend/img/blog/{{$blog->image ?? ''}}" alt="">
                     </div>
                     <div class="blog-detail-desc">
                         <p>{{$blog->title}}</p>
@@ -40,7 +40,7 @@
                         <div class="row">
                             @foreach($listBlog as $blog)
                             <div class="col-sm-4">
-                                <img src="Frontend/img/blog/{{$blog->image}}">
+                                <img src="Frontend/img/blog/{{$blog->image ?? ''}}">
                             </div>
                             @endforeach
                             <!-- <div class="col-sm-4">

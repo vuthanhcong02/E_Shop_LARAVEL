@@ -98,7 +98,7 @@
                         @foreach($featured_Products_Women as $product)
                         <div class="product-item item {{$product->productTag->name}}">
                             <div class="pi-pic">
-                                <img src="Frontend/img/products/{{$product->productImages[0]->path}}" alt="">
+                                <img src="Frontend/img/products/{{$product->productImages[0]->path} ?? ''}" alt="">
                                 @if($product->discount!=null)
                                 <div class="sale">Sale</div>
                                 @endif
@@ -188,7 +188,7 @@
                         @foreach($featured_Products_Man as $product)
                         <div class="product-item item {{$product->productTag->name}}">
                             <div class="pi-pic">
-                                <img src="Frontend/img/products/{{$product->productImages[0]->path}}" alt="">
+                                <img src="Frontend/img/products/{{$product->productImages[0]->path ?? ''}}" alt="">
                                 @if($product->discount!=null)
                                     <div class="sale">Sale</div>
                                 @endif
