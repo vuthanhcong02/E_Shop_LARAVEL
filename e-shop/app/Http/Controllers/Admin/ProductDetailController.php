@@ -14,9 +14,9 @@ class ProductDetailController extends Controller
     public function index(string $id)
     {
         //
-        $product = Product::find($id);
-        $productDetails = $product->productDetails;
-        $productDetails = ProductDetail::orderBy('id','desc')->paginate(7);
+        $product = Product::findorFail($id);
+        $productDetails = $product->productDetails()->paginate(5);
+        // $productDetails = ProductDetail::orderBy('id','desc')->paginate(7);
         return view('Dashboard.product.detail.index',compact('product','productDetails'));
     }
 
