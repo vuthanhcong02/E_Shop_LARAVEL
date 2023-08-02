@@ -10,10 +10,18 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $categories = ProductCategory::orderBy('id','desc')->paginate(5);
+        $search =  $request->search ?? '';
+        if(!$search){
+            $categories = ProductCategory::orderBy('id','desc')->paginate(5);
+        }
+        else{
+            $categories = ProductCategory::where('name', 'like', '%' . $search . '%')
+                ->orderBy('id', 'desc')->paginate(5);
+        }
+        // $categories = ProductCategory::orderBy('id','desc')->paginate(5);
         return view('Dashboard.category.index',compact('categories'));
     }
 

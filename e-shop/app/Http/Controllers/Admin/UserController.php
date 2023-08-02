@@ -11,10 +11,20 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $users = User::orderBy('id', 'desc')->paginate(5);
+        $search = $request->search ?? '';
+        if (!$search) {
+            $users = User::orderBy('id', 'desc')->paginate(5);
+        }
+        else{
+            $users = User::where('name', 'like', '%' . $search . '%')
+                ->orWhere('email', 'like', '%' . $search . '%')
+                ->orWhere('phone', 'like', '%' . $search . '%')
+                ->orderBy('id', 'desc')->paginate(5);
+        }
+        // $users = User::orderBy('id', 'desc')->paginate(5);
         return view('Dashboard.user.index',compact('users'));
     }
 
