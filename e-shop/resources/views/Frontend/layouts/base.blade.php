@@ -127,7 +127,7 @@
                                     </div>
                                     <div class="select-total">
                                         <span>total:</span>
-                                        <h5 >${{number_format(Cart::total(),2)}}</h5>
+                                        <h5 >${{number_format(Cart::subtotal(),2)}}</h5>
                                     </div>
                                     <div class="select-button">
                                         <a href="/cart" class="primary-btn view-card">VIEW CARD</a>
@@ -136,7 +136,7 @@
                                 </div>
                             </li>
                             <li class="cart-price">
-                                ${{number_format(Cart::total(),2)}}
+                                ${{number_format(Cart::subtotal(),2)}}
                             </li>
                         </ul>
                     </div>

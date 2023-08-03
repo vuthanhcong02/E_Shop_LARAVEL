@@ -5,12 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Utilities\Constant;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     //
     public function index(){
-        return view('Dashboard.index');
+        $count_order = Order::count();
+        $total_order = OrderDetail::sum('total');
+        return view('Dashboard.index',compact('count_order','total_order'));
     }
     public function getLogin(){
         return view('Dashboard.login');
