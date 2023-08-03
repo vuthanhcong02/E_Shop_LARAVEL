@@ -11,10 +11,21 @@ class CommentBlogController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $comments = BlogComment::orderBy('id', 'desc')->paginate(5);
+        $search = $request->search ?? '';
+        if(!empty($search)){
+            $comments = BlogComment::where('messages','LIKE','%'.$search.'%')
+                                        ->orWhere('name','LIKE','%'.$search.'%')
+                                        ->orWhereHas('blog',function($query) use($search){
+                                            $query->where('title','LIKE','%'.$search.'%');
+                                        })
+                                        ->orderBy('id', 'desc')->paginate(5);
+        }
+        else{
+            $comments = BlogComment::orderBy('id', 'desc')->paginate(5);
+        }
         return view('Dashboard.comment.blog.index',compact('comments'));
     }
 
