@@ -1272,9 +1272,21 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/admin/comment" class="{{request()->segment(2) =='comment' ? 'mm-active' : ''}}">
+                                        <a class="{{request()->segment(2) =='comment' ? 'mm-active' : ''}}">
                                             <i class="metismenu-icon"></i>Comment
                                         </a>
+                                        <ul>
+                                            <li>
+                                                <a href="/admin/comment/blog" class="{{request()->segment(3) =='blog' ? 'mm-active' : ''}}">
+                                                    <i class="metismenu-icon"></i>Blog
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/admin/comment/product" class="{{request()->segment(3) =='product' ? 'mm-active' : ''}}">
+                                                    <i class="metismenu-icon"></i>Product
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </li>
                                 </ul>
                             </li>

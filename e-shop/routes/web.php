@@ -18,7 +18,8 @@ use App\Http\Controllers\Admin\ProductDetailController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\BlogController as AdminBlogController;
-
+use App\Http\Controllers\Admin\CommentBlogController;
+use App\Http\Controllers\Admin\CommentProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -92,7 +93,11 @@ Route::prefix('admin')->middleware('CheckAdminLogin')->group(function(){
     Route::resource('/product', ProductController::class);
     Route::resource('/order',OrderController::class);
     Route::resource('/blog', AdminBlogController::class);
-    Route::resource('/comment', CommentController::class);
+    Route::prefix('/comment')->group(function(){
+        Route::resource('/', CommentController::class);
+        Route::resource('/blog',CommentBlogController::class);
+        Route::resource('/product',CommentProductController::class);
+    });
     Route::prefix('/login')->group(function(){
         Route::get('/',[AdminHomeController::class,'getLogin'])->withoutMiddleware('CheckAdminLogin');
         Route::post('/',[AdminHomeController::class,'checkLogin'])->withoutMiddleware('CheckAdminLogin');
