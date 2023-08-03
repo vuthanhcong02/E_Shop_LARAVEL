@@ -1232,10 +1232,15 @@
 
                             <li class="mm-active">
                                 <a href="#">
-                                    <i class="metismenu-icon pe-7s-plugin"></i>Applications
+                                    <i class="metismenu-icon pe-7s-plugin"></i>Managers
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
                                 <ul>
+                                    <li>
+                                        <a href="/admin/dashboard" class="{{request()->segment(2) =='dashboard' ? 'mm-active' : ''}}">
+                                            <i class="metismenu-icon"></i>Dashboard
+                                        </a>
+                                    </li>
                                     <li>
                                         <a href="/admin/user" class="{{request()->segment(2) =='user' ? 'mm-active' : ''}}">
                                             <i class="metismenu-icon"></i>User
@@ -2288,4 +2293,5 @@
     <script type="text/javascript" src="{{asset('Dashboard/assets/scripts/main.js')}}"></script>
     <script type="text/javascript" src="{{asset('Dashboard/assets/scripts/my_script.js')}}"></script>
 </body>
+
 </html>

@@ -247,7 +247,9 @@
 			}
 		}
 		$button.parent().find('input').val(newVal);
+
         var $rowId = $button.parent().find('input').data('rowid');
+        // var $productId = $button.parent().find('input').data('productid');
         updateCart($rowId, newVal); 
 	});
 
@@ -287,11 +289,13 @@
 
 })(jQuery);
 function addToCart(productId) {
+    var quantity = $('.pro-qty input').val();
     $.ajax({
         type: "GET",
         url: "cart/add",
         data: {
-            productId: productId
+            productId: productId,
+            quantity: quantity
         },
         success: function (response) {
             $('.cart-count').text(response['count']);
@@ -334,7 +338,7 @@ function addToCart(productId) {
                 "closeButton":true,
                 "progressBar":true
             }
-            toastr.error("Có lỗi xảy ra!",{timeOut:5000})
+            toastr.error("Có lỗi xảy ra !",{timeOut:5000})
         
         },
     });
@@ -444,11 +448,11 @@ function updateCart(rowId,qty){
             // alert('update thành công');
         },
         error: function (response) {
-            toastr.options={
-                "closeButton":true,
-                "progressBar":true
-            }
-            toastr.error("Có lỗi xảy ra!",{timeOut:5000})
+            // toastr.options={
+            //     "closeButton":true,
+            //     "progressBar":true
+            // }
+            // toastr.error("Có lỗi xảy ra khi tăng sl!",{timeOut:5000})
         
         },
     });

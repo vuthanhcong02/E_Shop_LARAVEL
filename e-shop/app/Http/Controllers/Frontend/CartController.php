@@ -90,12 +90,13 @@ class CartController extends Controller
     public function add(Request $request){
         if($request->ajax()){
             $product = Product::find($request->productId);
+           
             $response['cart'] = Cart::add(
                 [
                     'id' => $product->id,
                     'name' => $product->name,
                     'price' => $product->discount ?? $product->price,
-                    'qty' => 1,
+                    'qty' => $request->quantity ?? 1,
                     'options' => [
                         'images' => $product->productImages
                     ],
