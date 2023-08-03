@@ -1237,7 +1237,7 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="/admin/dashboard" class="{{request()->segment(2) =='dashboard' ? 'mm-active' : ''}}">
+                                        <a href="/admin" class="{{request()->segment(2) =='' ? 'mm-active' : ''}}">
                                             <i class="metismenu-icon"></i>Dashboard
                                         </a>
                                     </li>
@@ -1264,6 +1264,16 @@
                                     <li>
                                         <a href="/admin/brand" class="{{request()->segment(2) =='brand' ? 'mm-active' : ''}}">
                                             <i class="metismenu-icon"></i>Brand
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/admin/blog" class="{{request()->segment(2) =='blog' ? 'mm-active' : ''}}">
+                                            <i class="metismenu-icon"></i>BLog
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/admin/comment" class="{{request()->segment(2) =='comment' ? 'mm-active' : ''}}">
+                                            <i class="metismenu-icon"></i>Comment
                                         </a>
                                     </li>
                                 </ul>

@@ -16,6 +16,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\ProductDetailController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +74,8 @@ Route::prefix('account')->group(function(){
 
 // Admin Dashboard
 Route::prefix('admin')->middleware('CheckAdminLogin')->group(function(){
+    Route::get('/',[AdminHomeController::class,'index']);
+
     Route::prefix('/user')->group(function(){
         Route::get('/',[UserController::class,'index']);
         Route::get('/add',[UserController::class,'create']);
@@ -87,6 +91,8 @@ Route::prefix('admin')->middleware('CheckAdminLogin')->group(function(){
     Route::resource('/product/{product_id}/detail', ProductDetailController::class);
     Route::resource('/product', ProductController::class);
     Route::resource('/order',OrderController::class);
+    Route::resource('/blog', AdminBlogController::class);
+    Route::resource('/comment', CommentController::class);
     Route::prefix('/login')->group(function(){
         Route::get('/',[AdminHomeController::class,'getLogin'])->withoutMiddleware('CheckAdminLogin');
         Route::post('/',[AdminHomeController::class,'checkLogin'])->withoutMiddleware('CheckAdminLogin');

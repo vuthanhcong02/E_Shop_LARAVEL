@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     //
+    public function index(){
+        return view('Dashboard.index');
+    }
     public function getLogin(){
         return view('Dashboard.login');
     }
@@ -22,7 +25,7 @@ class HomeController extends Controller
         // $remember_pass = false;
         if(Auth::attempt($dataInfor,$remember_pass)){
             //return redirect('/');
-            return redirect()->intended('/admin/user');//chuyển hướng người dùng đến trang mà họ đang cố gắng truy cập trước khi yêu cầu xác thực (nếu có), và nếu không có trang đích xác định, nó sẽ chuyển hướng người dùng đến đường dẫn /.
+            return redirect()->intended('/admin/');//chuyển hướng người dùng đến trang mà họ đang cố gắng truy cập trước khi yêu cầu xác thực (nếu có), và nếu không có trang đích xác định, nó sẽ chuyển hướng người dùng đến đường dẫn /.
         }
         else{
              // Xóa cookie "remember_web_" nếu đăng nhập không thành công

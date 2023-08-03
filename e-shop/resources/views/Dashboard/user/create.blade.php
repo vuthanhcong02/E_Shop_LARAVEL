@@ -38,7 +38,7 @@
                                 class="thumbnail rounded-circle" data-toggle="tooltip"
                                 title="Click to change the image" data-placement="bottom"
                                 src="Dasdboard/assets/images/avatars/{{$user->avatar ?? '_default-user.png'}}" alt="Avatar">
-                            <input name="image" type="file" onchange="changeImg(this)"
+                            <input required name="image" type="file" onchange="changeImg(this)"
                                 class="image form-control-file" style="display: none;" value="">
                             <input type="hidden" name="image_old" value="">
                             <small class="form-text text-muted">
