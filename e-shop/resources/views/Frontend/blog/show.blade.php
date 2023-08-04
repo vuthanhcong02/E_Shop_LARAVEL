@@ -128,7 +128,7 @@
                             @endforeach
                         </div>
                     </div>
-                    <div class="leave-comment mb-5">
+                    <div class="leave-comment">
                         <h4>Leave a comment</h4>
                         <form class="comment-form" action="" method="post">
                         @csrf
@@ -150,7 +150,7 @@
                             </div>
                         </form>
                     </div>
-                </>
+                </div>
             </div>
         </div>
     </div>

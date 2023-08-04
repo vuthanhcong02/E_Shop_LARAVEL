@@ -249,8 +249,8 @@
                         </div>
                         <ul>
                             <li>Address: 123 Main Street, Anytown, CA 12345</li>
-                            <li>Phone: +123 456 7890</li>
-                            <li>Email: 5xq8v@example.com</li>
+                            <li>Phone: 097 1765 824</li>
+                            <li>Email: congvtc02@gmail.com</li>
                         </ul>
                     </div>
                 </div>
@@ -258,10 +258,8 @@
                     <div class="footer-widget">
                         <h5>Information</h5>
                         <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Checkout</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Serivces</a></li>
+                            <li><a href="/checkout">Checkout</a></li>
+                            <li><a href="/contact">Contact</a></li>
                             <li><a href="#">Privacy Policy</a></li>
                         </ul>
                     </div>
@@ -270,10 +268,10 @@
                     <div class="footer-widget">
                         <h5>My Account</h5>
                         <ul>
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Shoping Cart</a></li>
-                            <li><a href="#">Shop</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="/account/login">My Account</a></li>
+                            <li><a href="/cart">Shoping Cart</a></li>
+                            <li><a href="/shop">Shop</a></li>
+                            <li><a href="/contact">Contact</a></li>
                         </ul>
                     </div>
                 </div>
