@@ -20,7 +20,7 @@
         </div>
     </div>
 </div>
-
+@include('Dashboard.notice.notice')
 <div class="row">
     <div class="col-md-12">
         <div class="main-card mb-3 card">
@@ -48,8 +48,11 @@
                     <div class="position-relative row form-group">
                         <label for="name" class="col-md-3 text-md-right col-form-label">Name</label>
                         <div class="col-md-9 col-xl-8">
-                            <input required name="name" id="name" placeholder="Name" type="text"
+                            <input name="name" id="name" placeholder="Name" type="text"
                                 class="form-control" value="{{$user->name ?? ''}}">
+                        @error('name')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
                         </div>
                     </div>
 
@@ -59,6 +62,9 @@
                         <div class="col-md-9 col-xl-8">
                             <input required name="email" id="email" placeholder="Email" type="email"
                                 class="form-control" value="{{$user->email ?? ''}}">
+                            @error('email')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
@@ -68,6 +74,7 @@
                         <div class="col-md-9 col-xl-8">
                             <input name="password" id="password" placeholder="Password" type="password"
                                 class="form-control" value="">
+                           
                         </div>
                     </div>
 
@@ -77,6 +84,7 @@
                         <div class="col-md-9 col-xl-8">
                             <input name="password_confirmation" id="password_confirmation" placeholder="Confirm Password" type="password"
                                 class="form-control" value="">
+                    
                         </div>
                     </div>
                     <div class="position-relative row form-group">
@@ -87,6 +95,9 @@
                             <input name="address" id="street_address"
                                 placeholder="Street Address" type="text" class="form-control"
                                 value="{{$user->address ?? ''}}">
+                            @error('address')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
@@ -97,6 +108,9 @@
                         <div class="col-md-9 col-xl-8">
                             <input name="city" id="town_city" placeholder="Town City"
                                 type="text" class="form-control" value="{{$user->city ?? ''}}">
+                            @error('city')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
@@ -106,6 +120,9 @@
                         <div class="col-md-9 col-xl-8">
                             <input required name="phone" id="phone" placeholder="Phone" type="tel"
                                 class="form-control" value="{{$user->phone ?? ''}}">
+                            @error('phone')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
@@ -123,6 +140,9 @@
                                 @endif
                                 @endforeach
                             </select>
+                            @error('level')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 

@@ -19,11 +19,7 @@
         </div>
     </div>
 </div>
-@if(session('notice'))
-    <div class="alert alert-warning" role="alert">
-        <p class="font-weight-bold">{{session('notice')}}</p>
-    </div>
-@endif
+@include('Dashboard.notice.notice')
 <div class="row">
     <div class="col-md-12">
         <div class="main-card mb-3 card">
@@ -38,8 +34,11 @@
                                 class="thumbnail rounded-circle" data-toggle="tooltip"
                                 title="Click to change the image" data-placement="bottom"
                                 src="Dasdboard/assets/images/avatars/{{$user->avatar ?? '_default-user.png'}}" alt="Avatar">
-                            <input required name="image" type="file" onchange="changeImg(this)"
-                                class="image form-control-file" style="display: none;" value="">
+                            <input name="image" type="file" onchange="changeImg(this)"
+                                class="image form-control-file" style="display: none;" value="{{old('image')}}">
+                            @error('image')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <input type="hidden" name="image_old" value="">
                             <small class="form-text text-muted">
                                 Click on the image to change (required)
@@ -50,8 +49,11 @@
                     <div class="position-relative row form-group">
                         <label for="name" class="col-md-3 text-md-right col-form-label">Name</label>
                         <div class="col-md-9 col-xl-8">
-                            <input required name="name" id="name" placeholder="Name" type="text"
-                                class="form-control" value="">
+                            <input name="name" id="name" placeholder="Name" type="text"
+                                class="form-control" value="{{old('name')}}">
+                            @error('name')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
@@ -59,8 +61,11 @@
                         <label for="email"
                             class="col-md-3 text-md-right col-form-label">Email</label>
                         <div class="col-md-9 col-xl-8">
-                            <input required name="email" id="email" placeholder="Email" type="email"
-                                class="form-control" value="">
+                            <input  name="email" id="email" placeholder="Email" type="email"
+                                class="form-control" value="{{old('email')}}">
+                            @error('email')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
@@ -69,7 +74,10 @@
                             class="col-md-3 text-md-right col-form-label">Password</label>
                         <div class="col-md-9 col-xl-8">
                             <input name="password" id="password" placeholder="Password" type="password"
-                                class="form-control" value="">
+                                class="form-control" value="{{old('password')}}">
+                            @error('password')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
@@ -78,7 +86,10 @@
                             class="col-md-3 text-md-right col-form-label">Confirm Password</label>
                         <div class="col-md-9 col-xl-8">
                             <input name="password_confirmation" id="password_confirmation" placeholder="Confirm Password" type="password"
-                                class="form-control" value="">
+                                class="form-control" value="{{old('password_confirmation')}}">
+                            @error('password_confirmation')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
                     <div class="position-relative row form-group">
@@ -88,7 +99,10 @@
                         <div class="col-md-9 col-xl-8">
                             <input name="address" id="street_address"
                                 placeholder="Street Address" type="text" class="form-control"
-                                value="">
+                                value="{{old('address')}}">
+                            @error('address')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
                     <div class="position-relative row form-group">
@@ -97,7 +111,10 @@
                         </label>
                         <div class="col-md-9 col-xl-8">
                             <input name="city" id="town_city" placeholder="Town City"
-                                type="text" class="form-control" value="">
+                                type="text" class="form-control" value="{{old('city')}}">
+                            @error('city')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
@@ -105,8 +122,11 @@
                         <label for="phone"
                             class="col-md-3 text-md-right col-form-label">Phone</label>
                         <div class="col-md-9 col-xl-8">
-                            <input required name="phone" id="phone" placeholder="Phone" type="tel"
-                                class="form-control" value="">
+                            <input  name="phone" id="phone" placeholder="Phone" type="tel"
+                                class="form-control" value="{{old('phone')}}">
+                            @error('phone')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
@@ -114,12 +134,15 @@
                         <label for="level"
                             class="col-md-3 text-md-right col-form-label">Level</label>
                         <div class="col-md-9 col-xl-8">
-                            <select required name="level" id="level" class="form-control">
-                                <option value="">-- Level --</option>
+                            <select  name="level" id="level" class="form-control">
+                                <option value="{{old('level')}}">-- Level --</option>
                                 @foreach(App\Utilities\Constant::$user_level as $key => $value)
                                     <option value="{{ $key }}">{{ $value }}</option>
                                 @endforeach
                             </select>
+                            @error('level')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Utilities\Common;
+use App\Http\Requests\Admin\UserRequest;
 class UserController extends Controller
 {
     /**
@@ -37,7 +38,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         //
         if($request->password!= $request->password_confirmation){
@@ -116,6 +117,11 @@ class UserController extends Controller
             if($file_avatar_old !=''){
                 unlink('Frontend/img/user/'.$file_avatar_old);
             }
+        }
+        $email_exsist = User::where('email',$request->email)
+                                ->where('id','!=',$user->id)->first();
+        if($email_exsist){
+            return redirect()->back()->with('notice-error', 'Email already exist');
         }
         $user->update($data);
         return redirect('/admin/user/'.$user->id)->with('notice-success', 'Update user successfully');
