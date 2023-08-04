@@ -19,7 +19,6 @@
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="main-card mb-3 card">
@@ -29,21 +28,24 @@
                         <div class="position-relative row form-group">
                             <label for="brand_id" class="col-md-3 text-md-right col-form-label">Brand</label>
                             <div class="col-md-9 col-xl-8">
-                                <select required name="brand_id" id="brand_id" class="form-control">
-                                <option value="">-- Brand --</option>
+                                <select name="brand_id" id="brand_id" class="form-control">
+                                    <option value="">-- Brand --</option>
                                     @foreach($brands as $brand)
                                     <option value="{{$brand->id}}">
                                         {{$brand->name}}
                                     </option>
                                     @endforeach
                                 </select>
+                                @error('brand_id')
+                                <strong class="text-danger">{{ $message }}</strong>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="position-relative row form-group">
                             <label for="product_category_id" class="col-md-3 text-md-right col-form-label">Category</label>
                             <div class="col-md-9 col-xl-8">
-                                <select required name="product_category_id" id="product_category_id" class="form-control">
+                                <select name="product_category_id" id="product_category_id" class="form-control">
                                     <option value="">-- Category --</option>
                                     @foreach($categories as $category)
                                     <option value="{{ $category->id }}">
@@ -51,55 +53,73 @@
                                     </option>
                                     @endforeach
                                 </select>
+                                @error('product_category_id')
+                                <strong class="text-danger">{{ $message }}</strong>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="position-relative row form-group">
                             <label for="name" class="col-md-3 text-md-right col-form-label">Name</label>
                             <div class="col-md-9 col-xl-8">
-                                <input required name="name" id="name" placeholder="Name" type="text" class="form-control" value="">
+                                <input name="name" id="name" placeholder="Name" type="text" class="form-control" value="{{old('name')}}">
+                                @error('name')
+                                <strong class="text-danger">{{ $message }}</strong>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="position-relative row form-group">
                             <label for="content" class="col-md-3 text-md-right col-form-label">Content</label>
                             <div class="col-md-9 col-xl-8">
-                                <input required name="content" id="content" placeholder="Content" type="text" class="form-control" value="">
+                                <input name="content" id="content" placeholder="Content" type="text" class="form-control" value="{{old('content')}}">
+                                @error('content')
+                                <strong class="text-danger">{{ $message }}</strong>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="position-relative row form-group">
                             <label for="price" class="col-md-3 text-md-right col-form-label">Price</label>
                             <div class="col-md-9 col-xl-8">
-                                <input required name="price" id="price" placeholder="Price" type="text" class="form-control" value="">
+                                <input name="price" id="price" placeholder="Price" type="text" class="form-control" value="{{old('price')}}">
+                                @error('price')
+                                <strong class="text-danger">{{ $message }}</strong>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="position-relative row form-group">
                             <label for="discount" class="col-md-3 text-md-right col-form-label">Discount</label>
                             <div class="col-md-9 col-xl-8">
-                                <input required name="discount" id="discount" placeholder="Discount" type="text" class="form-control" value="">
+                                <input name="discount" id="discount" placeholder="Discount" type="text" class="form-control" value="{{old('discount')}}">
+                                @error('discount')
+                                <strong class="text-danger">{{ $message }}</strong>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="position-relative row form-group">
                             <label for="weight" class="col-md-3 text-md-right col-form-label">Weight</label>
                             <div class="col-md-9 col-xl-8">
-                                <input required name="weight" id="weight" placeholder="Weight" type="text" class="form-control" value="">
+                                <input name="weight" id="weight" placeholder="Weight" type="text" class="form-control" value="{{old('weight')}}">
+                                @error('weight')
+                                <strong class="text-danger">{{ $message }}</strong>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="position-relative row form-group">
                             <label for="sku" class="col-md-3 text-md-right col-form-label">SKU</label>
                             <div class="col-md-9 col-xl-8">
-                                <input  name="sku" id="sku" placeholder="SKU" type="text" class="form-control" value="">
+                                <input name="sku" id="sku" placeholder="SKU" type="text" class="form-control" value="{{old('sku')}}">
                             </div>
                         </div>
 
                         <div class="position-relative row form-group">
                             <label for="tag" class="col-md-3 text-md-right col-form-label">Tag</label>
                             <div class="col-md-9 col-xl-8">
-                                <select required name="tag_id" id="tag_id" class="form-control">
+                                <select name="tag_id" id="tag_id" class="form-control">
                                     <option value="">-- Tag --</option>
                                     @foreach($tags as $tag)
                                     <option value="{{$tag->id}}">
@@ -107,6 +127,9 @@
                                     </option>
                                     @endforeach
                                 </select>
+                                @error('tag_id')
+                                <strong class="text-danger">{{ $message }}</strong>
+                                @enderror
                             </div>
                         </div>
 
@@ -124,6 +147,9 @@
                             <label for="description" class="col-md-3 text-md-right col-form-label">Description</label>
                             <div class="col-md-9 col-xl-8">
                                 <textarea class="form-control" name="description" id="description" placeholder="Description"></textarea>
+                                @error('description')
+                                <strong class="text-danger">{{ $message }}</strong>
+                                @enderror
                             </div>
                         </div>
 
@@ -153,6 +179,6 @@
 <!-- End Main -->
 <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 <script>
-    CKEDITOR.replace( 'description' );
+    CKEDITOR.replace('description');
 </script>
 @endsection

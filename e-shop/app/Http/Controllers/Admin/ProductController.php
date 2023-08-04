@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Brand;
 use App\Models\Tag;
+use App\Http\Requests\Admin\ProductRequest;
 class ProductController extends Controller
 {
     /**
@@ -54,7 +55,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         //
         $data = $request->all();
@@ -90,7 +91,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProductRequest $request, string $id)
     {
         //
         $data = $request->all();
