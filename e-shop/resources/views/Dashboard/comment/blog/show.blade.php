@@ -22,7 +22,7 @@
     @include('Dashboard.notice.notice')
     <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
         <li class="nav-item delete">
-            <form action="{{route('blog.destroy',$comment->id)}}" method="post">
+            <form action="{{route('blog-comment.destroy',$comment->id)}}" method="post">
                 @csrf
                 @method('DELETE')
                 <button class="nav-link btn" type="submit" onclick="return confirm('Do you really want to delete this item?')">

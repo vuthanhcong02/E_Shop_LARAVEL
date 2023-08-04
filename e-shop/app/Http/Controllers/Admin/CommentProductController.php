@@ -78,6 +78,6 @@ class CommentProductController extends Controller
         //
         $comment = ProductComment::find($id);
         $comment->delete();
-        return redirect('admin/comment/product')->with('notice-success','Delete Comment Success');
+        return redirect('admin/comment/product-comment')->with('notice-success','Delete Comment Success');
     }
 }

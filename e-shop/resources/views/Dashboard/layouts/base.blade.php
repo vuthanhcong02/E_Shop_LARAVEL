@@ -876,12 +876,12 @@
                                         </a>
                                         <ul>
                                             <li>
-                                                <a href="/admin/comment/blog" class="{{request()->segment(3) =='blog' ? 'mm-active' : ''}}">
+                                                <a href="/admin/comment/blog-comment" class="{{request()->segment(3) =='blog-comment' ? 'mm-active' : ''}}">
                                                     <i class="metismenu-icon"></i>Blog
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="/admin/comment/product" class="{{request()->segment(3) =='product' ? 'mm-active' : ''}}">
+                                                <a href="/admin/comment/product-comment" class="{{request()->segment(3) =='product-comment' ? 'mm-active' : ''}}">
                                                     <i class="metismenu-icon"></i>Product
                                                 </a>
                                             </li>

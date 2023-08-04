@@ -76,10 +76,10 @@
                                 <td class="">{{$comment->blog->title}}</td>
                                 <td>{{$comment->messages}}</td>
                                 <td class="text-center">
-                                    <a href="{{route('blog.show',$comment->id)}}" data-toggle="tooltip" title="Details" data-placement="bottom" class="btn btn-outline-warning border-0 btn-sm">
+                                    <a href="{{route('blog-comment.show',$comment->id)}}" data-toggle="tooltip" title="Details" data-placement="bottom" class="btn btn-outline-warning border-0 btn-sm">
                                         Details
                                     </a>
-                                    <form class="d-inline" action="{{route('blog.destroy',$comment->id)}}" method="post">
+                                    <form class="d-inline" action="{{route('blog-comment.destroy',$comment->id)}}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-hover-shine btn-outline-danger border-0 btn-sm" type="submit" data-toggle="tooltip" title="Delete" data-placement="bottom" onclick="return confirm('Do you really want to delete this item?')">

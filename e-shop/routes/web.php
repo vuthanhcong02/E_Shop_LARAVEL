@@ -88,15 +88,16 @@ Route::prefix('admin')->middleware('CheckAdminLogin')->group(function(){
     });
     Route::resource('/category', CategoryController::class);
     Route::resource('/brand', BrandController::class);
+    Route::resource('/product', ProductController::class);
+
     Route::resource('/product/{product_id}/image', ProductImageController::class);
     Route::resource('/product/{product_id}/detail', ProductDetailController::class);
-    Route::resource('/product', ProductController::class);
     Route::resource('/order',OrderController::class);
     Route::resource('/blog', AdminBlogController::class);
     Route::prefix('/comment')->group(function(){
-        Route::resource('/', CommentController::class);
-        Route::resource('/blog',CommentBlogController::class);
-        Route::resource('/product',CommentProductController::class);
+        // Route::resource('/', CommentController::class);
+        Route::resource('/blog-comment',CommentBlogController::class);
+        Route::resource('/product-comment',CommentProductController::class);
     });
     Route::prefix('/login')->group(function(){
         Route::get('/',[AdminHomeController::class,'getLogin'])->withoutMiddleware('CheckAdminLogin');

@@ -79,6 +79,6 @@ class CommentBlogController extends Controller
         //
         $comment = BlogComment::find($id);
         $comment->delete();
-        return redirect('admin/comment/blog')->with('notice-success','Delete Comment Success');
+        return redirect('admin/comment/blog-comment')->with('notice-success','Delete Comment Success');
     }
 }
