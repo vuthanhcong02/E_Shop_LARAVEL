@@ -30,7 +30,7 @@
                         <label for="name" class="col-md-3 text-md-right col-form-label">Name</label>
                         <div class="col-md-9 col-xl-8">
                             <input name="name" id="name" placeholder="Name" type="text"
-                                class="form-control" value="">
+                                class="form-control" value="{{old('name')}}">
                             
                         </div>
                     </div>

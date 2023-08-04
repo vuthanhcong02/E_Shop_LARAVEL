@@ -19,7 +19,7 @@
         </div>
     </div>
 </div>
-
+@include('Dashboard.notice.notice')
 <div class="row">
     <div class="col-md-12">
         <div class="main-card mb-3 card">

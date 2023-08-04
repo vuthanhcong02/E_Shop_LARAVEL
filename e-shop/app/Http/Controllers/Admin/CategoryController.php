@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
+use App\Http\Requests\Admin\CategoryRequest;
 class CategoryController extends Controller
 {
     /**
@@ -37,10 +38,13 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         //
         $data = $request->all();
+        if(is_numeric($data['name'])){
+            return redirect()->back()->with('notice-error','Tên danh mục không được chứa số');
+        }
         ProductCategory::create($data);
         return redirect('/admin/category')->with('notice-success','Category created successfully');
     }
@@ -66,11 +70,14 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CategoryRequest $request, string $id)
     {
         //
         $data = $request->all();
         $category = ProductCategory::find($id);
+        if(is_numeric($data['name'])){
+            return redirect()->back()->with('notice-error','Tên danh muc không được chứa số');
+        }
         $category->update($data);
         return redirect('/admin/category')->with('notice-success','Category updated successfully');
     }
