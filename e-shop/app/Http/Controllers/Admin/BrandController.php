@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Brand;
+use App\Http\Requests\Admin\BrandRequest;
 class BrandController extends Controller
 {
     /**
@@ -38,10 +39,13 @@ class BrandController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BrandRequest $request)
     {
         //
         $data = $request->all();
+        if (is_numeric($data['name'])) {
+            return redirect()->back()->with('notice-error', 'Trường name không được chứa số.');
+        }
         Brand::create($data);
         return redirect('/admin/brand')->with('notice-success','Brand created successfully');
     }
@@ -67,11 +71,14 @@ class BrandController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(BrandRequest $request, string $id)
     {
         //
         $data = $request->all();
         $brand = Brand::find($id);
+        if(is_numeric($data['name'])){
+            return redirect()->back()->with('notice-error', 'Tên brand không được chứa số.');
+        }
         $brand->update($data);
         return redirect('/admin/brand')->with('notice-success','Brand updated successfully');
     }
