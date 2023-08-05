@@ -252,8 +252,8 @@
         // var $productId = $button.parent().find('input').data('productid');
         updateCart($rowId, newVal); 
 	});
-
-
+    //CheckSize Color
+   
     // -------------------
     // Filter Products
     const product_men = $('.product-slider.men');
@@ -298,9 +298,10 @@ function addToCart(productId) {
             quantity: quantity
         },
         success: function (response) {
+            console.log(response);
             $('.cart-count').text(response['count']);
-            $('.cart-price').text('$' + response['total']);
-            $('.select-total h5').text('$' + response['total']);
+            $('.cart-price').text('$' + response['subtotal']);
+            $('.select-total h5').text('$' + response['subtotal']);
             var cartHover_tbody = $('.select-items tbody');
             var cartHover_existItem = cartHover_tbody.find("tr" + "[data-rowId='" + response['cart'].rowId +"']");
             if(cartHover_existItem.length){
@@ -314,7 +315,7 @@ function addToCart(productId) {
                 '            src="Frontend/img/products/'+response['cart'].options.images[0].path + '" alt="">\n' +
                 '    </td>\n' +
                 '<td class="si-text">\n' +
-                '    <div class="producr-selected">\n' +
+                '    <div class="product-selected">\n' +
                 '        <p>$'+ response['cart'].price.toFixed(2)+ ' x '+ response['cart'].qty +'</p>\n' +
                 '        <h6>' + response['cart'].name + '</h6>\n' +
                 '    </div>\n' +
@@ -353,10 +354,10 @@ function deleteCart(rowId){
             },
             success: function (response) {
                 $('.cart-count').text(response['count']);
-                $('.cart-price').text('$' + response['total']);
-                $('.select-total h5').text('$' + response['total']);
+                $('.cart-price').text('$' + response['subtotal']);
+                $('.select-total h5').text('$' + response['subtotal']);
                 $('.subtotal span').text('$' + response['subtotal']);
-                $('.cart-total span').text('$' + response['total']);
+                $('.cart-total span').text('$' + response['subtotal']);
                 var cartHover_tbody = $('.select-items tbody');
                 var cartHover_existItem = cartHover_tbody.find("tr" + "[data-rowId='" + rowId +"']");
                 cartHover_existItem.remove();
@@ -426,10 +427,10 @@ function updateCart(rowId,qty){
         },
         success: function (response) {
             $('.cart-count').text(response['count']);
-            $('.cart-price').text('$' + response['total']);
-            $('.select-total h5').text('$' + response['total']);
+            $('.cart-price').text('$' + response['subtotal']);
+            $('.select-total h5').text('$' + response['subtotal']);
             $('.subtotal span').text('$' + response['subtotal']);
-            $('.cart-total span').text('$' + response['total']);
+            $('.cart-total span').text('$' + response['subtotal']);
             var cartHover_tbody = $('.select-items tbody');
             var cartHover_existItem = cartHover_tbody.find("tr" + "[data-rowId='" + rowId +"']");
             if(qty===0){

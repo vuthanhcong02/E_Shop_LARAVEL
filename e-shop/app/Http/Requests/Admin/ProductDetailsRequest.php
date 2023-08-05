@@ -23,7 +23,7 @@ class ProductDetailsRequest extends FormRequest
     {
         return [
             //
-            'color' => 'required | string | regex:/^[a-zA-Z0-9\s]+$/',
+            'color' => 'required | string',
             'size' => 'required | string | regex:/^[a-zA-Z0-9\s]+$/',
             'qty' => 'required | string | min:1',
         ];
@@ -33,7 +33,6 @@ class ProductDetailsRequest extends FormRequest
             //
             'color.required' => ':attribute bắt buộc phải nhập',
             'color.string' => ':attribute phải là chữ ',
-            'color.regex' => ':attribute không chứ kí tự đặc biệt',
             'size.required' => ':attribute bắt buộc phải nhập',
             'size.string' => ':attribute phải là chữ ',
             'size.regex' => ':attribute không chứ kí tự đặc biệt',

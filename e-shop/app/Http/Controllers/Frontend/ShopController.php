@@ -69,7 +69,11 @@ class ShopController extends Controller
         });
         
         #brands
-        $products = $brand_ids != null ? $products->whereIn('brand_id', $brand_ids):$products;
+        $products = $brand_ids != null ? $products->where('brand_id', $brand_ids) : $products;
+        // if($brand_ids != null){
+        //     $products = $products->join('brands', 'brands.id', '=', 'products.brand_id')
+        //                            ->where('brand_id', $brand_ids);
+        // }
         #price
         $products = ($pMax != null && $pMin != null) ? $products->whereBetween('price', [$pMin, $pMax]):$products;
 

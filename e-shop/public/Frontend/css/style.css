@@ -2233,14 +2233,37 @@ ol {
 	margin-bottom: 0;
 }
 
-.product-details .pd-color .pd-color-choose .cc-item label.cc-yellow {
+.product-details .pd-color .pd-color-choose .cc-item label.cc-Vàng {
 	background: #EEEE21;
 }
 
-.product-details .pd-color .pd-color-choose .cc-item label.cc-violet {
+.product-details .pd-color .pd-color-choose .cc-item label.cc-Tím {
 	background: #8230E3;
 }
-
+.product-details .pd-color .pd-color-choose .cc-item label.cc-Đen {
+	background:black;
+}
+.product-details .pd-color .pd-color-choose .cc-item label.cc-Xanh {
+	background:blue;
+}
+.product-details .pd-color .pd-color-choose .cc-item label.cc-Đỏ{
+	background:red;
+}
+.product-details .pd-color .pd-color-choose .cc-item label.cc-Xám {
+	background:gray;
+}
+.product-details .pd-color .pd-color-choose .cc-item label.cc-Be {
+	background:#dfad51;
+}
+.product-details .pd-color .pd-color-choose .cc-item label.cc-Hồng {
+	background:pink;
+}
+.product-details .pd-color .pd-color-choose .cc-item label.cc- {
+	background:black;
+}
+.product-details .pd-color .pd-color-choose .cc-item label.cc-XanhLa {
+	background:green;
+}
 .product-details .pd-size-choose {
 	margin-bottom: 30px;
 }

@@ -28,10 +28,10 @@ class ProductRequest extends FormRequest
             'name' => 'required|min:3|max:255',
             'content' => 'required|min:3|max:255',
             'price' => 'required|numeric|min:0',
-            'discount' => 'required|numeric|min:0',
+            'discount' => 'numeric|min:0',
             'weight' => 'required|numeric|min:0',
             'tag_id' => 'required',
-            'description' => 'required|min:3|max:255',
+            'description' => 'required|min:3',
         ];
     }
     public function messages(){
@@ -47,7 +47,6 @@ class ProductRequest extends FormRequest
             'price.required' => ':attribute phải nhập',
             'price.numeric' => ':attribute phải là số',
             'price.min' => ':attribute phải có ít nhất  = 0',
-            'discount.required' => ':attribute phải nhập',
             'discount.numeric' => ':attribute phải là số',
             'discount.min' => ':attribute phải có ít nhất  = 0',
             'weight.required' => ':attribute phải nhập',
@@ -56,7 +55,6 @@ class ProductRequest extends FormRequest
             'tag_id.required' => ':attribute phải được chọn',
             'description.required' => ':attribute phải nhập',
             'description.min' => ':attribute phải có ít nhất 3 ký tự',
-            'description.max' => ':attribute phải có nhiều nhất 255 ký tự',
         ];
     }
     public function attributes(){

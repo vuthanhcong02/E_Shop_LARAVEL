@@ -29,6 +29,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="product-details">
+                        
                             <div class="pd-title">
                                 <span>{{$product->tag}}</span>
                                 <h3>{{$product->name}}</h3>
@@ -56,7 +57,7 @@
                                 <div class="pd-color-choose">
                                     @foreach(array_unique(array_column($product->productDetails->toArray(), 'color')) as $productColor)
                                     <div class="cc-item">
-                                        <input type="radio" id="cc-{{$productColor}}">
+                                        <input required type="radio" id="cc-{{$productColor}}"name="color">
                                         <label class="cc-{{$productColor}}" for="cc-{{$productColor}}">
                                         </label>
                                     </div>
@@ -66,7 +67,7 @@
                             <div class="pd-size-choose">
                                 @foreach(array_unique(array_column($product->productDetails->toArray(), 'size')) as $productSize)
                                 <div class="sc-item">
-                                    <input type="radio" id="sm-{{$productSize}}">
+                                    <input required type="radio" id="sm-{{$productSize}}" name="size">
                                     <label for="sm-{{$productSize}}-size">
                                         {{$productSize}}
                                     </label>
@@ -109,9 +110,9 @@
                                     <div class="row">
                                         <div class="col-lg-7">
                                             <h5>Product Description</h5>
-                                            <p>{{$product->description}}</p>
-                                            <h5>Product Features</h5>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                            <p>{!!$product->description!!}</p>
+                                            <!-- <h5>Product Features</h5>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p> -->
                                         </div>
                                         <div class="col-lg-5">
                                             <img src="Frontend/img/product-single/tab-desc.jpg">
@@ -315,5 +316,6 @@
     </div>
 </div>
 <!--Partner Logo Section End-->
+
 
 @endsection

@@ -60,10 +60,12 @@
                                         <h5>{{$product->name}}</h5>
                                     </a>
                                     <div class="product-price">
-                                        @if($product->discount!=null)
+                                    @if($product->discount!=null)
                                         ${{number_format($product->discount,2)}}
-                                        @endif
                                         <span>${{number_format($product->price,2)}}</span>
+                                    @else
+                                        ${{number_format($product->price,2)}}
+                                    @endif
                                     </div>
                                 </div>
                             </div>

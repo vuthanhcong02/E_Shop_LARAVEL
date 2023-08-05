@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductCategory;
 use App\Models\Tag;
+
 class CartController extends Controller
 {
     /**
@@ -20,7 +21,7 @@ class CartController extends Controller
         $carts = Cart::content();
         $total = Cart::total();
         $subtotal = Cart::subtotal();
-        return view('Frontend.cart.index',compact('carts','total','subtotal'));
+        return view('Frontend.cart.index', compact('carts', 'total', 'subtotal'));
     }
 
     /**
@@ -61,11 +62,11 @@ class CartController extends Controller
     public function update(Request $request)
     {
         //
-        if($request->ajax()){
+        if ($request->ajax()) {
             $reponse['cart'] = Cart::update($request->rowId, $request->qty);
-            $reponse['count']=Cart::count();
-            $reponse['total']=Cart::total();
-            $reponse['subtotal']=Cart::subtotal();
+            $reponse['count'] = Cart::count();
+            $reponse['total'] = Cart::total();
+            $reponse['subtotal'] = Cart::subtotal();
             return $reponse;
         }
         // dd(Cart::content());
@@ -76,40 +77,80 @@ class CartController extends Controller
      * Remove the specified resource from storage.
      */
     public function delete(Request $request)
-    {   
-        if($request->ajax()){
+    {
+        if ($request->ajax()) {
             $response['cart'] = Cart::remove($request->rowId);
-            $response['count']=Cart::count();
-            $response['total']=Cart::total();
-            $response['subtotal']=Cart::subtotal();
+            $response['count'] = Cart::count();
+            $response['total'] = Cart::total();
+            $response['subtotal'] = Cart::subtotal();
             return $response;
         }
         // dd(Cart::content());
         return back();
     }
-    public function add(Request $request){
-        if($request->ajax()){
+    public function add(Request $request)
+    {
+        if ($request->ajax()) {
             $product = Product::find($request->productId);
-           
-            $response['cart'] = Cart::add(
-                [
-                    'id' => $product->id,
-                    'name' => $product->name,
-                    'price' => $product->discount ?? $product->price,
-                    'qty' => $request->quantity ?? 1,
-                    'options' => [
-                        'images' => $product->productImages
-                    ],
-                ]
-            );
-            $response['count']=Cart::count();
-            $response['total']=Cart::total();
-            return $response;
+            $productColor = $request->input('color');
+            $productSize = $request->input('size');
+            if ($product->discount == null) {
+                $response['cart'] = Cart::add(
+                    [
+                        'id' => $product->id,
+                        'name' => $product->name,
+                        'price' => $product->price,
+
+                        'qty' => $request->quantity ?? 1,
+                        'options' => [
+                            'images' => $product->productImages,
+                            'color' => $productColor,
+                            'size' => $productSize,
+                        ],
+                    ]
+                );
+                $response['count'] = Cart::count();
+                $response['subtotal'] = Cart::subtotal();
+                return $response;
+            } else {
+                $response['cart'] = Cart::add(
+                    [
+                        'id' => $product->id,
+                        'name' => $product->name,
+                        'price' => $product->discount,
+
+                        'qty' => $request->quantity ?? 1,
+                        'options' => [
+                            'images' => $product->productImages,
+                            'color' => $productColor,
+                            'size' => $productSize,
+                        ],
+                    ]
+                );
+                $response['count'] = Cart::count();
+                $response['subtotal'] = Cart::subtotal();
+                return $response;
+            }
+            // $response['cart'] = Cart::add(
+            //     [
+            //         'id' => $product->id,
+            //         'name' => $product->name,
+            //         'price' => $product->discount ?? $product->price,
+            //         'qty' => $request->quantity ?? 1,
+            //         'options' => [
+            //             'images' => $product->productImages
+            //         ],
+            //     ]
+            // );
+            // $response['count']=Cart::count();
+            // $response['subtotal']=Cart::subtotal();
+            // return $response;
         }
         // dd(Cart::content());
         return back();
     }
-    public function destroy(){
+    public function destroy()
+    {
         Cart::destroy();
         return back();
     }
