@@ -29,7 +29,7 @@
                     <div class="position-relative row form-group">
                         <label class="col-md-3 text-md-right col-form-label">Product Name</label>
                         <div class="col-md-9 col-xl-8">
-                            <input disabled required name="name" id="name" placeholder="Product Name" type="text"
+                            <input disabled  name="name" id="name" placeholder="Product Name" type="text"
                                 class="form-control" value="{{$product->name}}">
                         </div>
                     </div>
@@ -37,24 +37,33 @@
                     <div class="position-relative row form-group">
                         <label for="color" class="col-md-3 text-md-right col-form-label">Color</label>
                         <div class="col-md-9 col-xl-8">
-                            <input required name="color" id="color" placeholder="Color" type="text"
-                                class="form-control" value="">
+                            <input  name="color" id="color" placeholder="Color" type="text"
+                                class="form-control" value="{{old('color')}}">
+                            @error('color')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                     </div>
 
                     <div class="position-relative row form-group">
                         <label for="size" class="col-md-3 text-md-right col-form-label">Size</label>
                         <div class="col-md-9 col-xl-8">
-                            <input required name="size" id="size" placeholder="Size" type="text"
-                                class="form-control" value="">
+                            <input  name="size" id="size" placeholder="Size" type="text"
+                                class="form-control" value="{{old('size')}}">
+                            @error('size')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                     </div>
 
                     <div class="position-relative row form-group">
                         <label for="qty" class="col-md-3 text-md-right col-form-label">Qty</label>
                         <div class="col-md-9 col-xl-8">
-                            <input required name="qty" id="qty" placeholder="Qty" type="text"
-                                class="form-control" value="">
+                            <input  name="qty" id="qty" placeholder="Qty" type="text"
+                                class="form-control" value="{{old('qty')}}">
+                            @error('qty')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                     </div>
 

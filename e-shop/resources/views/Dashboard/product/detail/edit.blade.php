@@ -38,24 +38,33 @@
                     <div class="position-relative row form-group">
                         <label for="color" class="col-md-3 text-md-right col-form-label">Color</label>
                         <div class="col-md-9 col-xl-8">
-                            <input required name="color" id="color" placeholder="Color" type="text"
+                            <input  name="color" id="color" placeholder="Color" type="text"
                                 class="form-control" value="{{$productDetail->color}}">
+                            @error('color')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                     </div>
 
                     <div class="position-relative row form-group">
                         <label for="size" class="col-md-3 text-md-right col-form-label">Size</label>
                         <div class="col-md-9 col-xl-8">
-                            <input required name="size" id="size" placeholder="Size" type="text"
+                            <input  name="size" id="size" placeholder="Size" type="text"
                                 class="form-control" value="{{$productDetail->size}}">
+                            @error('size')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                     </div>
 
                     <div class="position-relative row form-group">
                         <label for="qty" class="col-md-3 text-md-right col-form-label">Qty</label>
                         <div class="col-md-9 col-xl-8">
-                            <input required name="qty" id="qty" placeholder="Qty" type="text"
+                            <input  name="qty" id="qty" placeholder="Qty" type="text"
                                 class="form-control" value="{{$productDetail->qty}}">
+                            @error('qty')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                     </div>
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Utilities\Common;
 use App\Models\ProductImage;
+use App\Http\Requests\Admin\ProductImageRequest;
 class ProductImageController extends Controller
 {
     /**
@@ -31,7 +32,7 @@ class ProductImageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request,string $product_id)
+    public function store(ProductImageRequest $request,string $product_id)
     {
         //
         $data = $request->all();

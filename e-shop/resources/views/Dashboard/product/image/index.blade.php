@@ -58,7 +58,9 @@
                                             <img style="width: 100%; cursor: pointer;" class="thumbnail" data-toggle="tooltip" title="Click to add image" data-placement="bottom" src="Dashboard/assets/images/add-image-icon.jpg" alt="Add Image">
 
                                             <input name="image" type="file" onchange="changeImg(this);this.form.submit();" accept="image/x-png,image/gif,image/jpeg" class="image form-control-file" style="display: none;">
-
+                                            @error('image')
+                                            <strong class="text-danger">{{ $message }}</strong>
+                                            @enderror
                                             <input type="hidden" name="product_id" value="{{$product->id}}">
                                         </div>
                                     </form>

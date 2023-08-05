@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductDetail;
+use App\Http\Requests\Admin\ProductDetailsRequest;
 class ProductDetailController extends Controller
 {
     /**
@@ -33,7 +34,7 @@ class ProductDetailController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, string $id)
+    public function store(ProductDetailsRequest $request, string $id)
     {
         //
         $data = $request->all();
@@ -65,7 +66,7 @@ class ProductDetailController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $product_id, string $productDetail_id)
+    public function update(ProductDetailsRequest $request, string $product_id, string $productDetail_id)
     {
         //
         $data = $request->all();
