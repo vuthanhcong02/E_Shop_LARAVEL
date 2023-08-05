@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Blog;
 use App\Models\User;
 use App\Utilities\Common;
+use App\Http\Requests\Admin\BlogRequest;
 class BlogController extends Controller
 {
     /**
@@ -48,7 +49,7 @@ class BlogController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BlogRequest $request)
     {
         //
         $data['title'] = $request->title ?? '';
@@ -87,7 +88,7 @@ class BlogController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(BlogRequest $request, string $id)
     {
         //
         $data['title'] = $request->title ?? '';

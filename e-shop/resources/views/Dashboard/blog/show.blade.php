@@ -82,7 +82,7 @@
                     <div class="position-relative row form-group">
                         <label for="content" class="col-md-3 text-md-right col-form-label">Content</label>
                         <div class="col-md-9 col-xl-8">
-                            <p>{{$blog->content}}</p>
+                            <p>{!!$blog->content!!}</p>
                         </div>
                     </div>
 

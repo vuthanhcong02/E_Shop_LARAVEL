@@ -35,7 +35,12 @@
                     </div>
                     <div class="blog-quote">
                         <p>{{$blog->subtitle}}<span>- Vũ Thành Công</span></p>
+                        
                     </div>
+                    <div class="p-3">
+                        {!!$blog->content!!}
+                    </div>
+
                     <div class="blog-more">
                         <div class="row">
                             @foreach($listBlog as $blog)

@@ -29,8 +29,11 @@
                         <div class="position-relative row form-group">
                             <label for="image" class="col-md-3 text-md-right col-form-label">Image</label>
                             <div class="col-md-9 col-xl-8">
-                                <img required style="height: 100px; cursor: pointer; object-fit: cover;" class="thumbnail rounded-circle" data-toggle="tooltip" title="Click to change the image" data-placement="bottom" src="Frontend/img/blog/default_blog.jpeg" alt="Image">
-                                <input required name="image" type="file" onchange="changeImg(this)" class="image form-control-file" style="display: none;" value="">
+                                <img  style="height: 100px; cursor: pointer; object-fit: cover;" class="thumbnail rounded-circle" data-toggle="tooltip" title="Click to change the image" data-placement="bottom" src="Frontend/img/blog/default_blog.jpeg" alt="Image">
+                                <input name="image" type="file" onchange="changeImg(this)" class="image form-control-file" style="display: none;" value="">
+                                @error('image')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <input type="hidden" name="image_old" value="">
                                 <small class="form-text text-muted">
                                     Click on the image to change (required)
@@ -40,42 +43,60 @@
                         <div class="position-relative row form-group">
                             <label for="title" class="col-md-3 text-md-right col-form-label">Title</label>
                             <div class="col-md-9 col-xl-8">
-                                <input required name="title" id="title" placeholder="Title.." type="text" class="form-control" value="">
+                                <input  name="title" id="title" placeholder="Title.." type="text" class="form-control" value="{{ old('title') }}">
+                                @error('title')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="position-relative row form-group">
                             <label for="subtitle" class="col-md-3 text-md-right col-form-label">SubTitle</label>
                             <div class="col-md-9 col-xl-8">
-                                <input required name="subtitle" id="subtitle" placeholder="Subtitle.." type="text" class="form-control" value="">
+                                <input  name="subtitle" id="subtitle" placeholder="Subtitle.." type="text" class="form-control" value="{{old('subtitle')}}">
+                                @error('subtitle')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="position-relative row form-group">
                             <label for="content" class="col-md-3 text-md-right col-form-label">Content</label>
                             <div class="col-md-9 col-xl-8">
-                                <textarea class="form-control" name="content" id="content" placeholder="Content"></textarea>
+                                <textarea class="form-control" name="content" id="content" placeholder="Content">{{old('content')}}</textarea>
+                                @error('content')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="position-relative row form-group">
                             <label for="category" class="col-md-3 text-md-right col-form-label">Category</label>
                             <div class="col-md-9 col-xl-8">
-                                <input required name="category" id="category" placeholder="Category" type="text" class="form-control" value="">
+                                <input  name="category" id="category" placeholder="Category" type="text" class="form-control" value="{{old('category')}}">
+                                @error('category')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="position-relative row form-group">
                             <label for="author" class="col-md-3 text-md-right col-form-label">Author</label>
                             <div class="col-md-9 col-xl-8">
-                                <select required name="author" id="author" class="form-control">
-                                    <option value="">-- Author --</option>
+                                <select  name="author" id="author" class="form-control">
+                                    <option value="{{old('author')}}">-- Author --</option>
                                     @foreach($authors as $author)
                                     <option value="{{ $author->id }}">{{ $author->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('author')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="position-relative row form-group">
                             <label for="created_at" class="col-md-3 text-md-right col-form-label">Created At</label>
                             <div class="col-md-9 col-xl-8">
-                                <input required name="created_at" id="created_at" placeholder="Created At" type="datetime-local" class="form-control" value="">
+                                <input  name="created_at" id="created_at" placeholder="Created At" type="datetime-local" class="form-control" value="{{old('created_at')}}">
+                                @error('created_at')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
 

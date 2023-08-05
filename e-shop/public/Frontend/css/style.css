@@ -3568,7 +3568,10 @@ ol {
 	padding-top: 10px;
 	margin-bottom: 45px;
 }
-
+.blog-details-inner p {
+    font-size: 15px;
+    line-height: 30px;
+}
 /*---------------------
   Map
 -----------------------*/

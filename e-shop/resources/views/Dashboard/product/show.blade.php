@@ -170,7 +170,7 @@
                     <label for="description"
                         class="col-md-3 text-md-right col-form-label">Description</label>
                     <div class="col-md-9 col-xl-8">
-                        <p>{{!!$product->description!!}}</p>
+                        <p>{!!$product->description!!}</p>
                     </div>
                 </div>
             </div>

@@ -93,7 +93,7 @@
                                                 </td>
                                               
                                                 <td class="text-center">{{$blog->category}}</td>
-                                                <td class="text-center">{{!!$blog->content!!}}</td>
+                                                <td class="text-center">{!!$blog->content!!}</td>
                                                 <td class="text-center">{{$blog->user->name}}</td>
                                                 <td class="text-center">{{$blog->created_at}}</td>
                                     
