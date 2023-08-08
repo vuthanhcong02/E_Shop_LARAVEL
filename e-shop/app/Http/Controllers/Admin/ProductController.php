@@ -61,6 +61,7 @@ class ProductController extends Controller
         $data = $request->all();
         // $data = $request->sku ?? '';
         $data['qty'] = 0;
+        $data['featured'] = $request->featured ?? 0;
         $product = Product::create($data);
         return redirect('/admin/product/'.$product->id)->with('notice-success','Product created successfully');
     }
